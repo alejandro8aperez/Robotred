@@ -6,6 +6,10 @@
 assets-src/
 Imagenes/
 
+# Material del curso: se versiona el material escrito y las imágenes de apoyo,
+# pero los vídeos no entran al repositorio (pesan decenas de MB).
+Curso/*.mp4
+
 # Capturas de verificación visual
 .shots/
 _shot_*.png

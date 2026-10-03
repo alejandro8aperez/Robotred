@@ -16,6 +16,8 @@ SHOTS = [
     ("index.html", "escritorio", 1440, 900, True),
     ("index.html", "tablet", 834, 1000, True),
     ("index.html", "movil", 390, 844, True),
+    ("tutorial.html", "tutorial", 1440, 900, True),
+    ("tutorial.html", "tutorial-movil", 390, 844, True),
     ("gracias.html", "gracias", 1280, 900, False),
 ]
 

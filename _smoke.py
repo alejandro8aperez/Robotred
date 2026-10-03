@@ -1,8 +1,9 @@
 """Prueba de humo del sitio en un navegador real.
 
-Levanta un servidor local, carga index.html y gracias.html en Chromium y
-comprueba: errores de consola, recursos rotos, y el flujo del formulario
-(relleno, validacion, envio y red de seguridad).
+Levanta un servidor local, carga index.html, tutorial.html y gracias.html en
+Chromium y comprueba: errores de consola, recursos rotos, el flujo del
+formulario (relleno, validacion, envio y red de seguridad) y la navegacion
+entre el indice y la pagina de tutorial.
 """
 
 import functools
@@ -202,6 +203,75 @@ def main():
         if len(received) != before:
             failures.append("el honeypot no bloqueó un envío de bot")
         page.close()
+
+        # --- TUTORIAL: la pagina nueva debe cargar limpia y enlazar al programa ---
+        print("\n--- tutorial.html ---")
+        for label, width, height in (("escritorio", 1440, 900), ("movil", 390, 844)):
+            page = browser.new_page(viewport={"width": width, "height": height})
+            console, failed = [], []
+            page.on("console", lambda m: console.append(f"{m.type}: {m.text}")
+                    if m.type == "error" else None)
+            page.on("pageerror", lambda e: console.append(f"pageerror: {e}"))
+            page.on("response", lambda r: failed.append(f"{r.status} {r.url}")
+                    if r.status >= 400 else None)
+
+            page.goto(f"{base}/tutorial.html", wait_until="networkidle")
+            page.wait_for_timeout(600)
+
+            print(f"[{label}] titulo:", page.title())
+
+            broken = page.evaluate(
+                """() => [...document.querySelectorAll('a[href^="#"]')]
+                     .map(a => a.getAttribute('href').slice(1))
+                     .filter(id => id && !document.getElementById(id))"""
+            )
+            print(f"[{label}] anclas rotas:", broken or "ninguna")
+            if broken:
+                failures.append(f"[tutorial/{label}] anclas rotas: {broken}")
+
+            mods = page.locator(".mod").count()
+            states = page.locator(".mod-state.published").count()
+            print(f"[{label}] modulos:", mods, "| publicados:", states)
+            if mods != 10:
+                failures.append(f"[tutorial/{label}] se esperaban 10 modulos, hay {mods}")
+
+            # El enlace del menu debe quedar resaltado aunque no haya ancla local.
+            active = page.evaluate(
+                """() => { const a = document.querySelector('#nav a.active');
+                          return a ? a.getAttribute('href') : null; }"""
+            )
+            print(f"[{label}] enlace activo del menu:", active)
+            if active != "tutorial.html":
+                failures.append(f"[tutorial/{label}] el menu no resalta Tutorial: {active}")
+
+            # Navegacion desde el indice hacia el tutorial y de vuelta.
+            if label == "escritorio":
+                page.goto(f"{base}/index.html#tutorial", wait_until="networkidle")
+                page.wait_for_timeout(400)
+                settle(page, ".tut-teaser")
+                page.click(".tut-teaser", position={"x": 30, "y": 30})
+                page.wait_for_load_state("networkidle")
+                print("[escritorio] url tras pulsar la banda:", page.url)
+                if "tutorial" not in page.url:
+                    failures.append("[tutorial] la banda del indice no lleva al tutorial")
+
+                # El enlace del menu del indice tambien debe llegar.
+                page.goto(f"{base}/index.html", wait_until="networkidle")
+                page.click('#nav a[href="tutorial.html"]')
+                page.wait_for_load_state("networkidle")
+                print("[escritorio] url tras el menu:", page.url)
+                if "tutorial" not in page.url:
+                    failures.append("[tutorial] el enlace del menu no lleva al tutorial")
+
+            if console:
+                print(f"[{label}] errores de consola:", console)
+                failures.extend(f"[tutorial/{label}] consola: {c}" for c in console)
+            http_fail = [u for u in failed if "127.0.0.1" in u or u.startswith(("4", "5"))]
+            print(f"[{label}] recursos con error:", http_fail or "ninguno")
+            if http_fail:
+                failures.append(f"[tutorial/{label}] recursos rotos: {http_fail}")
+
+            page.close()
 
         browser.close()
 

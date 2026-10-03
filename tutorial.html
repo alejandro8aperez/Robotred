@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TUTORIAL — Robótica para el mantenimiento de redes eléctricas | ROBOT-RED</title>
+  <meta name="description" content="Tutorial en 10 módulos para gerencia y gestión de activos: introducción a la robótica eléctrica, sensores, IA en el borde, mantenimiento en línea energizada, seguridad y diseño de prototipos según IEC/TC 129.">
+  <meta name="theme-color" content="#0A1620">
+  <meta name="author" content="ROBOT-RED">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://robotred.co/tutorial.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="ROBOT-RED">
+  <meta property="og:title" content="TUTORIAL — Robótica para el mantenimiento de redes eléctricas">
+  <meta property="og:description" content="10 módulos para gerencia y gestión de activos: desde la terminología IEC 63439-1-1 hasta IA en el borde y mantenimiento en línea energizada.">
+  <meta property="og:url" content="https://robotred.co/tutorial.html">
+  <meta property="og:image" content="https://robotred.co/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TUTORIAL — Robótica para el mantenimiento de redes eléctricas">
+  <meta name="twitter:description" content="10 módulos para gerencia y gestión de activos, alineados con IEC/TC 129.">
+  <meta name="twitter:image" content="https://robotred.co/assets/og-image.png">
+
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="assets/favicon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "Robótica para el mantenimiento de líneas de transmisión y distribución",
+    "description": "Tutorial en 10 módulos dirigido a gerencia y gestión de activos de empresas del sector eléctrico: marco normativo IEC/TC 129, plataformas de movilidad, sensores, IA en el borde, mantenimiento en línea energizada, seguridad y diseño de prototipos.",
+    "inLanguage": "es",
+    "url": "https://robotred.co/tutorial.html",
+    "provider": {
+      "@type": "Organization",
+      "name": "ROBOT-RED",
+      "url": "https://robotred.co/",
+      "email": "info@robotred.co"
+    },
+    "educationalLevel": "Profesional",
+    "teaches": [
+      "Terminología y clasificación de robots de energía eléctrica (IEC 63439-1-1:2025)",
+      "Plataformas de movilidad: robots trepadores, drones, UGVs y UUVs",
+      "Sensores multiespectrales para inspección de activos",
+      "Inteligencia artificial y procesamiento en el borde",
+      "Mantenimiento activo en línea energizada",
+      "Seguridad eléctrica, EMC y análisis FMEA/FMECA"
+    ],
+    "hasCourseInstance": {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "courseWorkload": "10 módulos",
+      "inLanguage": "es"
+    }
+  }
+  </script>
+</head>
+<body class="page-tutorial">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="progress" id="progress" aria-hidden="true"><span></span></div>
+
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-robot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V5M9 5h6M9 13h.01M15 13h.01M9.5 16.5h5M2 12v3M22 12v3"/></symbol>
+    <symbol id="i-drone" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="2"/><path d="M9 10 5 6M15 10l4-4M9 14l-4 4M15 14l4 4M3 4h4M17 4h4M3 20h4M17 20h4"/></symbol>
+    <symbol id="i-thermal" viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 1 3 3v7.5a5 5 0 1 1-6 0V6a3 3 0 0 1 3-3Z"/><path d="M12 9v6"/></symbol>
+    <symbol id="i-ai" viewBox="0 0 24 24"><path d="M12 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5.2A3 3 0 0 0 9 18a3 3 0 0 0 3 2 3 3 0 0 0 3-2 3 3 0 0 0 2-5.8A3 3 0 0 0 15 7a3 3 0 0 0-3-3Z"/><path d="M12 8v9M9.5 11.5h5M9.5 14.5h5"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5.5c0 4.3-2.9 8.1-7 9.5-4.1-1.4-7-5.2-7-9.5V6l7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 8.5 4.5L12 12 3.5 7.5 12 3Z"/><path d="m4 12 8 4.3 8-4.3M4 16.5 12 21l8-4.5"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.4 6.9 6.6 15.6M13.6 6.9l3.8 8.7M7.5 18h9"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M12.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3h3l1.5 4-2 1.5a11 11 0 0 0 5 5L16 11.5 20 13v3a2 2 0 0 1-2.2 2A16 16 0 0 1 5 5.2 2 2 0 0 1 7 3Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10" rx="2"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 2"/></symbol>
+  </svg>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="ROBOT-RED — inicio">
+        <img class="brand-logo" src="assets/logo-blanco.webp" width="100" height="96" alt="" fetchpriority="high">
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <a href="/">Inicio</a>
+        <a href="/#soluciones">Soluciones</a>
+        <a href="/#robot">Robot X</a>
+        <a href="/#tecnologia">Tecnología</a>
+        <a href="/#casos">Casos de uso</a>
+        <a href="/#resultados">Resultados</a>
+        <a href="/#faq">FAQ</a>
+        <a href="tutorial.html" class="active" aria-current="page">Tutorial</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="link-tech" href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Área técnica</a>
+        <a class="btn btn-primary btn-sm" href="/#contacto">Solicitar demo</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ============ PORTADA DEL TUTORIAL ============ -->
+    <section class="tut-hero" id="inicio">
+      <div class="tut-hero-grid" aria-hidden="true"></div>
+      <div class="container tut-hero-inner">
+        <p class="tut-kicker reveal">ROBOT-RED</p>
+        <h1 class="tut-title reveal" data-delay="60">Tutorial</h1>
+        <p class="tut-sub reveal" data-delay="120">Robótica para el mantenimiento de líneas de transmisión y distribución</p>
+        <p class="lede reveal" data-delay="180">Ruta de aprendizaje de <strong>10 módulos</strong> para gerencia, gestión de activos y líderes de mantenimiento: cómo se aplica la robótica en redes eléctricas, con qué normas se gobierna y cómo se escala una flota con criterio de inversión.</p>
+
+        <div class="tut-hero-actions reveal" data-delay="240">
+          <a class="btn btn-primary" href="#modulos">Ver el programa <svg class="ico ico-sm"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost" href="#inscribirse">Inscribirme</a>
+        </div>
+
+        <ul class="tut-facts reveal" data-delay="300">
+          <li><svg class="ico ico-sm"><use href="#i-layers"/></svg><div><strong>10 módulos</strong><span>De fundamentos a diseño de prototipo</span></div></li>
+          <li><svg class="ico ico-sm"><use href="#i-target"/></svg><div><strong>IEC/TC 129</strong><span>IEC 63439-1-1 y TR 63439-1-2</span></div></li>
+          <li><svg class="ico ico-sm"><use href="#i-drone"/></svg><div><strong>Caso real</strong><span>Spot en estación convertidora de National Grid</span></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ PARA QUIÉN ES ============ -->
+    <section class="section section-alt" id="audiencia">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="eyebrow">Antes de empezar</p>
+          <h2>Un tutorial pensado para decidir, no solo para operar</h2>
+          <p class="sec-lede">El contenido está escrito para quien aprueba presupuesto y responde por la continuidad del servicio. Cada módulo termina en algo que se puede aplicar en la propia utility.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card reveal">
+            <span class="card-ico"><svg class="ico"><use href="#i-shield"/></svg></span>
+            <h3>Gerencia y dirección técnica</h3>
+            <p>Justificar la inversión en robótica con argumentos de riesgo, confiabilidad y costo de mantener, no con entusiasmo tecnológico.</p>
+            <ul class="ticks">
+              <li>Construcción del caso de negocio</li>
+              <li>Alcance y límites del marco IEC/TC 129</li>
+              <li>Hoja de ruta de escalamiento</li>
+            </ul>
+          </article>
+
+          <article class="card reveal" data-delay="80">
+            <span class="card-ico"><svg class="ico"><use href="#i-target"/></svg></span>
+            <h3>Gestión de activos</h3>
+            <p>Cómo elegir plataforma, carga útil y nivel de autonomía según la topología del activo y el ambiente donde se opera.</p>
+            <ul class="ticks">
+              <li>Taxonomía de plataformas móviles</li>
+              <li>Criterios de evaluación y benchmarking</li>
+              <li>Asignación de capital por zona</li>
+            </ul>
+          </article>
+
+          <article class="card reveal" data-delay="160">
+            <span class="card-ico"><svg class="ico"><use href="#i-ai"/></svg></span>
+            <h3>Equipos de operación e ingeniería</h3>
+            <p>Los fundamentos para especificar, recibir, operar y mantener robots: sensores, IA en el borde, seguridad y recuperación en campo.</p>
+            <ul class="ticks">
+              <li>Lectura de informes de inspección</li>
+              <li>Procedimientos de seguridad operacional</li>
+              <li>Integración con SCADA, ADMS y GIS</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROGRAMA ============ -->
+    <section class="section" id="modulos">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="eyebrow">El programa</p>
+          <h2>Diez módulos, en orden de decisión</h2>
+          <p class="sec-lede">El curso avanza desde el marco normativo hasta el proyecto final. Los módulos se publican en este tutorial a medida que se completan.</p>
+        </div>
+
+        <ol class="mod-list">
+
+          <li class="mod reveal" id="mod-1">
+            <div class="mod-head">
+              <span class="mod-num">01</span>
+              <div>
+                <h3>Introducción a la robótica eléctrica</h3>
+                <p class="mod-sum">Qué es un robot de energía eléctrica y por qué el sector eléctrico fue el primero en estandarizarlo.</p>
+              </div>
+              <span class="mod-state published">Publicado</span>
+            </div>
+            <ul class="ticks">
+              <li>Autonomía aplicada a construcción, patrullaje, inspección, operación y mantenimiento</li>
+              <li>Terminología y clasificación según IEC 63439-1-1:2025</li>
+              <li>Ámbito de IEC/TC 129 y exclusión expresa del dominio nuclear</li>
+              <li>Designaciones normalizadas de conductor, fase, cable de guarda y puesta a tierra</li>
+            </ul>
+          </li>
+
+          <li class="mod reveal" data-delay="60" id="mod-2">
+            <div class="mod-head">
+              <span class="mod-num">02</span>
+              <div>
+                <h3>Conocimiento de la línea eléctrica</h3>
+                <p class="mod-sum">La arquitectura física del activo: sin ella, ninguna interfaz de robot es confiable.</p>
+              </div>
+              <span class="mod-state published">Publicado</span>
+            </div>
+            <ul class="ticks">
+              <li>Torres, conductores, cables de guarda, herrajes y cadenas de aisladores</li>
+              <li>Elementos que un robot debe cruzar: grapas, empalmes, manguitos, separadores y amortiguadores</li>
+              <li>Identificación de zonas críticas y distancias de seguridad</li>
+              <li>Campos electromagnéticos y su efecto sobre la electrónica embarcada</li>
+            </ul>
+          </li>
+
+          <li class="mod reveal" data-delay="120" id="mod-3">
+            <div class="mod-head">
+              <span class="mod-num">03</span>
+              <div>
+                <h3>El robot trepador y las plataformas de movilidad</h3>
+                <p class="mod-sum">Mecánica, tracción y cinemática, y el panorama completo de las alternativas.</p>
+              </div>
+              <span class="mod-state published">Publicado</span>
+            </div>
+            <ul class="ticks">
+              <li>Desplazamiento sobre conductores y cables de guarda</li>
+              <li>Drones (UAV) para inspección aérea y respuesta a contingencias</li>
+              <li>Robots terrestres (UGV) y guiados por riel para subestaciones</li>
+              <li>Robots subacuáticos (UUV) y robots internos para transformadores</li>
+              <li>Robots articulados para uso de herramientas convencionales</li>
+            </ul>
+          </li>
+
+          <li class="mod reveal" data-delay="180" id="mod-4">
+            <div class="mod-head">
+              <span class="mod-num">04</span>
+              <div>
+                <h3>Sensores para inspección</h3>
+                <p class="mod-sum">Cargas útiles multiespectrales y cómo se captura la evidencia.</p>
+              </div>
+              <span class="mod-state published">Publicado</span>
+            </div>
+            <ul class="ticks">
+              <li>Visión óptica de alta resolución y PTZ</li>
+              <li>Termografía infrarroja radiométrica y detección de puntos calientes</li>
+              <li>Acústica y ultrasonido para descargas parciales y fugas</li>
+              <li>LiDAR y escaneo 3D para modelos digitales y control de vegetación</li>
+              <li>Metodología de captura: distancia, ángulo, emisividad y hora del día</li>
+            </ul>
+          </li>
+
+          <li class="mod reveal" data-delay="240" id="mod-5">
+            <div class="mod-head">
+              <span class="mod-num">05</span>
+              <div>
+                <h3>Qué puede hacer ROBOT-RED</h3>
+                <p class="mod-sum">Capacidades operativas reales y escenarios de aplicación en campo.</p>
+              </div>
+              <span class="mod-state published">Publicado</span>
+            </div>
+            <ul class="ticks">
+              <li>Alcance de la plataforma ROBOT-RED X sobre línea energizada</li>
+              <li>Inspección autónoma de líneas de distribución y transmisión aéreas</li>
+              <li>Detección de corrosión, aflojamiento, fatiga y contaminación</li>
+              <li>Monitoreo remoto continuo y evidencia trazable por activo</li>
+            </ul>
+          </li>
+
+          <li class="mod reveal" data-delay="300" id="mod-6">
+            <div class="mod-head">
+              <span class="mod-num">06</span>
+              <div>
+                <h3>Inteligencia artificial y procesamiento en el borde</h3>
+                <p class="mod-sum">Cómo el robot decide en campo en lugar de enviar video crudo a la nube.</p>
+              </div>
+              <span class="mod-state published">Publicado</span>
+            </div>
+            <ul class="ticks">
+              <li>Del sensor al borde: arquitectura de procesamiento embarcado</li>
+              <li>Visión computacional para anomalías: puntos calientes, grietas, fugas, hilos rotos</li>
+              <li>Clasificación automática de severidad e índice de riesgo</li>
+              <li>Filtrado inteligente que optimiza el ancho de banda hacia la sala de control</li>
+              <li>Taller: umbrales térmicos y acústicos, y etiquetado de aisladores sanos y dañados</li>
+            </ul>
+          </li>
+
+          <li class="mod mod-soon reveal" data-delay="360" id="mod-7">
+            <div class="mod-head">
+              <span class="mod-num">07</span>
+              <div>
+                <h3>Robot para mantenimiento</h3>
+                <p class="mod-sum">De la inspección pasiva a la intervención física sobre la red energizada.</p>
+              </div>
+              <span class="mod-state">Próximamente</span>
+            </div>
+            <ul class="ticks">
+              <li>Mantenimiento en línea viva y manipulación con brazos articulados</li>
+              <li>Limpieza de aisladores y remoción de elementos extraños</li>
+              <li>Reparación de hilos y reparación de conductores</li>
+              <li>Espacios confinados y áreas de alto riesgo eléctrico</li>
+            </ul>
+          </li>
+
+          <li class="mod mod-soon reveal" data-delay="420" id="mod-8">
+            <div class="mod-head">
+              <span class="mod-num">08</span>
+              <div>
+                <h3>Seguridad eléctrica</h3>
+                <p class="mod-sum">Distancia de seguridad, compatibilidad electromagnética y recuperación en campo.</p>
+              </div>
+              <span class="mod-state">Próximamente</span>
+            </div>
+            <ul class="ticks">
+              <li>Protocolos de seguridad operacional y distancia límite de acercamiento</li>
+              <li>Compatibilidad electromagnética (EMC) en campo de alta tensión</li>
+              <li>Arranque y apagado seguro, cambio de batería y robot recovery</li>
+              <li>Procedimientos de emergencia y respuesta ante pérdida de comunicación</li>
+            </ul>
+          </li>
+
+          <li class="mod mod-soon reveal" data-delay="480" id="mod-9">
+            <div class="mod-head">
+              <span class="mod-num">09</span>
+              <div>
+                <h3>Diseño del primer prototipo</h3>
+                <p class="mod-sum">Hardware, controladores y telemetría para construir la primera versión.</p>
+              </div>
+              <span class="mod-state">Próximamente</span>
+            </div>
+            <ul class="ticks">
+              <li>Especificación técnica y selección de componentes</li>
+              <li>Controladores, sensores y arquitectura de comunicación en tiempo real</li>
+              <li>Alimentación, encapsulamiento y protección ambiental</li>
+              <li>Diagramas de integración física y electrónica</li>
+            </ul>
+          </li>
+
+          <li class="mod mod-soon reveal" data-delay="540" id="mod-10">
+            <div class="mod-head">
+              <span class="mod-num">10</span>
+              <div>
+                <h3>Proyecto final</h3>
+                <p class="mod-sum">Un proyecto real, de principio a fin, validado contra la guía IEC TR 63439-1-2.</p>
+              </div>
+              <span class="mod-state">Próximamente</span>
+            </div>
+            <ul class="ticks">
+              <li>Definición del problema y selección del activo objetivo</li>
+              <li>Desarrollo e implementación de la solución</li>
+              <li>Evaluación de desempeño y validación de confiabilidad</li>
+              <li>Presentación de resultados ante la gerencia</li>
+            </ul>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ MARCO NORMATIVO ============ -->
+    <section class="section section-dark" id="norma">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="eyebrow">Marco de referencia</p>
+          <h2>Por qué enseñamos con norma IEC y no solo con normas locales</h2>
+          <p class="sec-lede">La IEC no compite con el fabricante: define cómo la utility especifica, compra, opera y acepta un robot de red. Las normas locales de seguridad eléctrica se aplican igual, pero la estructura de la tecnología la da el TC 129.</p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card-dark reveal">
+            <p class="norm-code">IEC 63439-1-1:2025</p>
+            <h3>Terminología para robots de energía eléctrica</h3>
+            <p>Define los términos normalizados de constitución, funciones, rendimiento, parámetros de seguridad y especificaciones del entorno de trabajo. Aplica en todas las fases: diseño, fabricación, pruebas, comercialización, operación y mantenimiento.</p>
+          </article>
+
+          <article class="card-dark reveal" data-delay="80">
+            <p class="norm-code">IEC TR 63439-1-2:2026</p>
+            <h3>Estado del arte y hoja de ruta</h3>
+            <p>Clasifica robots por escenario operativo (subestaciones, líneas) y condición ambiental (alta tensión, espacios confinados). Evalúa tecnologías de movilidad, navegación y comunicaciones, y define el marco de pruebas mediante FMEA/FMECA y estrés ambiental.</p>
+          </article>
+
+          <article class="card-dark reveal" data-delay="160">
+            <p class="norm-code">IEC/TC 129</p>
+            <h3>Un comité especializado</h3>
+            <p>Cubre sistemas que se desplazan sobre rieles, por tierra, por aire, bajo agua o sobre los propios equipos eléctricos. La robótica de energía nuclear queda fuera de su ámbito.</p>
+          </article>
+
+          <article class="card-dark reveal" data-delay="240">
+            <p class="norm-code">Caso de campo</p>
+            <h3>National Grid y Spot</h3>
+            <p>Estación convertidora HVDC de 2.000 MW: una malla de 14 nodos y la plataforma de control centralizada permitieron pasar de inspección anual a inspección continua y autónoma, y detectar una fuga de aceite en un buje energizado.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CÓMO SE ESTUDIA ============ -->
+    <section class="section section-alt" id="metodo">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="eyebrow">Metodología</p>
+          <h2>Cómo se estudia este tutorial</h2>
+        </div>
+
+        <div class="grid-3">
+          <article class="benefit reveal">
+            <span class="b-num">01</span>
+            <h3>Lectura corta y directa</h3>
+            <p>Cada módulo está escrito para leerse en una sesión de trabajo y terminar con una decisión o un entregable, no con una diapositiva decorativa.</p>
+          </article>
+          <article class="benefit reveal" data-delay="80">
+            <span class="b-num">02</span>
+            <h3>Ejemplo antes que teoría</h3>
+            <p>Partimos de despliegues reales —como Spot en la estación convertidora de National Grid— y de ahí derivamos el concepto, la norma y el procedimiento.</p>
+          </article>
+          <article class="benefit reveal" data-delay="160">
+            <span class="b-num">03</span>
+            <h3>Material reutilizable</h3>
+            <p>Los esquemas, listas de verificación y plantillas de especificación quedan disponibles para usarse en licitaciones, pilotos y procedimientos internos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INSCRIPCIÓN ============ -->
+    <section class="section section-dark" id="inscribirse">
+      <div class="container">
+        <div class="cta-band reveal">
+          <div>
+            <p class="eyebrow">Siguiente paso</p>
+            <h2>Quiero recibir el tutorial</h2>
+            <p class="sec-lede">Déjenos sus datos y le enviamos el acceso a los módulos publicados, junto con el calendario de publicación de los siguientes.</p>
+          </div>
+          <a class="btn btn-primary" href="/#contacto">Inscribirme <svg class="ico ico-sm"><use href="#i-arrow"/></svg></a>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info reveal">
+            <div class="logo-full">
+              <img src="assets/logo-color.webp" width="100" height="96" alt="ROBOT-RED — Robótica e ingeniería para redes eléctricas" loading="lazy">
+            </div>
+            <p class="tagline">Robótica e ingeniería para redes eléctricas.</p>
+
+            <ul class="contact-list">
+              <li><svg class="ico ico-sm"><use href="#i-mail"/></svg><div><span>Correo</span><a href="mailto:info@robotred.co">info@robotred.co</a></div></li>
+              <li><svg class="ico ico-sm"><use href="#i-phone"/></svg><div><span>Teléfono</span><a href="tel:+573219717601">+57 321 971 7601</a></div></li>
+              <li><svg class="ico ico-sm"><use href="#i-pin"/></svg><div><span>Oficina</span><p>Medellín, Colombia</p></div></li>
+              <li><svg class="ico ico-sm"><use href="#i-doc"/></svg><div><span>Documentación</span><a href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Libro Blanco INSTE-BOT X</a></div></li>
+            </ul>
+
+            <div class="contact-note">
+              <strong>¿Va a implementar ya?</strong>
+              <p>Si su interés es un despliegue inmediato, escríbanos directo: preferimos un piloto bien definido a un curso completo.</p>
+            </div>
+          </div>
+
+          <div class="mod-next reveal" data-delay="100">
+            <p class="eco-title">Lo que se viene</p>
+            <ol class="tut-timeline">
+              <li><span class="tut-dot done"></span><div><strong>Módulos 1 a 6 — disponibles</strong><p>Fundamentos, línea eléctrica, plataformas, sensores, capacidades ROBOT-RED e IA en el borde.</p></div></li>
+              <li><span class="tut-dot"></span><div><strong>Módulo 7 — Robot para mantenimiento</strong><p>Mantenimiento en línea viva, limpieza de aisladores y reparación de conductores.</p></div></li>
+              <li><span class="tut-dot"></span><div><strong>Módulo 8 — Seguridad eléctrica</strong><p>EMC, distancia de seguridad y procedimientos de recuperación en campo.</p></div></li>
+              <li><span class="tut-dot"></span><div><strong>Módulo 9 — Diseño del primer prototipo</strong><p>Componentes, controladores y telemetría en tiempo real.</p></div></li>
+              <li><span class="tut-dot"></span><div><strong>Módulo 10 — Proyecto final</strong><p>Desarrollo práctico y evaluación conforme a la guía IEC TR 63439-1-2.</p></div></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/" aria-label="ROBOT-RED — inicio">
+          <img class="brand-logo" src="assets/logo-blanco.webp" width="100" height="96" alt="" loading="lazy">
+        </a>
+        <p>Robots autónomos para inspeccionar, diagnosticar y mantener redes eléctricas sin interrumpir el servicio.</p>
+        <div class="social">
+          <a href="mailto:info@robotred.co" aria-label="Correo"><svg class="ico ico-sm"><use href="#i-mail"/></svg></a>
+          <a href="tel:+573219717601" aria-label="Teléfono"><svg class="ico ico-sm"><use href="#i-phone"/></svg></a>
+          <a href="https://github.com/alejandro8aperez/Robotred" target="_blank" rel="noopener" aria-label="GitHub"><svg class="ico ico-sm"><use href="#i-network"/></svg></a>
+        </div>
+      </div>
+
+      <nav class="footer-col" aria-label="Soluciones">
+        <h4>Soluciones</h4>
+        <a href="/#soluciones">Inspección autónoma</a>
+        <a href="/#soluciones">Termografía</a>
+        <a href="/#soluciones">Mantenimiento en línea</a>
+        <a href="/#soluciones">Monitoreo IoT</a>
+        <a href="/#soluciones">IA predictiva</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Compañía">
+        <h4>Compañía</h4>
+        <a href="/#robot">Robot X</a>
+        <a href="/#casos">Casos de uso</a>
+        <a href="/#proceso">Proceso</a>
+        <a href="/#faq">Preguntas frecuentes</a>
+        <a href="/#contacto">Contacto</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Aprendizaje">
+        <h4>Tutorial</h4>
+        <a href="#modulos">Programa en 10 módulos</a>
+        <a href="#norma">Marco normativo IEC/TC 129</a>
+        <a href="#metodo">Metodología</a>
+        <a href="#inscribirse">Recibir el tutorial</a>
+        <a href="/#resultados">Cumplimiento RETIE</a>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> ROBOT-RED. Todos los derechos reservados.</p>
+      <p class="foot-note">Las referencias normativas IEC/TC 129 se citan con fines formativos. Los valores técnicos se validan por tramo en cada piloto.</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Volver arriba" hidden>
+    <svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M12 19V6M6 12l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

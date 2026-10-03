@@ -98,6 +98,9 @@
 
     navLinks.forEach(function (link) {
       var href = link.getAttribute('href') || '';
+      /* Los enlaces que apuntan a otra pagina (p. ej. tutorial.html) llevan ya
+         su estado .active en el HTML: no se tocan al calcular la seccion. */
+      if (href.charAt(0) !== '#') return;
       link.classList.toggle('active', href === '#' + current);
     });
   }

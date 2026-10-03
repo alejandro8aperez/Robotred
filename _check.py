@@ -63,7 +63,8 @@ local_refs = {r for r in c.refs
               if r and not r.startswith(("http://", "https://", "mailto:", "tel:"))}
 broken_refs = sorted(
     r for r in local_refs
-    if r not in c.ids and "/" not in r and not r.endswith(tuple(EXT))
+    if r not in c.ids and "/" not in r
+    and not r.endswith(tuple(EXT)) and not r.endswith(".html")
 )
 print("refs rotas:", broken_refs)
 
@@ -102,7 +103,7 @@ for src in sorted(set(re.findall(r'(?:src|href)="([^"#]+\.(?:png|jpg|jpeg|webp|s
     if not ok:
         problems.append(f"Archivo referenciado que no existe: {src}")
 
-for page in ("gracias.html",):
+for page in ("gracias.html", "tutorial.html"):
     if not (root / page).exists():
         problems.append(f"Falta la pagina {page}")
 
@@ -134,7 +135,7 @@ if not og_url:
 elif domain not in og_url.group(1):
     problems.append(f"og:url no apunta a {domain}: {og_url.group(1)}")
 for f in ("netlify.toml", "robots.txt", "sitemap.xml", "gracias.html",
-          "assets/og-image.png", "assets/apple-touch-icon.png",
+          "tutorial.html", "assets/og-image.png", "assets/apple-touch-icon.png",
           "assets/logo-color.webp", "assets/logo-blanco.webp",
           "assets/esquema.jpg", "assets/favicon-32.png"):
     ok = (root / f).exists()
@@ -142,9 +143,79 @@ for f in ("netlify.toml", "robots.txt", "sitemap.xml", "gracias.html",
     if not ok:
         problems.append(f"Falta {f}")
 
+print("\n== PAGINAS SECUNDARIAS ==")
+
+
+def check_page(name, want_robots=None, need_seo=True, need_js=True):
+    """Valida una pagina distinta de index.html con las mismas reglas."""
+    path = root / name
+    if not path.exists():
+        problems.append(f"Falta la pagina {name}")
+        return
+
+    page = path.read_text(encoding="utf-8")
+    pc = Checker()
+    pc.feed(page)
+
+    issues = []
+    if pc.stack:
+        issues.append(f"tags sin cerrar: {pc.stack}")
+    if pc.errors:
+        issues.append(f"cierres sobrantes: {pc.errors}")
+    dupes = sorted(i for i in set(pc.ids) if pc.ids.count(i) > 1)
+    if dupes:
+        issues.append(f"ids duplicados: {dupes}")
+
+    refs = {r for r in pc.refs
+            if r and not r.startswith(("http://", "https://", "mailto:", "tel:"))}
+    broken = sorted(r for r in refs
+                    if r not in pc.ids and "/" not in r
+                    and not r.endswith(tuple(EXT)) and not r.endswith(".html"))
+    if broken:
+        issues.append(f"anclas rotas: {broken}")
+
+    symbols = set(re.findall(r'<symbol id="([^"]+)"', page))
+    orphans = sorted(set(re.findall(r'<use href="#([^"]+)"', page)) - symbols)
+    if orphans:
+        issues.append(f"iconos <use> sin <symbol>: {orphans}")
+
+    for src in sorted(set(re.findall(r'(?:src|href)="([^"#]+\.(?:png|jpg|jpeg|webp|svg|css|js))"', page))):
+        if not (root / src).exists():
+            issues.append(f"archivo inexistente: {src}")
+
+    head = page[:page.find("</head>")]
+    canonical = re.search(r'<link rel="canonical" href="([^"]+)"', head)
+    if want_robots and want_robots not in page:
+        issues.append(f"falta el meta robots '{want_robots}'")
+    if need_seo:
+        if not canonical:
+            issues.append("falta link rel=canonical")
+        elif "robotred.co" not in canonical.group(1):
+            issues.append(f"el canonical no apunta a robotred.co: {canonical.group(1)}")
+        if not re.search(r'property="og:url"', head):
+            issues.append("falta og:url")
+    if 'href="styles.css"' not in page:
+        issues.append("no carga styles.css")
+    if need_js and 'src="app.js"' not in page:
+        issues.append("no carga app.js")
+
+    print(f"  {name:18} {'OK' if not issues else 'FALLA'}")
+    for i in issues:
+        print(f"      - {i}")
+        problems.append(f"{name}: {i}")
+
+
+check_page("tutorial.html")
+# La pagina de gracias es noindex y estatica: no lleva canonical, og:url ni app.js.
+check_page("gracias.html", want_robots="noindex", need_seo=False, need_js=False)
+
 print("\n== ENCUBIERTO ==")
 moji = html.count("â€") + css.count("â€") + js.count("â€")
 repl = html.count("\ufffd") + css.count("\ufffd") + js.count("\ufffd")
+for page in ("tutorial.html", "gracias.html"):
+    extra = (root / page).read_text(encoding="utf-8")
+    moji += extra.count("â€")
+    repl += extra.count("\ufffd")
 print("mojibake 'â€':", moji, "| U+FFFD:", repl)
 if moji or repl:
     problems.append("Encoding roto: hay caracteres mojibake o U+FFFD")

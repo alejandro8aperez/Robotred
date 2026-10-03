@@ -4,6 +4,9 @@
 assets-src/
 Imagenes/
 
+# Material del curso: los vídeos no se publican (pesan decenas de MB).
+Curso/*.mp4
+
 # Herramientas de desarrollo (no deben publicarse)
 _check.py
 _gen_*.py
