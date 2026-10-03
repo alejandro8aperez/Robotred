@@ -1,0 +1,24 @@
+# Si el repositorio se enlaza en Netlify, .netlify/ ya está en .gitignore.
+
+# Originales de imagen (solo se publican las versiones de assets/)
+assets-src/
+
+# Herramientas de desarrollo (no deben publicarse)
+_check.py
+_gen_*.py
+_smoke.py
+_shots.py
+.shots/
+_shot_*.png
+_shot_*.html
+_*.html
+_*.png
+_*.jpg
+*.zip
+*.psd
+*.ai
+
+# Metadatos
+.netlify/
+.git/
+.github/

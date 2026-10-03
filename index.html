@@ -3,207 +3,844 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ROBOTRED — Robótica para Redes Eléctricas</title>
-  <meta name="description" content="ROBOTRED: Tecnología robótica para el mantenimiento de líneas de distribución y transmisión eléctrica. Drones, robots, termografía e IA.">
+  <title>ROBOT-RED — Robots autónomos para el mantenimiento de redes eléctricas</title>
+  <meta name="description" content="ROBOT-RED diseña y opera robots autónomos, drones y sistemas de IA para inspeccionar y mantener líneas de distribución y transmisión eléctrica sin interrumpir el servicio.">
+  <meta name="theme-color" content="#0A1620">
+  <meta name="author" content="ROBOT-RED">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://robotred.co/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="ROBOT-RED">
+  <meta property="og:title" content="ROBOT-RED — Robots autónomos para el mantenimiento de redes eléctricas">
+  <meta property="og:description" content="Inspección y mantenimiento autónomo sobre líneas energizadas: visión 8K, térmica radiométrica, detección de corona UV y brazos robóticos.">
+  <meta property="og:url" content="https://robotred.co/">
+  <meta property="og:image" content="https://robotred.co/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ROBOT-RED — Robots autónomos para el mantenimiento de redes eléctricas">
+  <meta name="twitter:description" content="Inspección y mantenimiento autónomo sobre líneas energizadas sin interrumpir el servicio.">
+  <meta name="twitter:image" content="https://robotred.co/og-image.png">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ROBOT-RED",
+    "url": "https://robotred.co/",
+    "description": "Robótica e ingeniería para el mantenimiento de redes eléctricas de distribución y transmisión.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bogotá",
+      "addressCountry": "CO"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "comercial",
+      "email": "info@robotred.co",
+      "telephone": "+57-300-123-4567",
+      "availableLanguage": ["es", "en"]
+    },
+    "makesOffer": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Inspección autónoma de líneas eléctricas"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Termografía y diagnóstico de puntos calientes"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Mantenimiento predictivo con inteligencia artificial"}}
+    ]
+  }
+  </script>
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#inicio">
-      <span class="brand-icon">⚡</span>
-      <span class="brand-text">ROBOT<strong>RED</strong></span>
-    </a>
-    <nav>
-      <a href="#inicio" class="active">Inicio</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#tecnologia">Tecnología</a>
-      <a href="#beneficios">Beneficios</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-    <a class="cta-button" href="#contacto">Solicitar Cotización</a>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="progress" id="progress" aria-hidden="true"><span></span></div>
+
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-logo" viewBox="60 12 170 190">
+      <path d="M142 25 L213 65 L213 145 L142 185 L71 145 L71 65 Z" fill="none" stroke="currentColor" stroke-width="15" stroke-linejoin="round"/>
+      <path d="M113 145 V66 H151 C173 66 184 77 184 94 C184 111 173 122 151 122 H113 M148 122 L181 151" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="square" stroke-linejoin="round"/>
+      <circle cx="183" cy="151" r="12" fill="#D8433E"/>
+      <circle cx="183" cy="151" r="4" fill="#FFFFFF"/>
+    </symbol>
+    <symbol id="i-robot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V5M9 5h6M9 13h.01M15 13h.01M9.5 16.5h5M2 12v3M22 12v3"/></symbol>
+    <symbol id="i-drone" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="2"/><path d="M9 10 5 6M15 10l4-4M9 14l-4 4M15 14l4 4M3 4h4M17 4h4M3 20h4M17 20h4"/></symbol>
+    <symbol id="i-thermal" viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 1 3 3v7.5a5 5 0 1 1-6 0V6a3 3 0 0 1 3-3Z"/><path d="M12 9v6"/></symbol>
+    <symbol id="i-sensor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M6.5 6.5a7.8 7.8 0 0 0 0 11M17.5 6.5a7.8 7.8 0 0 1 0 11M3.5 3.5a12 12 0 0 0 0 17M20.5 3.5a12 12 0 0 1 0 17"/></symbol>
+    <symbol id="i-ai" viewBox="0 0 24 24"><path d="M12 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5.2A3 3 0 0 0 9 18a3 3 0 0 0 3 2 3 3 0 0 0 3-2 3 3 0 0 0 2-5.8A3 3 0 0 0 15 7a3 3 0 0 0-3-3Z"/><path d="M12 8v9M9.5 11.5h5M9.5 14.5h5"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M15.5 3.5a5 5 0 0 0-6.2 6.4L3.7 15.5a2 2 0 1 0 2.8 2.8l5.6-5.6a5 5 0 0 0 6.4-6.2l-3 3-2.6-.7-.7-2.6 3-3Z"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+    <symbol id="i-lidar" viewBox="0 0 24 24"><path d="M12 3v6M12 21v-3M4.9 6.9l4.2 4.2M14.9 12.9l4.2 4.2M3 12h5M21 12h-3M6.9 19.1l4.2-4.2"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-uv" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M5 5l1.8 1.8M17.2 17.2 19 19M19 5l-1.8 1.8M6.8 17.2 5 19"/></symbol>
+    <symbol id="i-arm" viewBox="0 0 24 24"><path d="M4 21h6M7 21V13l5-3 1 4 4-6"/><circle cx="17" cy="8" r="2.2"/><circle cx="12" cy="10" r="2"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1 .6-8A5.5 5.5 0 0 1 18 10.5 3.75 3.75 0 0 1 17.5 18H7Z"/><path d="M12 12v5M9.7 14.3 12 12l2.3 2.3"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5.5c0 4.3-2.9 8.1-7 9.5-4.1-1.4-7-5.2-7-9.5V6l7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16"/><path d="M8 16v-4M12 16V8M16 16v-6M20 16v-9"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 2"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.4 6.9 6.6 15.6M13.6 6.9l3.8 8.7M7.5 18h9"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3h3l1.5 4-2 1.5a11 11 0 0 0 5 5L16 11.5 20 13v3a2 2 0 0 1-2.2 2A16 16 0 0 1 5 5.2 2 2 0 0 1 7 3Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M12.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 8.5 4.5L12 12 3.5 7.5 12 3Z"/><path d="m4 12 8 4.3 8-4.3M4 16.5 12 21l8-4.5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10" rx="2"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></symbol>
+  </svg>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#inicio" aria-label="ROBOT-RED — inicio">
+        <svg class="brand-ico" aria-hidden="true"><use href="#i-logo"/></svg>
+        <span class="brand-text">ROBOT<em>-RED</em></span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <a href="#inicio" class="active">Inicio</a>
+        <a href="#soluciones">Soluciones</a>
+        <a href="#robot">Robot X</a>
+        <a href="#tecnologia">Tecnología</a>
+        <a href="#casos">Casos de uso</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="link-tech" href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Área técnica</a>
+        <a class="btn btn-primary btn-sm" href="#contacto">Solicitar demo</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <main id="inicio">
-    <section class="hero">
-      <div class="hero-content">
-        <p class="eyebrow">TECNOLOGÍA QUE MANTIENE TUS REDES</p>
-        <h1>El futuro del mantenimiento eléctrico <em>ya está aquí.</em></h1>
-        <p class="lede">Robots autónomos, drones y inteligencia artificial para inspeccionar y mantener sus líneas de distribución y transmisión sin interrumpir el servicio.</p>
-        <div class="hero-actions">
-          <a class="button primary" href="#servicios">Ver Servicios</a>
-          <a class="button secondary" href="#tecnologia">Conocer Tecnología</a>
+  <main id="contenido">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="inicio">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span class="dot"></span> Mantenimiento eléctrico autónomo</p>
+          <h1>Su red eléctrica, <em>inspeccionada y reparada</em> por robots.</h1>
+          <p class="lede">ROBOT-RED opera plataformas robóticas autónomas sobre líneas de distribución y transmisión energizadas: detectan fallas, actúan sobre los activos y entregan evidencia trazable — <strong>sin cortar el servicio ni exponer cuadrillas</strong>.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contacto">Solicitar demostración <svg class="ico ico-sm"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-ghost" href="#robot">Ver el robot</a>
+          </div>
+          <ul class="hero-checks">
+            <li><svg class="ico ico-sm"><use href="#i-check"/></svg> Operación sobre línea energizada</li>
+            <li><svg class="ico ico-sm"><use href="#i-check"/></svg> Evidencia lista para auditoría RETIE</li>
+            <li><svg class="ico ico-sm"><use href="#i-check"/></svg> Despacho por flota coordinada</li>
+          </ul>
         </div>
-        <div class="hero-stats">
-          <div class="stat"><strong>24/7</strong><span>Monitoreo continuo</span></div>
-          <div class="stat"><strong>0</strong><span>Interrupciones</span></div>
-          <div class="stat"><strong>100%</strong><span>Cobertura</span></div>
+
+        <div class="hero-stage reveal" data-delay="120">
+          <div class="stage-frame">
+            <svg class="scene" viewBox="0 0 560 460" role="img" aria-label="Robot autónomo inspeccionando una línea eléctrica energizada">
+              <defs>
+                <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#162835"/><stop offset="100%" stop-color="#0A1620"/>
+                </linearGradient>
+                <linearGradient id="gTower" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#2A4B5E"/><stop offset="100%" stop-color="#19384A"/>
+                </linearGradient>
+                <linearGradient id="gScan" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#D8433E" stop-opacity=".55"/>
+                  <stop offset="100%" stop-color="#D8433E" stop-opacity="0"/>
+                </linearGradient>
+                <radialGradient id="gHot" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#E9A93C"/><stop offset="100%" stop-color="#E9A93C" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+
+              <rect width="560" height="460" fill="url(#gSky)"/>
+              <g stroke="#1B3242" stroke-width="1" opacity=".7">
+                <path d="M0 80h560M0 160h560M0 240h560M0 320h560M0 400h560"/>
+                <path d="M80 0v460M160 0v460M240 0v460M320 0v460M400 0v460M480 0v460"/>
+              </g>
+
+              <!-- torre -->
+              <g fill="url(#gTower)" stroke="#33566C" stroke-width="2">
+                <path d="M96 400 132 96h20l36 304h-18l-30-250h-16l-30 250Z"/>
+                <rect x="104" y="128" width="112" height="12" rx="3"/>
+                <rect x="114" y="176" width="92" height="10" rx="3"/>
+                <rect x="126" y="224" width="70" height="10" rx="3"/>
+                <rect x="84" y="96" width="144" height="10" rx="4"/>
+              </g>
+              <g stroke="#3A5F76" stroke-width="2" opacity=".85">
+                <path d="M112 138l104 40M216 138 112 178M124 186l76 30M200 186l-76 30"/>
+              </g>
+
+              <!-- conductores -->
+              <g fill="none" stroke="#44697F" stroke-width="3" stroke-linecap="round">
+                <path d="M228 118c90 34 168 34 300 12"/>
+                <path d="M228 156c90 34 168 34 300 12" opacity=".75"/>
+                <path d="M228 194c90 34 168 34 300 12" opacity=".5"/>
+              </g>
+
+              <!-- haz de escaneo -->
+              <path class="scan-beam" d="M336 150 300 300h116L378 150Z" fill="url(#gScan)"/>
+
+              <!-- punto caliente -->
+              <circle class="hotspot" cx="452" cy="166" r="34" fill="url(#gHot)"/>
+              <circle class="hotspot-core" cx="452" cy="166" r="7" fill="#E9A93C"/>
+
+              <!-- robot sobre el conductor -->
+              <g class="robot" transform="translate(296 108)">
+                <rect x="-6" y="34" width="14" height="26" rx="4" fill="#1B3342"/>
+                <rect x="52" y="34" width="14" height="26" rx="4" fill="#1B3342"/>
+                <circle cx="1" cy="64" r="11" fill="#0E1A24" stroke="#D8433E" stroke-width="3"/>
+                <circle cx="59" cy="64" r="11" fill="#0E1A24" stroke="#D8433E" stroke-width="3"/>
+                <rect x="-4" y="-4" width="68" height="42" rx="12" fill="#162835" stroke="#3F6480" stroke-width="2"/>
+                <rect x="6" y="6" width="24" height="14" rx="4" fill="#0E1A24" stroke="#4F9FBC" stroke-width="2"/>
+                <circle class="led" cx="18" cy="13" r="3.5" fill="#4F9FBC"/>
+                <rect x="38" y="6" width="18" height="14" rx="4" fill="#0E1A24" stroke="#D8433E" stroke-width="2"/>
+                <path d="M64 18h18l10 16" fill="none" stroke="#3F6480" stroke-width="5" stroke-linecap="round"/>
+                <path d="M-4 18h-16l-8 14" fill="none" stroke="#3F6480" stroke-width="5" stroke-linecap="round"/>
+                <rect x="14" y="-16" width="30" height="14" rx="4" fill="#0E1A24" stroke="#3F6480" stroke-width="2"/>
+                <path d="M29 -16v-10" stroke="#3F6480" stroke-width="3"/>
+                <circle cx="29" cy="-30" r="5" fill="#D8433E" class="led"/>
+              </g>
+
+              <!-- enlaces de datos -->
+              <g class="data-links" stroke="#4F9FBC" stroke-width="1.5" fill="none" opacity=".55" stroke-dasharray="5 7">
+                <path d="M348 96 440 60h72"/>
+                <path d="M348 132 460 118h60"/>
+              </g>
+              <g fill="#4F9FBC">
+                <circle class="pulse" cx="512" cy="60" r="4"/>
+                <circle class="pulse" cx="520" cy="118" r="4" style="animation-delay:.6s"/>
+              </g>
+            </svg>
+
+            <div class="hud hud-1">
+              <span class="hud-tag hud-alert">ALERTA</span>
+              <strong>Conector · Tramo 14</strong>
+              <span class="hud-meta">78.4 °C · ΔT +31 K · Prioridad ALTA</span>
+            </div>
+            <div class="hud hud-2">
+              <span class="hud-tag">ESCANEANDO</span>
+              <strong>Tramo 14 · Fase B</strong>
+              <span class="hud-meta">8K · Térmico · UV · LiDAR</span>
+            </div>
+            <div class="hud hud-3">
+              <div class="ring"><span>98<small>%</small></span></div>
+              <div>
+                <strong>Salud del tramo</strong>
+                <span class="hud-meta">Modelo predictivo v4.2</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="hero-visual">
-        <div class="visual-grid">
-          <div class="visual-item v1">🤖</div>
-          <div class="visual-item v2">🚁</div>
-          <div class="visual-item v3">🌡️</div>
-          <div class="visual-item v4">📡</div>
+
+      <div class="container metric-band reveal">
+        <div class="metric"><strong data-count="24" data-suffix="/7">24/7</strong><span>Ventana de patrullaje</span></div>
+        <div class="metric"><strong data-count="0" data-suffix="">0</strong><span>Cortes de servicio previstos</span></div>
+        <div class="metric"><strong data-count="150" data-prefix="<" data-suffix=" kg">&lt;150 kg</strong><span>Masa operativa</span></div>
+        <div class="metric"><strong data-count="7" data-suffix=" GDL">7 GDL</strong><span>Por brazo robótico</span></div>
+        <div class="metric"><strong data-count="14" data-suffix=" tipos">14 tipos</strong><span>De defecto detectado</span></div>
+        <p class="metric-note">Cifras de diseño del programa ROBOT-RED X, no resultados medidos en campo. Cada valor se valida por tramo durante el piloto.</p>
+      </div>
+    </section>
+
+    <!-- ============ SECTORES ============ -->
+    <section class="strip" aria-label="Sectores atendidos">
+      <div class="container strip-inner">
+        <span class="strip-label">Diseñado para</span>
+        <ul class="strip-list">
+          <li>Generadoras</li>
+          <li>Transmisores</li>
+          <li>Distribuidoras</li>
+          <li>EPC &amp; contratistas</li>
+          <li>Parques industriales</li>
+          <li>Facilities críticas</li>
+          <li>Renovables &amp; BESS</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ PROBLEMA ============ -->
+    <section class="section section-dark" id="problema">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="eyebrow">El problema</p>
+          <h2>La red envejece más rápido de lo que se inspecciona</h2>
+          <p class="sec-lede">Las compañías siguen dependiendo de inspecciones visuales manuales, cuadrillas en altura y sobrevuelos ocasionales. Ese modelo tiene un techo: es caro, peligroso y llega tarde.</p>
+        </div>
+
+        <div class="grid-4">
+          <article class="card-dark reveal">
+            <svg class="ico ico-lg c-red"><use href="#i-shield"/></svg>
+            <h3>Riesgo para las personas</h3>
+            <p>Descargas, arcos eléctricos, caídas y trabajos en suspensión siguen siendo la principal causa de accidentes graves en la operación de red.</p>
+          </article>
+          <article class="card-dark reveal" data-delay="80">
+            <svg class="ico ico-lg c-amber"><use href="#i-clock"/></svg>
+            <h3>Inspección poco frecuente</h3>
+            <p>Cuando la ventana operativa es de uno o dos recorridos al año, el defecto tiene meses para crecer antes de ser visto.</p>
+          </article>
+          <article class="card-dark reveal" data-delay="160">
+            <svg class="ico ico-lg c-blue"><use href="#i-chart"/></svg>
+            <h3>Costo por kilometro</h3>
+            <p>Cuadrillas certificadas, vehículos, equipos de aislamiento, transporte y tiempos muertos encarecen cada recorrido.</p>
+          </article>
+          <article class="card-dark reveal" data-delay="240">
+            <svg class="ico ico-lg c-red"><use href="#i-target"/></svg>
+            <h3>Fallas que no se ven a tiempo</h3>
+            <p>Corrosión en herrajes, conexiones aflojadas, fatiga de conductor, corona y sobrecalentamientos no son visibles a simple vista.</p>
+          </article>
+        </div>
+
+        <blockquote class="quote reveal">
+          <p>Cuando el síntoma finalmente aparece, el daño ya es más costoso y la probabilidad de interrupción, considerablemente mayor.</p>
+          <cite>Libro Blanco de Ingeniería · INSTE-BOT X — Tomo I</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ============ SOLUCIONES ============ -->
+    <section class="section" id="soluciones">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="eyebrow">Soluciones</p>
+          <h2>Seis servicios que operan sobre su red</h2>
+          <p class="sec-lede">Un mismo ecosistema robótico cubre la cadena completa: percibir, diagnosticar, actuar y reportar.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card reveal">
+            <span class="card-ico"><svg class="ico ico-lg"><use href="#i-robot"/></svg></span>
+            <h3>Inspección con robot autónomo</h3>
+            <p>Recorrido sobre el conductor con captura 8K, térmica radiométrica, UV y LiDAR. Cruza grapas, empalmes, separadores y aisladores sin detenerse.</p>
+            <ul class="ticks">
+              <li>Georreferenciación RTK</li>
+              <li>Mapa 3D del tramo</li>
+              <li>Informe por tramo y por activo</li>
+            </ul>
+          </article>
+
+          <article class="card reveal" data-delay="80">
+            <span class="card-ico"><svg class="ico ico-lg"><use href="#i-drone"/></svg></span>
+            <h3>Drones de apoyo</h3>
+            <p>Vuelo rápido sobre torres, cruces y zonas de difícil acceso para complementar al robot cuando la prioridad es cobertura amplia en poco tiempo.</p>
+            <ul class="ticks">
+              <li>Cámaras visuales y térmicas</li>
+              <li>Documentación de riesgos vegetativos</li>
+              <li>Cruces y vanos especiales</li>
+            </ul>
+          </article>
+
+          <article class="card reveal" data-delay="160">
+            <span class="card-ico"><svg class="ico ico-lg"><use href="#i-thermal"/></svg></span>
+            <h3>Termografía y diagnóstico</h3>
+            <p>Detección de puntos calientes con cámara radiométrica ±2 °C y clasificación automática de severidad por diferencia de temperatura.</p>
+            <ul class="ticks">
+              <li>Mapa térmico georreferenciado</li>
+              <li>Curva de tendencia por conexión</li>
+              <li>Prioridad ALTA / MEDIA / BAJA</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <span class="card-ico"><svg class="ico ico-lg"><use href="#i-arm"/></svg></span>
+            <h3>Mantenimiento en línea</h3>
+            <p>Brazos de 7 GDL con cambio automático de herramienta para ajustar conexiones, limpiar herrajes y aplicar protección anticorrosiva sobre línea energizada.</p>
+            <ul class="ticks">
+              <li>Llave de torque controlada</li>
+              <li>Cepillo y pulverizador</li>
+              <li>Parada ante colisión</li>
+            </ul>
+          </article>
+
+          <article class="card reveal" data-delay="80">
+            <span class="card-ico"><svg class="ico ico-lg"><use href="#i-sensor"/></svg></span>
+            <h3>Monitoreo IoT permanente</h3>
+            <p>Instalación de nodos sensores por el propio robot para vigilar vibración, temperatura, campo eléctrico y humedad más allá de la visita.</p>
+            <ul class="ticks">
+              <li>Telemetría LoRa / 5G</li>
+              <li>Alertas antes de la falla</li>
+              <li>Series temporales históricas</li>
+            </ul>
+          </article>
+
+          <article class="card reveal" data-delay="160">
+            <span class="card-ico"><svg class="ico ico-lg"><use href="#i-ai"/></svg></span>
+            <h3>IA predictiva y gemelo digital</h3>
+            <p>Cada inspección alimenta un modelo que estima vida útil, riesgo y ventana óptima de intervención sobre un gemelo digital de su red.</p>
+            <ul class="ticks">
+              <li>Inferencia en el borde (Edge AI)</li>
+              <li>Reentrenamiento continuo</li>
+              <li>Integración SCADA / GIS</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="servicios" class="section">
-      <div class="section-header">
-        <p class="eyebrow">NUESTROS SERVICIOS</p>
-        <h2>Soluciones completas para su red eléctrica</h2>
-      </div>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon">🤖</div>
-          <h3>Robots de Inspección</h3>
-          <p>Robots autónomos que recorren sus líneas detectando fallas, corrosión y puntos calientes antes de que se conviertan en problemas.</p>
+    <!-- ============ ROBOT X ============ -->
+    <section class="section section-alt" id="robot">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="eyebrow">El producto</p>
+          <h2>ROBOT-RED X · Plataforma autónoma sobre línea energizada</h2>
+          <p class="sec-lede">No es un dron con cámara: es una unidad de inspección y actuación que se desplaza por el propio conductor, diagnostica con IA y ejecuta mantenimiento con sus brazos.</p>
         </div>
-        <div class="service-card">
-          <div class="service-icon">🚁</div>
-          <h3>Drones de Inspección</h3>
-          <p>Inspecciones aéreas rápidas y seguras con cámaras de alta resolución y termografía para evaluar el estado de su red.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🌡️</div>
-          <h3>Termografía</h3>
-          <p>Detección de puntos calientes y conexiones defectuosas mediante cámaras térmicas de alta precisión.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">📡</div>
-          <h3>IoT y Monitoreo</h3>
-          <p>Sensores inteligentes que monitorean su red en tiempo real, enviando alertas antes de que ocurra una falla.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🧠</div>
-          <h3>IA Predictiva</h3>
-          <p>Algoritmos de inteligencia artificial que analizan datos históricos para predecir fallas y optimizar el mantenimiento.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🔧</div>
-          <h3>Mantenimiento Preventivo</h3>
-          <p>Programas de mantenimiento basados en datos para extender la vida útil de sus activos y reducir costos.</p>
+
+        <div class="robot-layout">
+          <div class="spec-panel reveal">
+            <div class="spec-hero">
+              <div class="spec-silhouette" aria-hidden="true">
+                <svg viewBox="0 0 300 200">
+                  <g stroke="#33566C" stroke-width="2" fill="none">
+                    <path d="M10 118h280" stroke="#D8433E" stroke-opacity=".6"/>
+                    <rect x="86" y="52" width="128" height="62" rx="18" fill="#162835"/>
+                    <rect x="104" y="66" width="44" height="24" rx="6" fill="#0A1620" stroke="#4F9FBC"/>
+                    <rect x="160" y="66" width="34" height="24" rx="6" fill="#0A1620" stroke="#E9A93C"/>
+                    <circle cx="104" cy="136" r="20" fill="#0A1620" stroke="#D8433E" stroke-width="4"/>
+                    <circle cx="196" cy="136" r="20" fill="#0A1620" stroke="#D8433E" stroke-width="4"/>
+                    <path d="M214 76h34l22 30M86 76H52L34 106" stroke-width="6" stroke-linecap="round"/>
+                    <path d="M150 52V34h-8" />
+                    <circle cx="140" cy="30" r="7" stroke="#4F9FBC"/>
+                    <path d="M60 118v18M240 118v18"/>
+                  </g>
+                </svg>
+              </div>
+              <p class="spec-caption">Configuración monocuerpo modular · 4 puntos de contacto adaptables</p>
+            </div>
+
+            <dl class="spec-list">
+              <div><dt>Masa operativa</dt><dd>&lt; 150 kg</dd></div>
+              <div><dt>Grado de protección</dt><dd>IP66</dd></div>
+              <div><dt>Temperatura</dt><dd>−10 °C a +55 °C</dd></div>
+              <div><dt>Brazos</dt><dd>2 × 7 GDL · 2.5 m · 50 kg</dd></div>
+              <div><dt>Computación</dt><dd>NVIDIA Jetson · Edge AI</dd></div>
+              <div><dt>Comunicaciones</dt><dd>5G · LoRa · Wi-Fi · Satelital</dd></div>
+            </dl>
+          </div>
+
+          <div class="tabs reveal" data-delay="120">
+            <div class="tablist" role="tablist" aria-label="Capacidades del robot">
+              <button role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true" class="tab active">Percepción</button>
+              <button role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" class="tab">Actuación</button>
+              <button role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" class="tab">Autonomía</button>
+              <button role="tab" id="tab-4" aria-controls="panel-4" aria-selected="false" class="tab">Nube</button>
+            </div>
+
+            <div class="tabpanel active" id="panel-1" role="tabpanel" aria-labelledby="tab-1">
+              <ul class="feature-list">
+                <li><svg class="ico ico-sm"><use href="#i-camera"/></svg><div><strong>Cámara visible 8K con zoom 40X</strong><span>Inspección detallada de herrajes, aisladores y conductor con gimbal de 3 ejes e iluminación nocturna.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-thermal"/></svg><div><strong>Térmica radiométrica ±2 °C</strong><span>Mapa térmico georreferenciado de conexiones y empalmes para detectar sobrecargas.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-uv"/></svg><div><strong>Ultravioleta solar-blind</strong><span>Detección de corona y descargas parciales, anticipando fallas de aislamiento.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-lidar"/></svg><div><strong>LiDAR + radar milimétrico</strong><span>Navegación SLAM en 3D y operación sostenida con lluvia o niebla.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-map"/></svg><div><strong>GNSS RTK + IMU</strong><span>Posicionamiento centimétrico para georreferenciar cada hallazgo.</span></div></li>
+              </ul>
+            </div>
+
+            <div class="tabpanel" id="panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+              <ul class="feature-list">
+                <li><svg class="ico ico-sm"><use href="#i-arm"/></svg><div><strong>Doble brazo de 7 grados de libertad</strong><span>Alcance de 2.5 m y 50 kg de capacidad por brazo, con control de impedancia para contacto seguro.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-wrench"/></svg><div><strong>Cambio automático de herramienta</strong><span>Llave de torque, cepillo, pulverizador, pinza servoaccionada, cámara secundaria y nodo IoT.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-shield"/></svg><div><strong>Seguridad de contacto</strong><span>Limitación de fuerza, parada ante colisión y sincronización cooperativa entre ambos brazos.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-check"/></svg><div><strong>Tareas ejecutadas</strong><span>Ajuste de conexiones, limpieza de superficies, aplicación de recubrimiento anticorrosivo e instalación de sensores.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-target"/></svg><div><strong>Trayectorias planificadas</strong><span>Evitación de colisiones contra la estructura de la línea y los propios conductores.</span></div></li>
+              </ul>
+            </div>
+
+            <div class="tabpanel" id="panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+              <ul class="feature-list">
+                <li><svg class="ico ico-sm"><use href="#i-robot"/></svg><div><strong>Locomoción adaptable</strong><span>Cuatro puntos de contacto con motores independientes y suspensión activa para cambios de diámetro.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-layers"/></svg><div><strong>Cruce automático de obstáculos</strong><span>Grapas de suspensión, empalmes, manguitos, separadores, amortiguadores y aisladores.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-network"/></svg><div><strong>Flota cooperativa</strong><span>Unidades que se reparten tramos y comparten hallazgos con una inteligencia global.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-lock"/></svg><div><strong>Operación sin corte</strong><span>Trabajo en línea energizada con aislamiento galvánico y apantallamiento electromagnético.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-clock"/></svg><div><strong>Resiliencia</strong><span>Continúa la misión ante fallas parciales y regresa a la estación de carga con autonomía propia.</span></div></li>
+              </ul>
+            </div>
+
+            <div class="tabpanel" id="panel-4" role="tabpanel" aria-labelledby="tab-4" hidden>
+              <ul class="feature-list">
+                <li><svg class="ico ico-sm"><use href="#i-cloud"/></svg><div><strong>ROBOT-RED CLOUD</strong><span>Almacenamiento de telemetría, servicio de gemelo digital y API REST para sus sistemas.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-ai"/></svg><div><strong>IA en el borde y en la nube</strong><span>Decisión en tiempo real sobre el robot; reentrenamiento continuo de modelos en la nube.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-chart"/></svg><div><strong>Centro de control</strong><span>Tablero único para ver alertas, salud de activos, órdenes de trabajo y evidencia.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-doc"/></svg><div><strong>Informes y trazabilidad</strong><span>Historial auditable por activo, exportable a GIS, SCADA y sistemas de mantenimiento.</span></div></li>
+                <li><svg class="ico ico-sm"><use href="#i-lock"/></svg><div><strong>Control de acceso</strong><span>Autenticación y permisos por rol, con versionado de modelos y actualizaciones OTA.</span></div></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="tecnologia" class="section section-dark">
-      <div class="section-header">
-        <p class="eyebrow">NUESTRA TECNOLOGÍA</p>
-        <h2>Ingeniería de punta al servicio de su red</h2>
-      </div>
-      <div class="tech-grid">
-        <div class="tech-item">
-          <h4>Robots Autónomos</h4>
-          <p>Plataformas robóticas que se desplazan sobre conductores, realizando inspecciones y mantenimientos sin intervención humana directa.</p>
+    <!-- ============ TECNOLOGÍA ============ -->
+    <section class="section section-dark" id="tecnologia">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="eyebrow">Tecnología</p>
+          <h2>De la señal cruda a la decisión</h2>
+          <p class="sec-lede">La arquitectura encadena cinco etapas. Cada inspección alimenta el modelo global, y el modelo global mejora a cada unidad.</p>
         </div>
-        <div class="tech-item">
-          <h4>Visión por Computador</h4>
-          <p>IA que analiza imágenes en tiempo real para detectar corrosión, daños en aisladores, vegetación cercana y otros riesgos.</p>
+
+        <ol class="pipeline reveal">
+          <li><span class="p-num">01</span><strong>Percepción</strong><em>Cámaras, LiDAR, radar, UV, ultrasonido</em></li>
+          <li><span class="p-num">02</span><strong>Fusión</strong><em>Estado del mundo consolidado</em></li>
+          <li><span class="p-num">03</span><strong>Cognición</strong><em>IA · clasificación y predicción</em></li>
+          <li><span class="p-num">04</span><strong>Planificación</strong><em>Trayectorias y reglas de seguridad</em></li>
+          <li><span class="p-num">05</span><strong>Acción</strong><em>Brazos, locomoción, energía</em></li>
+        </ol>
+
+        <div class="grid-3 tech-grid">
+          <article class="card-tech reveal"><h4>Visión por computador</h4><p>Corrosión, fisuras en aisladores, vegetación peligrosa y daños mecánicos detectados automáticamente en el borde.</p></article>
+          <article class="card-tech reveal" data-delay="60"><h4>Diagnóstico térmico</h4><p>Clasificación de puntos calientes por severidad y tendencia histórica por conexión.</p></article>
+          <article class="card-tech reveal" data-delay="120"><h4>Detección de corona</h4><p>Cámara UV solar-blind que identifica descargas parciales antes de la falla de aislamiento.</p></article>
+          <article class="card-tech reveal"><h4>Navegación autónoma</h4><p>SLAM con LiDAR, fusión IMU/GNSS RTK y odometría para operar sin GPS continuo.</p></article>
+          <article class="card-tech reveal" data-delay="60"><h4>Gemelo digital</h4><p>Modelo virtual de la red que simula escenarios y optimiza la ventana de intervención.</p></article>
+          <article class="card-tech reveal" data-delay="120"><h4>Coordinación de flota</h4><p>Reparto de tramos entre unidades y ciclo de mejora continua entre robots e inteligencia global.</p></article>
         </div>
-        <div class="tech-item">
-          <h4>Gemelo Digital</h4>
-          <p>Modelo virtual de su red eléctrica que simula escenarios y optimiza decisiones de mantenimiento.</p>
-        </div>
-        <div class="tech-item">
-          <h4>Centro de Control</h4>
-          <p>Plataforma centralizada para monitorear toda su red, gestionar alertas y coordinar equipos de campo.</p>
+
+        <div class="ecosystem reveal">
+          <p class="eco-title">Ecosistema ROBOT-RED</p>
+          <div class="eco-flow" role="img" aria-label="Diagrama del ecosistema: nube, inteligencia global, robots y red eléctrica">
+            <div class="eco-node">ROBOT-RED CLOUD</div>
+            <span class="eco-arrow">▲</span>
+            <div class="eco-node accent">INTELIGENCIA GLOBAL</div>
+            <span class="eco-arrow">▲</span>
+            <div class="eco-row">
+              <div class="eco-node small">Robot 01</div>
+              <div class="eco-node small">Robot 02</div>
+              <div class="eco-node small">Robot 03</div>
+            </div>
+            <span class="eco-arrow">▼</span>
+            <div class="eco-node ghost">RED ELÉCTRICA REAL</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="beneficios" class="section">
-      <div class="section-header">
-        <p class="eyebrow">POR QUÉ ROBOTRED</p>
-        <h2>Beneficios para su empresa</h2>
-      </div>
-      <div class="benefits-grid">
-        <div class="benefit-item">
-          <span class="benefit-number">01</span>
-          <h4>Reducción de Costos</h4>
-          <p>Menos cuadrillas en altura, menos tiempo de inactividad y mantenimiento predictivo que evita fallas costosas.</p>
+    <!-- ============ CASOS DE USO ============ -->
+    <section class="section" id="casos">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="eyebrow">Casos de uso</p>
+          <h2>Cómo se ve en operación</h2>
         </div>
-        <div class="benefit-item">
-          <span class="benefit-number">02</span>
-          <h4>Mayor Seguridad</h4>
-          <p>Eliminación del riesgo humano en trabajos de alta tensión. Los robots operan donde las personas no pueden.</p>
-        </div>
-        <div class="benefit-item">
-          <span class="benefit-number">03</span>
-          <h4>Continuidad del Servicio</h4>
-          <p>Inspecciones y mantenimientos sin necesidad de cortar el servicio eléctrico a sus usuarios.</p>
-        </div>
-        <div class="benefit-item">
-          <span class="benefit-number">04</span>
-          <h4>Datos y Trazabilidad</h4>
-          <p>Informes detallados con datos precisos para tomar decisiones informadas y cumplir normativas.</p>
-        </div>
-        <div class="benefit-item">
-          <span class="benefit-number">05</span>
-          <h4>Escalabilidad</h4>
-          <p>Desde una línea hasta toda su red. Nuestra tecnología crece con sus necesidades.</p>
-        </div>
-        <div class="benefit-item">
-          <span class="benefit-number">06</span>
-          <h4>Cumplimiento Normativo</h4>
-          <p>Cumplimiento de RETIE y otras normativas con documentación técnica completa y trazable.</p>
+
+        <figure class="case-figure reveal">
+          <picture>
+            <source srcset="assets/robot-campo.webp" type="image/webp">
+            <img src="assets/robot-campo.jpg" width="1024" height="1536" loading="lazy" decoding="async" alt="ROBOT-RED X, plataforma autónoma de inspección y mantenimiento sobre línea eléctrica energizada">
+          </picture>
+          <figcaption>
+            <strong>ROBOT-RED X</strong>
+            Plataforma autónoma de inspección y mantenimiento que se desplaza por el propio conductor,
+            con la línea energizada y sin necesidad de cuadrilla en altura.
+          </figcaption>
+        </figure>
+
+        <div class="grid-2 cases">
+          <article class="case reveal">
+            <span class="case-num">01</span>
+            <div>
+              <h3>Patrullaje autónomo nocturno</h3>
+              <p>El robot recorre una línea de distribución durante la noche y devuelve fotografías, modelo 3D y mapas térmicos del tramo completo, sin cuadrilla ni corte.</p>
+            </div>
+          </article>
+          <article class="case reveal" data-delay="80">
+            <span class="case-num">02</span>
+            <div>
+              <h3>Detección de anomalía crítica</h3>
+              <p>La cámara térmica identifica un conector caliente; la IA clasifica prioridad ALTA, riesgo de falla inminente y acción recomendada, y abre la orden de trabajo.</p>
+            </div>
+          </article>
+          <article class="case reveal" data-delay="160">
+            <span class="case-num">03</span>
+            <div>
+              <h3>Mantenimiento preventivo en línea</h3>
+              <p>El brazo robótico aplica protección anticorrosiva y ajusta herrajes sin necesidad de una cuadrilla de trabajo en tensión.</p>
+            </div>
+          </article>
+          <article class="case reveal" data-delay="240">
+            <span class="case-num">04</span>
+            <div>
+              <h3>Instalación de sensores IoT</h3>
+              <p>Los brazos colocan nodos de monitoreo sobre el activo y la telemetría comienza a fluir al centro de control en el mismo recorrido.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="contacto" class="section section-dark">
-      <div class="section-header">
-        <p class="eyebrow">CONTACTO</p>
-        <h2>Solicite una cotización</h2>
+    <!-- ============ RESULTADOS ============ -->
+    <section class="section section-alt" id="resultados">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="eyebrow">Resultados</p>
+          <h2>Qué cambia en su operación</h2>
+        </div>
+
+        <div class="grid-3 benefits">
+          <article class="benefit reveal"><span class="b-num">01</span><h3>Menor exposición humana</h3><p>Se retira al personal de altura y de trabajos en tensión: el robot asume el recorrido y la manipulación.</p></article>
+          <article class="benefit reveal" data-delay="60"><span class="b-num">02</span><h3>Continuidad del servicio</h3><p>Inspección y mantenimiento sobre línea energizada, sin ventanas de corte ni reclamos por interrupción.</p></article>
+          <article class="benefit reveal" data-delay="120"><span class="b-num">03</span><h3>Menor costo por tramo</h3><p>Menos cuadrillas, menos vehículos, menos desplazamientos y una frecuencia de inspección que antes era impensable.</p></article>
+          <article class="benefit reveal"><span class="b-num">04</span><h3>Detección antes de la falla</h3><p>El mantenimiento correctivo se reemplaza por intervención programada en la ventana óptima.</p></article>
+          <article class="benefit reveal" data-delay="60"><span class="b-num">05</span><h3>Evidencia trazable</h3><p>Historial completo y auditable por activo, con fotografía, temperatura, ubicación y estado en el momento de la medición.</p></article>
+          <article class="benefit reveal" data-delay="120"><span class="b-num">06</span><h3>Escalabilidad</h3><p>De un tramo piloto a toda una zona de servicio, sumando unidades a la flota sin rediseñar el proceso.</p></article>
+        </div>
+
+        <div class="compliance reveal">
+          <div class="compliance-copy">
+            <p class="eyebrow">Cumplimiento normativo</p>
+            <h3>Documentación técnica lista para auditoría</h3>
+            <p>Cada entrega incluye evidencia georreferenciada, condiciones de medición y trazabilidad por activo, alineadas con los requisitos de inspección y mantenimiento aplicables.</p>
+            <a class="btn btn-outline" href="#contacto">Solicitar matriz de cumplimiento</a>
+          </div>
+          <ul class="compliance-tags">
+            <li>RETIE</li>
+            <li>NTC</li>
+            <li>IEC 61936</li>
+            <li>IEC 60815</li>
+            <li>Trabajos en línea energizada</li>
+            <li>Trazabilidad de registros</li>
+            <li>Reportes exportables a GIS</li>
+            <li>Control de versiones de modelos</li>
+          </ul>
+        </div>
       </div>
-      <div class="contact-grid">
-        <div class="contact-info">
-          <h3>ROBOTRED</h3>
-          <p>Tecnología que mantiene tus redes</p>
-          <div class="contact-details">
-            <p><strong>Email:</strong> info@robotred.co</p>
-            <p><strong>Teléfono:</strong> +57 300 123 4567</p>
-            <p><strong>Ubicación:</strong> Bogotá, Colombia</p>
+    </section>
+
+    <!-- ============ PROCESO ============ -->
+    <section class="section section-dark" id="proceso">
+      <div class="container">
+        <div class="sec-head reveal">
+          <p class="eyebrow">Cómo trabajamos</p>
+          <h2>Del piloto al despliegue en cinco fases</h2>
+        </div>
+
+        <ol class="timeline">
+          <li class="reveal"><span class="t-badge">Fase A</span><strong>Diagnóstico de red</strong><p>Caracterización de tramos prioritarios, condiciones de acceso y definición de métricas de éxito.</p></li>
+          <li class="reveal" data-delay="80"><span class="t-badge">Fase B</span><strong>Piloto en laboratorio</strong><p>Validación de sensores, modelos y procedimientos sobre réplicas de herrajes y conductor.</p></li>
+          <li class="reveal" data-delay="160"><span class="t-badge">Fase C</span><strong>Piloto en campo</strong><p>Operación supervisada sobre un tramo real con entrega de informes y ajuste de modelos.</p></li>
+          <li class="reveal" data-delay="240"><span class="t-badge">Fase D</span><strong>Operación industrial</strong><p>Rutina de patrullaje, integración con su centro de control y formación de su equipo.</p></li>
+          <li class="reveal" data-delay="320"><span class="t-badge">Fase E</span><strong>Escalamiento de flota</strong><p>Cobertura por zona con coordinación multi-robot y analítica predictiva sobre toda la red.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section" id="faq">
+      <div class="container narrow">
+        <div class="sec-head reveal">
+          <p class="eyebrow">Preguntas frecuentes</p>
+          <h2>Lo que preguntan los equipos de operación</h2>
+        </div>
+
+        <div class="faq" id="faqList">
+          <div class="faq-item reveal">
+            <h3><button class="faq-q" aria-expanded="false">¿El robot trabaja con la línea energizada?<span class="faq-ico"></span></button></h3>
+            <div class="faq-a" hidden><p>Sí. La plataforma está concebida para operar sobre infraestructura energizada, con aislamiento galvánico, apantallamiento electromagnético y protección contra sobretensiones. Toda operación se planifica bajo los procedimientos de seguridad y las autorizaciones de su compañía.</p></div>
+          </div>
+          <div class="faq-item reveal">
+            <h3><button class="faq-q" aria-expanded="false">¿Reemplaza a los técnicos?<span class="faq-ico"></span></button></h3>
+            <div class="faq-a" hidden><p>No. Reemplaza las tareas de mayor riesgo y repetitividad: recorridos en altura, manipulación en tensión y captura manual de evidencia. Su equipo pasa a supervisar, priorizar y ejecutar las intervenciones que requieren criterio.</p></div>
+          </div>
+          <div class="faq-item reveal">
+            <h3><button class="faq-q" aria-expanded="false">¿Qué tipo de línea puede recorrer?<span class="faq-ico"></span></button></h3>
+            <div class="faq-a" hidden><p>Distribución y transmisión aéreas con conductores desnudos o aislados. La locomoción es adaptable al diámetro y cruza grapas, empalmes, manguitos, separadores, amortiguadores y aisladores de suspensión.</p></div>
+          </div>
+          <div class="faq-item reveal">
+            <h3><button class="faq-q" aria-expanded="false">¿Qué defectos detecta?<span class="faq-ico"></span></button></h3>
+            <div class="faq-a" hidden><p>Corrosión y oxidación de herrajes, aflojamiento de conexiones, fatiga mecánica de conductores, fisuras y contaminación de aisladores, sobrecalentamientos, descargas parciales y corona, además de vegetación en distancia de seguridad.</p></div>
+          </div>
+          <div class="faq-item reveal">
+            <h3><button class="faq-q" aria-expanded="false">¿Cómo llega la información a mi equipo?<span class="faq-ico"></span></button></h3>
+            <div class="faq-a" hidden><p>Todo converge en ROBOT-RED CLOUD: alertas, imágenes, mapas térmicos, modelo 3D e informes por activo. La plataforma expone una API REST y puede integrarse con sus sistemas GIS, SCADA y de gestión de mantenimiento.</p></div>
+          </div>
+          <div class="faq-item reveal">
+            <h3><button class="faq-q" aria-expanded="false">¿Cuánto tarda un despliegue?<span class="faq-ico"></span></button></h3>
+            <div class="faq-a" hidden><p>Un piloto típico se estructura en fases de diagnóstico, validación y operación supervisada antes de pasar a operación industrial. El calendario exacto depende del número de tramos, accesos y requisitos de su compañía.</p></div>
+          </div>
+          <div class="faq-item reveal">
+            <h3><button class="faq-q" aria-expanded="false">¿Qué pasa si pierde la comunicación?<span class="faq-ico"></span></button></h3>
+            <div class="faq-a" hidden><p>Los enlaces son redundantes (5G / LoRa / satelital) y el robot mantiene lógica de seguridad embarcada: completa la acción segura, se retira a una posición segura y reanuda o regresa a la estación según el protocolo definido.</p></div>
+          </div>
+          <div class="faq-item reveal">
+            <h3><button class="faq-q" aria-expanded="false">¿Puedo ver la documentación de ingeniería?<span class="faq-ico"></span></button></h3>
+            <div class="faq-a" hidden><p>Sí. El Libro Blanco de Ingeniería (arquitectura, estado del arte, diseño mecánico, sistema sensorial y brazos) está disponible en el área técnica para equipos de ingeniería y evaluación técnica.</p></div>
           </div>
         </div>
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('Gracias por su contacto. Nos comunicaremos pronto.');">
-          <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" required>
+      </div>
+    </section>
+
+    <!-- ============ CTA + CONTACTO ============ -->
+    <section class="section section-dark" id="contacto">
+      <div class="container">
+        <div class="cta-band reveal">
+          <div>
+            <p class="eyebrow">Siguiente paso</p>
+            <h2>Agende una demostración técnica</h2>
+            <p class="sec-lede">Cuéntenos qué tramos quiere inspeccionar y prepararemos una sesión con su equipo de operación e ingeniería.</p>
           </div>
-          <div class="form-group">
-            <label for="empresa">Empresa</label>
-            <input type="text" id="empresa" required>
+          <a class="btn btn-primary" href="#form">Comenzar <svg class="ico ico-sm"><use href="#i-arrow"/></svg></a>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info reveal">
+            <div class="logo-full">
+              <svg class="brand-ico" aria-hidden="true"><use href="#i-logo"/></svg>
+              <span class="brand-text">ROBOT<em>-RED</em></span>
+            </div>
+            <p class="tagline">Robótica e ingeniería para redes eléctricas.</p>
+
+            <ul class="contact-list">
+              <li><svg class="ico ico-sm"><use href="#i-mail"/></svg><div><span>Correo</span><a href="mailto:info@robotred.co">info@robotred.co</a></div></li>
+              <li><svg class="ico ico-sm"><use href="#i-phone"/></svg><div><span>Teléfono</span><a href="tel:+573001234567">+57 300 123 4567</a></div></li>
+              <li><svg class="ico ico-sm"><use href="#i-pin"/></svg><div><span>Oficina</span><p>Bogotá, Colombia</p></div></li>
+              <li><svg class="ico ico-sm"><use href="#i-doc"/></svg><div><span>Área técnica</span><a href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Libro Blanco INSTE-BOT X</a></div></li>
+            </ul>
+
+            <div class="contact-note">
+              <strong>¿Es usted ingeniero del proyecto?</strong>
+              <p>La documentación de desarrollo vive en el área técnica. Esta página es el canal comercial.</p>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" required>
-          </div>
-          <div class="form-group">
-            <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" rows="4" required></textarea>
-          </div>
-          <button type="submit" class="button primary full-width">Enviar Solicitud</button>
-        </form>
+
+          <form class="form reveal" id="form" data-delay="100" name="contacto" method="POST" action="/gracias.html" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+            <input type="hidden" name="form-name" value="contacto">
+            <p class="hp" aria-hidden="true"><label>No complete este campo <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+            <div class="form-row">
+              <div class="field">
+                <label for="nombre">Nombre y apellido *</label>
+                <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+                <small class="err" data-for="nombre">Indique su nombre.</small>
+              </div>
+              <div class="field">
+                <label for="empresa">Empresa *</label>
+                <input type="text" id="empresa" name="empresa" autocomplete="organization" required>
+                <small class="err" data-for="empresa">Indique su empresa.</small>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="email">Correo corporativo *</label>
+                <input type="email" id="email" name="email" autocomplete="email" required>
+                <small class="err" data-for="email">Correo no válido.</small>
+              </div>
+              <div class="field">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="+57 ...">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="tipo">Tipo de solicitud *</label>
+                <select id="tipo" name="tipo" required>
+                  <option value="">Seleccione una opción</option>
+                  <option>Demostración del robot</option>
+                  <option>Piloto de inspección</option>
+                  <option>Cotización de servicio</option>
+                  <option>Alianza / integración</option>
+                  <option>Información técnica</option>
+                </select>
+                <small class="err" data-for="tipo">Seleccione una opción.</small>
+              </div>
+              <div class="field">
+                <label for="red">Tipo de red</label>
+                <select id="red" name="red">
+                  <option>Distribución aérea</option>
+                  <option>Transmisión</option>
+                  <option>Ambas</option>
+                  <option>Instalación industrial</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="mensaje">Mensaje *</label>
+              <textarea id="mensaje" name="mensaje" rows="4" required placeholder="Tramos, longitud aproximada, criticidad, fechas..."></textarea>
+              <small class="err" data-for="mensaje">Escriba un mensaje.</small>
+            </div>
+
+            <input type="hidden" name="utm_source" id="utm_source">
+            <input type="hidden" name="utm_medium" id="utm_medium">
+            <input type="hidden" name="utm_campaign" id="utm_campaign">
+            <input type="hidden" name="utm_term" id="utm_term">
+            <input type="hidden" name="utm_content" id="utm_content">
+            <input type="hidden" name="origen" id="origen">
+            <input type="hidden" name="pagina" id="pagina">
+
+            <button type="submit" class="btn btn-primary full" id="formSubmit">Enviar solicitud <svg class="ico ico-sm"><use href="#i-arrow"/></svg></button>
+            <p class="form-hint">Respuesta garantizada en día hábil. Sus datos se usan únicamente para atender esta solicitud.</p>
+            <p class="form-success" id="formSuccess" role="status" hidden>Solicitud registrada. Si prefiere escribirnos directamente: <a href="mailto:info@robotred.co">info@robotred.co</a></p>
+          </form>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="footer-content">
+  <footer class="footer">
+    <div class="container footer-grid">
       <div class="footer-brand">
-        <span class="brand-icon">⚡</span>
-        <span class="brand-text">ROBOT<strong>RED</strong></span>
+        <a class="brand" href="#inicio">
+          <svg class="brand-ico" aria-hidden="true"><use href="#i-logo"/></svg>
+          <span class="brand-text">ROBOT<em>-RED</em></span>
+        </a>
+        <p>Robots autónomos para inspeccionar, diagnosticar y mantener redes eléctricas sin interrumpir el servicio.</p>
+        <div class="social">
+          <a href="mailto:info@robotred.co" aria-label="Correo"><svg class="ico ico-sm"><use href="#i-mail"/></svg></a>
+          <a href="tel:+573001234567" aria-label="Teléfono"><svg class="ico ico-sm"><use href="#i-phone"/></svg></a>
+          <a href="https://github.com/alejandro8aperez/Robotred" target="_blank" rel="noopener" aria-label="GitHub"><svg class="ico ico-sm"><use href="#i-network"/></svg></a>
+        </div>
       </div>
-      <p>Robótica e ingeniería para redes eléctricas</p>
-      <p class="copyright">© 2026 ROBOTRED. Todos los derechos reservados.</p>
+
+      <nav class="footer-col" aria-label="Soluciones">
+        <h4>Soluciones</h4>
+        <a href="#soluciones">Inspección autónoma</a>
+        <a href="#soluciones">Termografía</a>
+        <a href="#soluciones">Mantenimiento en línea</a>
+        <a href="#soluciones">Monitoreo IoT</a>
+        <a href="#soluciones">IA predictiva</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Compañía">
+        <h4>Compañía</h4>
+        <a href="#robot">Robot X</a>
+        <a href="#casos">Casos de uso</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#faq">Preguntas frecuentes</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Recursos">
+        <h4>Recursos</h4>
+        <a href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Libro Blanco INSTE-BOT X</a>
+        <a href="https://github.com/alejandro8aperez/INSTE-BOT" target="_blank" rel="noopener">Repositorio de ingeniería</a>
+        <a href="https://github.com/alejandro8aperez/Robotred" target="_blank" rel="noopener">Repositorio del sitio</a>
+        <a href="#resultados">Cumplimiento RETIE</a>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> ROBOT-RED. Todos los derechos reservados.</p>
+      <p class="foot-note">Los valores técnicos corresponden a especificaciones de diseño del programa ROBOT-RED X y se validan por tramo en cada piloto.</p>
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <button class="to-top" id="toTop" aria-label="Volver arriba" hidden>
+    <svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M12 19V6M6 12l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="app.js" defer></script>
 </body>
 </html>

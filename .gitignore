@@ -1,0 +1,24 @@
+# Artefactos de Netlify
+.netlify/
+
+# Originales de imagen: pesan mucho y no se publican directamente.
+# Las versiones para web se generan con _gen_assets.py.
+assets-src/
+
+# Capturas de verificación visual
+.shots/
+_shot_*.png
+_shot_*.html
+_probe.html
+_mv.jpg
+
+# Sistema
+.DS_Store
+Thumbs.db
+.env
+.env.*
+
+# Editores
+.vscode/
+.idea/
+*.swp
