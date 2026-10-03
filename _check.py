@@ -134,7 +134,9 @@ if not og_url:
 elif domain not in og_url.group(1):
     problems.append(f"og:url no apunta a {domain}: {og_url.group(1)}")
 for f in ("netlify.toml", "robots.txt", "sitemap.xml", "gracias.html",
-          "og-image.png", "apple-touch-icon.png"):
+          "assets/og-image.png", "assets/apple-touch-icon.png",
+          "assets/logo-color.webp", "assets/logo-blanco.webp",
+          "assets/esquema.jpg", "assets/favicon-32.png"):
     ok = (root / f).exists()
     print(f"  {f:24} {'OK' if ok else 'FALTA'}")
     if not ok:

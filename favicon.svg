@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="ROBOT-RED">
-  <rect width="512" height="512" rx="112" fill="#19384A"/>
-  <svg x="56" y="46" width="400" height="420" viewBox="63 17 158 176">
-    <path d="M142 25 L213 65 L213 145 L142 185 L71 145 L71 65 Z" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linejoin="round"/>
-    <path d="M113 145 V66 H151 C173 66 184 77 184 94 C184 111 173 122 151 122 H113 M148 122 L181 151" fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="square" stroke-linejoin="round"/>
-    <circle cx="183" cy="151" r="12" fill="#D8433E"/>
-    <circle cx="183" cy="151" r="4" fill="#19384A"/>
-  </svg>
-</svg>

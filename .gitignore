@@ -4,6 +4,7 @@
 # Originales de imagen: pesan mucho y no se publican directamente.
 # Las versiones para web se generan con _gen_assets.py.
 assets-src/
+Imagenes/
 
 # Capturas de verificación visual
 .shots/

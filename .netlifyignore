@@ -2,6 +2,7 @@
 
 # Originales de imagen (solo se publican las versiones de assets/)
 assets-src/
+Imagenes/
 
 # Herramientas de desarrollo (no deben publicarse)
 _check.py
