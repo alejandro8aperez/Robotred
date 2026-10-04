@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 07 — Robot para mantenimiento | ROBOTY-RED</title>
+  <meta name="description" content="El salto de la inspección pasiva a la intervención física: qué significa que un robot toque un activo, y qué hay que tener resuelto antes de intentarlo.">
+  <meta name="theme-color" content="#0A1620">
+  <meta name="author" content="ROBOTY-RED">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://robotred.co/curso/modulo-07.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="ROBOTY-RED">
+  <meta property="og:title" content="Módulo 07 — Robot para mantenimiento">
+  <meta property="og:description" content="El salto de la inspección pasiva a la intervención física: qué significa que un robot toque un activo, y qué hay que tener resuelto antes de intentarlo.">
+  <meta property="og:url" content="https://robotred.co/curso/modulo-07.html">
+  <meta property="og:image" content="https://robotred.co/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Módulo 07 — Robot para mantenimiento">
+  <meta name="twitter:description" content="El salto de la inspección pasiva a la intervención física: qué significa que un robot toque un activo, y qué hay que tener resuelto antes de intentarlo.">
+  <meta name="twitter:image" content="https://robotred.co/assets/og-image.png">
+
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="../assets/favicon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="page-curso">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="progress" id="progress" aria-hidden="true"><span></span></div>
+
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 2"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5.5c0 4.3-2.9 8.1-7 9.5-4.1-1.4-7-5.2-7-9.5V6l7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 8.5 4.5L12 12 3.5 7.5 12 3Z"/><path d="m4 12 8 4.3 8-4.3M4 16.5 12 21l8-4.5"/></symbol>
+    <symbol id="i-ai" viewBox="0 0 24 24"><path d="M12 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5.2A3 3 0 0 0 9 18a3 3 0 0 0 3 2 3 3 0 0 0 3-2 3 3 0 0 0 2-5.8A3 3 0 0 0 15 7a3 3 0 0 0-3-3Z"/><path d="M12 8v9M9.5 11.5h5M9.5 14.5h5"/></symbol>
+    <symbol id="i-thermal" viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 1 3 3v7.5a5 5 0 1 1-6 0V6a3 3 0 0 1 3-3Z"/><path d="M12 9v6"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M15.5 3.5a5 5 0 0 0-6.2 6.4L3.7 15.5a2 2 0 1 0 2.8 2.8l5.6-5.6a5 5 0 0 0 6.4-6.2l-3 3-2.6-.7-.7-2.6 3-3Z"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 3v3M14 3v3M10 18v3M14 18v3M3 10h3M3 14h3M18 10h3M18 14h3M10 10h4v4h-4z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M12.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3h3l1.5 4-2 1.5a11 11 0 0 0 5 5L16 11.5 20 13v3a2 2 0 0 1-2.2 2A16 16 0 0 1 5 5.2 2 2 0 0 1 7 3Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-robo" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V5M9 5h6M9 13h.01M15 13h.01M9.5 16.5h5M2 12v3M22 12v3"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.4 6.9 6.6 15.6M13.6 6.9l3.8 8.7M7.5 18h9"/></symbol>
+    <symbol id="i-sensor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M6.5 6.5a7.8 7.8 0 0 0 0 11M17.5 6.5a7.8 7.8 0 0 1 0 11M3.5 3.5a12 12 0 0 0 0 17M20.5 3.5a12 12 0 0 1 0 17"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-drone" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="2"/><path d="M9 10 5 6M15 10l4-4M9 14l-4 4M15 14l4 4M3 4h4M17 4h4M3 20h4M17 20h4"/></symbol>
+  </svg>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+        <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" fetchpriority="high">
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../index.html#robot">Robot X</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="index.html" class="active" aria-current="page">Curso</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="link-tech" href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Área técnica</a>
+        <a class="btn btn-primary btn-sm" href="../index.html#contacto">Solicitar demo</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <article class="leccion">
+      <div class="container leccion-wrap">
+
+        <header class="leccion-head">
+          <p class="leccion-num">Módulo 07 de 10</p>
+          <h1>Robot para mantenimiento</h1>
+          <p class="leccion-lead">El salto de la inspección pasiva a la intervención física: qué significa que un robot toque un activo, y qué hay que tener resuelto antes de intentarlo.</p>
+          <ul class="leccion-meta">
+            <li><svg class="ico ico-sm"><use href="#i-clock"/></svg>90 min de lectura</li>
+            <li><svg class="ico ico-sm"><use href="#i-doc"/></svg>Módulo 7 de 10</li>
+            <li><svg class="ico ico-sm"><use href="#i-wrench"/></svg>Intervención sobre el activo</li>
+          </ul>
+        </header>
+
+        <div class="leccion-body">
+
+          <section>
+            <h2>Qué va a aprender</h2>
+            <ul class="ticks">
+              <li>Definir qué significa que un robot intervenga sobre una red, y por qué es un cambio de categoría de riesgo.</li>
+              <li>Distinguir los tres niveles de intervención sobre una línea, del más simple al más complejo.</li>
+              <li>Identificar las condiciones que deben cumplirse para que una intervención sea aceptable.</li>
+              <li>Construir el procedimiento y la trazabilidad que exige una intervención de robot.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Por qué intervenir es otra categoría</h2>
+
+            <p>Un robot que <em>mira</em> un activo no puede dañarlo más allá de lo que lo dañaría tocarlo. Un robot que <em>actúa</em> sobre el activo puede dejarlo fuera de servicio, puede dejar un aflojamiento que provoque una falla semanas después, o puede aplicar el par incorrecto a un componente que no lo tolera.</p>
+            <p>Esa es la razón por la que la intervención robotizada no es "el siguiente paso natural" después de la inspección, aunque comercialmente se presente así. Es un proyecto nuevo, con su propio análisis de riesgo, su propio procedimiento y su propia evidencia.</p>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-shield"/></svg>El principio que no se negocia</p>
+              <p>Todo lo que el módulo 8 y los procedimientos de la empresa digan sobre seguridad eléctrica se aplican <em>igual</em> cuando quien ejecuta es un robot. La autonomía cambia quién hace la tarea y cómo se registra, nunca bajo qué reglas se hace.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Los tres niveles de intervención</h2>
+
+            <p>No todas las intervenciones tienen la misma dificultad. Ordenarlas es la mejor forma de decidir por dónde empezar.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Nivel</th><th>Qué hace</th><th>Riesgo para el activo</th><th>Requisito previo</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Nivel 1 — Contacto no invasivo</td><td>Limpieza del aislador, retiro de contaminación, aplicación de producto.</td><td>Mínimo: no cambia la función del componente.</td><td>Inspección previa que confirme que el componente está sano.</td></tr>
+                  <tr><td>Nivel 2 —Ajuste mecánico</td><td>Apriete de pernos a par especificado, alineación de un herraje.</td><td>Medio: un par incorrecto deja un aflojamiento futuro.</td><td>Par de apriete documentado y sensor de torque con registro.</td></tr>
+                  <tr><td>Nivel 3 — Sustitución</td><td>Cambio de aislador, conector o grapa.</td><td>Alto: una sustitución mal hecha es una falla diferida.</td><td>Componente de reemplazo, procedimiento probado y validación previa.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>Recomendación de entrada</p>
+              <p>Empiece por el <strong>nivel 1</strong>. La limpieza de aisladores es la intervención con el mejor balance del catálogo: valor real para el activo, riesgo bajo, y es además la que más información devuelve, porque revela defectos que estaban ocultos bajo la contaminación.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Intervención en línea energizada y desenergizada</h2>
+
+            <p>La distinción no es técnica, es de procedimiento, y es donde la mayoría de los proyectos se complica.</p>
+            <ul class="bullets">
+              <li><strong>Línea desenergizada:</strong> el.robot puede acercarse más, el riesgo de arco eléctrico baja y el procedimiento es el de un trabajo en caliente común. Es el escenario de entrada razonable para las primeras intervenciones.</li>
+              <li><strong>Línea energizada:</strong> cualquier intervención exige distances de seguridad, control de la zona de trabajo y un procedimiento specifico aprobado. No es un problema de obstáculo técnico: es un problema de autorización.</li>
+            </ul>
+
+            <div class="callout callout-warn">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-shield"/></svg>Advertencia</p>
+              <p>Cualquier proyecto que proponga intervención sobre línea energizada antes de haber acumulado historial de intervención sobre línea desenergizada está saltándose la etapa de aprendizaje. La secuencia natural es: inspeccionar, luego Cleaning en desenergizado, luego ajuste, y solo después considerar la energizada.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Herramientas y control de par</h2>
+
+            <p>En el nivel 2, la diferencia entre una intervención correcta y una falla diferida es el par aplicado. Y el par aplicado por un brazo robótico con retroalimentación de posición no es el mismo que aplica una llave dinamométrica.</p>
+
+            <dl class="glossary">
+              <div><dt>Torque de apriete</dt><dd>El momento de fuerza que se aplica al perno. Depende del diámetro del perno y de la clase de acero. Un valor incorrecto, por alto, termina rompiendo el hilo; por bajo, deja el aflojamiento que el calor va a terminar desarrollando.</dd></div>
+              <div><dt>Sensor de torque</dt><dd>El instrumento que mide el par realmente aplicado y lo registra. Sin sensor de torque, no hay evidencia de que el apriete ocurrió, solo de que el robot movió la herramienta.</dd></div>
+              <div><dt>Curva de apriete</dt><dd>El perfil de par a lo largo del tiempo. En un perno nuevo, el par crece linealmente; en uno que ya fue apretado, cae. El robot puede diferenciar ambos casos, y esa es información valiosa.</dd></div>
+            </dl>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>El argumento de trazabilidad</p>
+              <p>El valor real del apriete robotizado no es que apriete: es que <strong>registra el par de cada perno</strong>, con sello de tiempo y posición, y lo deja en un expediente. Una cuadrilla que aprieta deja una nota; un robot deja evidencia auditable. Eso es lo que un auditor de calidad reconoce y lo que justify el costo del sistema.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Trazabilidad de la intervención</h2>
+
+            <p>Intervenir sin registro es peor que no intervenir, porque genera la impresión de que el trabajo se hizo. La trazabilidad mínima de una intervención robotizada incluye:</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Registro</th><th>Qué contiene</th><th>Por qué lo exige la calidad</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Identificación</td><td>Torre, componente, posición, orientación.</td><td>Para que el hallazgo sea localizable en el futuro.</td></tr>
+                  <tr><td>Parámetro de proceso</td><td>Torque aplicado, ángulo final, número de vueltas.</td><td>Para verificar que se cumplió la especificación.</td></tr>
+                  <tr><td>Evidencia visual</td><td>Foto antes, foto después, del componente intervenido.</td><td>Para el expediente técnico y para auditorías.</td></tr>
+                  <tr><td>Resultado del control</td><td>Verificación posterior: tensión de línea, termografía, etc.</td><td>Para confirmar que la intervención resolvió el problema.</td></tr>
+                  <tr><td>Sello de tiempo y operador</td><td>Cuándo y quién autorizó la intervención.</td><td>Para la cadena de responsabilidad.</td></tr>
+                </tbody>
+              </table>
+            </div>
+                
+          </section>
+
+          <section class="taller">
+            <h2>Taller: procedimiento de cambio de componente</h2>
+
+            <p>Se redacta, en detalle, el procedimiento de una intervención de nivel 3 —un cambio de aislador en línea desenergizada— siguiendo la estructura de un procedimiento real de mantenimiento. El objetivo es entender cuánto procedimiento hay detrás de lo que parece una tarea simple.</p>
+            <ol class="steps">
+              <li><strong>Precondiciones.</strong> Línea desenergizada, bloqueada, verificada; permiso de trabajo emitido; acceso a la base asegurado.</li>
+              <li><strong>Inspección previa.</strong> Confirmar que el componente a cambiar está efectivamente en falla, con evidencia registrada.</li>
+              <li><strong>Verificación de repuesto.</strong> El componente de reemplazo existe, es compatible y está en el sitio antes de subir el robot.</li>
+              <li><strong>Secuencia de desmontaje.</strong> El orden de afloje, con el torque de cada perno y el registro de cada uno.</li>
+              <li><strong>Secuencia de montaje.</strong> El orden inverso, con verificación de torque y, si aplica, control de par por método angular.</li>
+              <li><strong>Verificación posterior.</strong> Termografía del punto intervenido y comprobación de que la estructura quedó en su posición.</li>
+              <li><strong>Cierre y expediente.</strong> Registro consolidado y actualización del historial del componente.</li>
+            </ol>
+            <p>Si el procedimiento completo no cabe en dos páginas, probablemente el alcance de la intervención es demasiado amplio para el nivel de madurez del equipo.</p>
+            
+            <p class="entrega"><strong>Entregable</strong>Procedimiento de cambio de componente de dos páginas, con precondiciones, secuencia, torques, puntos de verificación y requisitos de registro.</p>
+          </section>
+
+          <section class="resumen-eco">
+            <h2>Resumen para la gerencia</h2>
+
+            <p>Para la gerencia, el mensaje de este módulo es que <strong>la intervención robotizada no es un producto que se compra, es una capacidad que se construye</strong>. No hay un robot en el mercado que pueda cambiar un aislador en una torre sin un procedimiento detrás, y ese procedimiento es el trabajo de verdad.</p>
+            <p>LaBuena noticia es que la secuencia es segura: se empieza inspeccionando, se sigue con tareas de contacto no invasivo, luego con ajuste mecánico, y solo al final se considera la sustitución. Cada nivel da información del anterior. Un programa que respeta esa secuencia acumula evidencia y no acumula accidentes.</p>
+        
+          </section>
+
+        </div>
+
+        <nav class="leccion-nav" aria-label="Navegación del curso">
+          <a class="btn btn-outline" href="modulo-06.html">← Inteligencia artificial</a>
+          <a class="btn btn-primary" href="modulo-08.html">Seguridad eléctrica <svg class="ico ico-sm"><use href="#i-arrow"/></svg></a>
+        </nav>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+          <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" loading="lazy">
+        </a>
+        <p>Robots autónomos para inspeccionar, diagnosticar y mantener redes eléctricas sin interrumpir el servicio.</p>
+        <div class="social">
+          <a href="mailto:info@robotred.co" aria-label="Correo"><svg class="ico ico-sm"><use href="#i-mail"/></svg></a>
+          <a href="https://github.com/alejandro8aperez/Robotred" target="_blank" rel="noopener" aria-label="GitHub"><svg class="ico ico-sm"><use href="#i-network"/></svg></a>
+        </div>
+      </div>
+
+      <nav class="footer-col" aria-label="Curso">
+        <h4>Curso</h4>
+        <a href="modulo-01.html">Módulo 01 — Introducción</a>
+        <a href="modulo-04.html">Módulo 04 — Sensores</a>
+        <a href="modulo-06.html">Módulo 06 — IA en el borde</a>
+        <a href="modulo-08.html">Módulo 08 — Seguridad</a>
+        <a href="modulo-10.html">Módulo 10 — Proyecto final</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Sitio">
+        <h4>Sitio</h4>
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="../index.html#faq">Preguntas frecuentes</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Aprendizaje">
+        <h4>Aprendizaje</h4>
+        <a href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Libro Blanco INSTE-BOT X</a>
+        <a href="../index.html#resultados">Cumplimiento RETIE</a>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> ROBOTY-RED. Todos los derechos reservados.</p>
+      <p class="foot-note">Las referencias normativas IEC/TC 129 se citan con fines formativos. Los valores técnicos se validan por tramo en cada piloto.</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Volver arriba" hidden>
+    <svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M12 19V6M6 12l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="../app.js" defer></script>
+</body>
+</html>

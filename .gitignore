@@ -17,6 +17,15 @@ _shot_*.html
 _probe.html
 _mv.jpg
 
+# Python
+__pycache__/
+*.py[cod]
+
+# _gen_og.py escribe en la raiz por error; las versiones correctas estan
+# en assets/ y las genera _gen_brand.py.
+og-image.png
+apple-touch-icon.png
+
 # Sistema
 .DS_Store
 Thumbs.db
@@ -27,3 +36,9 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+# Recursos multimedia pesados no necesarios en el repo
+Curso/*.mp4
+Curso/*.jpg
+curso/*.mp4
+curso/*.jpg
+curso/IMAGEN*

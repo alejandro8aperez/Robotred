@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 08 — Seguridad eléctrica | ROBOTY-RED</title>
+  <meta name="description" content="Distancia de seguridad, compatibilidad electromagnética y las condiciones de campo que un robot de red tiene que demostrar antes de operar cerca de un conductor.">
+  <meta name="theme-color" content="#0A1620">
+  <meta name="author" content="ROBOTY-RED">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://robotred.co/curso/modulo-08.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="ROBOTY-RED">
+  <meta property="og:title" content="Módulo 08 — Seguridad eléctrica">
+  <meta property="og:description" content="Distancia de seguridad, compatibilidad electromagnética y las condiciones de campo que un robot de red tiene que demostrar antes de operar cerca de un conductor.">
+  <meta property="og:url" content="https://robotred.co/curso/modulo-08.html">
+  <meta property="og:image" content="https://robotred.co/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Módulo 08 — Seguridad eléctrica">
+  <meta name="twitter:description" content="Distancia de seguridad, compatibilidad electromagnética y las condiciones de campo que un robot de red tiene que demostrar antes de operar cerca de un conductor.">
+  <meta name="twitter:image" content="https://robotred.co/assets/og-image.png">
+
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="../assets/favicon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="page-curso">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="progress" id="progress" aria-hidden="true"><span></span></div>
+
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 2"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5.5c0 4.3-2.9 8.1-7 9.5-4.1-1.4-7-5.2-7-9.5V6l7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 8.5 4.5L12 12 3.5 7.5 12 3Z"/><path d="m4 12 8 4.3 8-4.3M4 16.5 12 21l8-4.5"/></symbol>
+    <symbol id="i-ai" viewBox="0 0 24 24"><path d="M12 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5.2A3 3 0 0 0 9 18a3 3 0 0 0 3 2 3 3 0 0 0 3-2 3 3 0 0 0 2-5.8A3 3 0 0 0 15 7a3 3 0 0 0-3-3Z"/><path d="M12 8v9M9.5 11.5h5M9.5 14.5h5"/></symbol>
+    <symbol id="i-thermal" viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 1 3 3v7.5a5 5 0 1 1-6 0V6a3 3 0 0 1 3-3Z"/><path d="M12 9v6"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M15.5 3.5a5 5 0 0 0-6.2 6.4L3.7 15.5a2 2 0 1 0 2.8 2.8l5.6-5.6a5 5 0 0 0 6.4-6.2l-3 3-2.6-.7-.7-2.6 3-3Z"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 3v3M14 3v3M10 18v3M14 18v3M3 10h3M3 14h3M18 10h3M18 14h3M10 10h4v4h-4z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M12.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3h3l1.5 4-2 1.5a11 11 0 0 0 5 5L16 11.5 20 13v3a2 2 0 0 1-2.2 2A16 16 0 0 1 5 5.2 2 2 0 0 1 7 3Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-robo" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V5M9 5h6M9 13h.01M15 13h.01M9.5 16.5h5M2 12v3M22 12v3"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.4 6.9 6.6 15.6M13.6 6.9l3.8 8.7M7.5 18h9"/></symbol>
+    <symbol id="i-sensor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M6.5 6.5a7.8 7.8 0 0 0 0 11M17.5 6.5a7.8 7.8 0 0 1 0 11M3.5 3.5a12 12 0 0 0 0 17M20.5 3.5a12 12 0 0 1 0 17"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-drone" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="2"/><path d="M9 10 5 6M15 10l4-4M9 14l-4 4M15 14l4 4M3 4h4M17 4h4M3 20h4M17 20h4"/></symbol>
+  </svg>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+        <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" fetchpriority="high">
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../index.html#robot">Robot X</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="index.html" class="active" aria-current="page">Curso</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="link-tech" href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Área técnica</a>
+        <a class="btn btn-primary btn-sm" href="../index.html#contacto">Solicitar demo</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <article class="leccion">
+      <div class="container leccion-wrap">
+
+        <header class="leccion-head">
+          <p class="leccion-num">Módulo 08 de 10</p>
+          <h1>Seguridad eléctrica</h1>
+          <p class="leccion-lead">Distancia de seguridad, compatibilidad electromagnética y las condiciones de campo que un robot de red tiene que demostrar antes de operar cerca de un conductor.</p>
+          <ul class="leccion-meta">
+            <li><svg class="ico ico-sm"><use href="#i-clock"/></svg>90 min de lectura</li>
+            <li><svg class="ico ico-sm"><use href="#i-doc"/></svg>Módulo 8 de 10</li>
+            <li><svg class="ico ico-sm"><use href="#i-shield"/></svg>Seguridad y conformidad</li>
+          </ul>
+        </header>
+
+        <div class="leccion-body">
+
+          <section>
+            <h2>Qué va a aprender</h2>
+            <ul class="ticks">
+              <li>Enumerar las cinco capas de seguridad que debe tener un robot de red, de la más externa a la más interna.</li>
+              <li>Explicar por qué la compatibilidad electromagnética no es un trámite, sino una condición de existencia del producto.</li>
+              <li>Describir el comportamiento seguro esperado ante pérdida de comunicación, de energía y de posicionamiento.</li>
+              <li>Construir la_argumentación de seguridad de un piloto ante un comité que va a preguntar qué pasa si falla.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Las cinco capas de seguridad</h2>
+
+            <p>Un robot de red no se protege con un solo mecanismo. La seguridad es el conjunto de capas, y cada una cubre un fallo que las otras no cubren.</p>
+
+            <ol class="steps">
+              <li><strong>Diseño y certificación.</strong> El equipo cumple los requisitos de la norma aplicable y los de seguridad eléctrica del país donde opera. Es la capa que se demuestra con documentos.</li>
+              <li><strong>Restricción del entorno.</strong> El robot no se despliega en cualquier sitio: hay condiciones de viento, de temperatura, de superficie y de proximity al conductor que se verifican antes de salir.</li>
+              <li><strong>Detectores a bordo.</strong> Sensores que miden en todo momento la distancia al conductor y a la estructura, con umbrales que disparan la parada.</li>
+              <li><strong>Parada segura.</strong> Cuando algo se dispara, el robot no se apaga: se detiene de forma controlada, con la carga en posición segura, y queda en un estado definido.</li>
+              <li><strong>Recuperación.</strong> Un procedimiento documentado para devolver el sistema a operación, y para el caso en que no se pueda, que es el más frecuente.</li>
+            </ol>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>La pregunta que siempre llega</p>
+              <p>"¿Qué pasa si el robot se cae?" No es la pregunta más difícil. La más difícil es <strong>"¿qué pasa si el robot se queda sin comunicación?"</strong>, porque la respuesta honesta es que el robot debe saber qué hacer sin nadie que le diga, y eso hay que demostrarlo en pruebas, no en el diseño.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Distancia y zona de trabajo</h2>
+
+            <p>La distancia mínima entre un conductor y cualquier objeto lo fija la tensión de la línea, y no es negociable. Lo que el robot tiene que Respect es ese número, automáticamente, en todo momento.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Concepto</th><th>Qué significa</th><th>Cómo lo controla el robot</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Distancia mínima de trabajo</td><td>La separación mínima entre el conductor energizado y cualquier parte del equipo o persona.</td><td>Sensor de distancia con alarma y parada.</td></tr>
+                  <tr><td>Distancia de seguridad</td><td>Una separación mayor, de margen, paraXu-PR accommodate errores de medición y movimiento.</td><td>Distancia interna del sistema, menor que la mínima teórica.</td></tr>
+                  <tr><td>Límite de aproximación</td><td>El valor que el software impide rebasar.</td><td>Restricción de software no modificable por el operador.</td></tr>
+                  <tr><td>Zona de trabajo</td><td>El área definida alrededor de la línea dentro de la cual se requieren permisos y controles.</td><td>Delimitación geográfica y señalización en campo.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout callout-warn">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-shield"/></svg>Los valores dependen de la norma local</p>
+              <p>Este módulo no publica distancias numéricas porque <strong>cada país tiene sus propias reglas</strong> y además difieren por tensión y por condición de línea. Lo que debe hacer cualquier proyecto es tomar el valor del reglamento que le aplica, documentarlo como requisito de diseño y verificarlo en campo con el instrumento que la propia empresa usa para medirlo.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Compatibilidad electromagnética: la condición de existencia</h2>
+
+            <p>Un robot de red trabaja junto a fuentes de campo electromagnético notoriously hostiles: campos magnéticos intensos de corriente alterna, descargas atmosféricas, subestaciones, y radios de comunicaciones en la misma frecuencia que su enlace.</p>
+            <p>De ahí vienen dos familias de problemas que no son opcionales:</p>
+            <ul class="bullets">
+              <li><strong>Inmunidad:</strong> el equipo debe seguir funcionando correctamente aunque el ambiente electromagnético loРУROLLIecte. La conformidad con las normas de inmunidad de uso industrial es el mínimo.</li>
+              <li><strong>Emisiones:</strong> el equipo no debe emitir más de lo permitido, porque en un ambiente de subestación puede interferir con otros sistemas de proteccion o comunicaciones críticas.</li>
+              <li><strong>Descarga electrostática:</strong> una pregunta de campo clásica enaltitude baja y sequedad.</li>
+              <li><strong>Interferencia con otros sistemas:</strong> incluyendo el propio enlace de datos del robot y cualquier sistema de proteccion instalado en la subestación.</li>
+            </ul>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>Por qué esto no es un trámite</p>
+              <p>La conformidad en EMC no es un sello que se pega al producto. Es la evidencia de que el equipo <strong>funciona</strong> en el ambiente para el que fue diseñado. Un robot que funciona en taller y falla a 200 metros de una subestación no tiene un problema de certificación: tiene un problema de diseño que la certificación habría detectado.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Fallas en campo y comportamiento seguro</h2>
+
+            <p>La seguridad de un robot se juzga por su comportamiento en el peor caso, no en el mejor. Estos son los escenarios que deben tener respuesta documentada y probada.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Falla</th><th>Comportamiento seguro esperado</th><th>Qué hay que demostrar</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Pérdida de enlace de comunicaciones</td><td>Detección de ausencia de enlace y comportamiento definido: parar, seguir, o volver al punto de origen.</td><td>Que el tiempo de detección es menor que el tiempo que el robot está expuesto sin control.</td></tr>
+                  <tr><td>Pérdida de posicionamiento</td><td>El robot no debe operar si no sabe dónde está. Detección y parada o retorno, no operación a ciegas.</td><td>Que no hay modo de fallo en el que el robot actué sin localization válida.</td></tr>
+                  <tr><td>Falla de batería</td><td>Descenso controlado a la posición segura, no caída libre.</td><td>Que el robot llega a un estado seguro en el modo de falla más adverso.</td></tr>
+                  <tr><td>Atasco mecánico</td><td>Detección de exceso de esfuerzo y retroceso controlado.</td><td>Que el límite de torque protege la estructura, no solo el robot.</td></tr>
+                  <tr><td>Viento sobre el límite</td><td>El robot no debe operar con viento por encima de su umbral, y debe poder recuperarse si aparece.</td><td>Que el umbral es un bloqueo, no una recomendación.</td></tr>
+                  <tr><td>Parada de emergencia</td><td>Corte inmediato de movimiento, con categoría de parada definida.</td><td>Que es accesible desde el campo y que el estado posterior es conocido.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-doc"/></svg>Práctica recomendada</p>
+              <p>Ninguna de estas respuestas se acepta en un documento: se demuestran con pruebas, en el entorno real, y se registran. Un piloto de seguridad que no incluye pruebas de falla no es un piloto de seguridad, es una demostración.</p>
+            </div>
+                
+          </section>
+
+          <section class="taller">
+            <h2>Taller: análisis de riesgo del piloto</h2>
+
+            <p>Se construye el análisis de riesgo del piloto de forma estructurada, como lo haría un comité antes de autorizar la salida del robot. El entregable es el documento que realmente decide si el proyecto arranca.</p>
+            <ol class="steps">
+              <li><strong>Describa el escenario:</strong> activo, tarea, condiciones del entorno, hora del día, personal en la zona.</li>
+              <li><strong>Liste los peligros:</strong> eléctricos, mecánicos, de caída, de clima, de pérdida de comunicaciones, de operador.</li>
+              <li><strong>Evalúe cada peligro:</strong> probabilidad y severidad, con la escala de la propia empresa.</li>
+              <li><strong>Asigne una barrera por peligro:</strong> capa de prevención y capa de mitigación, según el módulo.</li>
+              <li><strong>Identifique los riesgos residuales:</strong> los que quedan después de las barreras, y decida si se aceptan.</li>
+              <li><strong>Defina las condiciones de parada del piloto:</strong> qué señal, de quién, obliga a detener la operación y revisar.</li>
+            </ol>
+            <p>El paso 5 es el que más revela sobre el estado real de la tecnología. Un riesgo residual alto y aceptado por necesidad operativa es una decisión legítima; un riesgo residual alto que nadie discutió es un defecto del proceso.</p>
+            
+            <p class="entrega"><strong>Entregable</strong>Análisis de riesgo del piloto: peligros, evaluación, barreras por capa, riesgos residuales aceptados y condiciones de parada.</p>
+          </section>
+
+          <section class="resumen-eco">
+            <h2>Resumen para la gerencia</h2>
+
+            <p>Para la gerencia, el mensaje es que <strong>la seguridad no es un requisito del producto, es una condición de autorización</strong>. Ningún robot de red opera porque su fabricante lo certifique: opera porque la empresa analizó el riesgo, aceptó los riesgos residuales y definó las condiciones bajo las cuales se detiene.</p>
+            <p>Ese documento, que es un trámite para mucha gente, es en realidad el que hace posible el proyecto. Y es también el que le va a permitir a la empresa decir, meses después, por qué autorizó lo que autorizó.</p>
+        
+          </section>
+
+        </div>
+
+        <nav class="leccion-nav" aria-label="Navegación del curso">
+          <a class="btn btn-outline" href="modulo-07.html">← Robot para mantenimiento</a>
+          <a class="btn btn-primary" href="modulo-09.html">Diseño del primer prototipo <svg class="ico ico-sm"><use href="#i-arrow"/></svg></a>
+        </nav>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+          <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" loading="lazy">
+        </a>
+        <p>Robots autónomos para inspeccionar, diagnosticar y mantener redes eléctricas sin interrumpir el servicio.</p>
+        <div class="social">
+          <a href="mailto:info@robotred.co" aria-label="Correo"><svg class="ico ico-sm"><use href="#i-mail"/></svg></a>
+          <a href="https://github.com/alejandro8aperez/Robotred" target="_blank" rel="noopener" aria-label="GitHub"><svg class="ico ico-sm"><use href="#i-network"/></svg></a>
+        </div>
+      </div>
+
+      <nav class="footer-col" aria-label="Curso">
+        <h4>Curso</h4>
+        <a href="modulo-01.html">Módulo 01 — Introducción</a>
+        <a href="modulo-04.html">Módulo 04 — Sensores</a>
+        <a href="modulo-06.html">Módulo 06 — IA en el borde</a>
+        <a href="modulo-08.html">Módulo 08 — Seguridad</a>
+        <a href="modulo-10.html">Módulo 10 — Proyecto final</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Sitio">
+        <h4>Sitio</h4>
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="../index.html#faq">Preguntas frecuentes</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Aprendizaje">
+        <h4>Aprendizaje</h4>
+        <a href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Libro Blanco INSTE-BOT X</a>
+        <a href="../index.html#resultados">Cumplimiento RETIE</a>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> ROBOTY-RED. Todos los derechos reservados.</p>
+      <p class="foot-note">Las referencias normativas IEC/TC 129 se citan con fines formativos. Los valores técnicos se validan por tramo en cada piloto.</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Volver arriba" hidden>
+    <svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M12 19V6M6 12l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="../app.js" defer></script>
+</body>
+</html>

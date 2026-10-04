@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 05 — Qué puede hacer ROBOTY-RED | ROBOTY-RED</title>
+  <meta name="description" content="Capacidades operativas reales, el alcance honesto de la plataforma y los escenarios donde un robot de mantenimiento cambia el resultado.">
+  <meta name="theme-color" content="#0A1620">
+  <meta name="author" content="ROBOTY-RED">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://robotred.co/curso/modulo-05.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="ROBOTY-RED">
+  <meta property="og:title" content="Módulo 05 — Qué puede hacer ROBOTY-RED">
+  <meta property="og:description" content="Capacidades operativas reales, el alcance honesto de la plataforma y los escenarios donde un robot de mantenimiento cambia el resultado.">
+  <meta property="og:url" content="https://robotred.co/curso/modulo-05.html">
+  <meta property="og:image" content="https://robotred.co/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Módulo 05 — Qué puede hacer ROBOTY-RED">
+  <meta name="twitter:description" content="Capacidades operativas reales, el alcance honesto de la plataforma y los escenarios donde un robot de mantenimiento cambia el resultado.">
+  <meta name="twitter:image" content="https://robotred.co/assets/og-image.png">
+
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="../assets/favicon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="page-curso">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="progress" id="progress" aria-hidden="true"><span></span></div>
+
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 2"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5.5c0 4.3-2.9 8.1-7 9.5-4.1-1.4-7-5.2-7-9.5V6l7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 8.5 4.5L12 12 3.5 7.5 12 3Z"/><path d="m4 12 8 4.3 8-4.3M4 16.5 12 21l8-4.5"/></symbol>
+    <symbol id="i-ai" viewBox="0 0 24 24"><path d="M12 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5.2A3 3 0 0 0 9 18a3 3 0 0 0 3 2 3 3 0 0 0 3-2 3 3 0 0 0 2-5.8A3 3 0 0 0 15 7a3 3 0 0 0-3-3Z"/><path d="M12 8v9M9.5 11.5h5M9.5 14.5h5"/></symbol>
+    <symbol id="i-thermal" viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 1 3 3v7.5a5 5 0 1 1-6 0V6a3 3 0 0 1 3-3Z"/><path d="M12 9v6"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M15.5 3.5a5 5 0 0 0-6.2 6.4L3.7 15.5a2 2 0 1 0 2.8 2.8l5.6-5.6a5 5 0 0 0 6.4-6.2l-3 3-2.6-.7-.7-2.6 3-3Z"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 3v3M14 3v3M10 18v3M14 18v3M3 10h3M3 14h3M18 10h3M18 14h3M10 10h4v4h-4z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M12.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3h3l1.5 4-2 1.5a11 11 0 0 0 5 5L16 11.5 20 13v3a2 2 0 0 1-2.2 2A16 16 0 0 1 5 5.2 2 2 0 0 1 7 3Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-robo" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V5M9 5h6M9 13h.01M15 13h.01M9.5 16.5h5M2 12v3M22 12v3"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.4 6.9 6.6 15.6M13.6 6.9l3.8 8.7M7.5 18h9"/></symbol>
+    <symbol id="i-sensor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M6.5 6.5a7.8 7.8 0 0 0 0 11M17.5 6.5a7.8 7.8 0 0 1 0 11M3.5 3.5a12 12 0 0 0 0 17M20.5 3.5a12 12 0 0 1 0 17"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-drone" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="2"/><path d="M9 10 5 6M15 10l4-4M9 14l-4 4M15 14l4 4M3 4h4M17 4h4M3 20h4M17 20h4"/></symbol>
+  </svg>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+        <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" fetchpriority="high">
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../index.html#robot">Robot X</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="index.html" class="active" aria-current="page">Curso</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="link-tech" href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Área técnica</a>
+        <a class="btn btn-primary btn-sm" href="../index.html#contacto">Solicitar demo</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <article class="leccion">
+      <div class="container leccion-wrap">
+
+        <header class="leccion-head">
+          <p class="leccion-num">Módulo 05 de 10</p>
+          <h1>Qué puede hacer ROBOTY-RED</h1>
+          <p class="leccion-lead">Capacidades operativas reales, el alcance honesto de la plataforma y los escenarios donde un robot de mantenimiento cambia el resultado.</p>
+          <ul class="leccion-meta">
+            <li><svg class="ico ico-sm"><use href="#i-clock"/></svg>90 min de lectura</li>
+            <li><svg class="ico ico-sm"><use href="#i-doc"/></svg>Módulo 5 de 10</li>
+            <li><svg class="ico ico-sm"><use href="#i-wrench"/></svg>Del diagnóstico a la intervención</li>
+          </ul>
+        </header>
+
+        <div class="leccion-body">
+
+          <section>
+            <h2>Qué va a aprender</h2>
+            <ul class="ticks">
+              <li>Distinguir entre lo que la plataforma puede hacer hoy y lo que está en desarrollo.</li>
+              <li>Enmarcar un escenario de aplicación en términos de tarea, activo y evidencia esperada.</li>
+              <li>Construir el caso de negocio de un piloto con costos y ahorro explícitos.</li>
+              <li>Reconocer los cuatro límites que aparecen en cualquier propuesta comercial.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Las tres capacidades, en orden de madurez</h2>
+
+            <p>Conviene presentar las capacidades en orden, no en permanente: la diferencia entre lo que ya opera y lo que se está desarrollando es la que separa una propuesta seria de una promesa.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Capacidad</th><th>Estado</th><th>Qué resuelve</th><th>Qué no resuelve</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Inspeccióntermográfica</td><td>Operativa</td><td>Puntos calientes en conexiones, herrajes y bushings, con punto de referencia medido.</td><td>No mide lo que no está expuesto ni corrige lo que encuentra.</td></tr>
+                  <tr><td>Inspección visual</td><td>Operativa</td><td>Corrosión, deformación, ausencia de pernos, condición de aisladores, con evidencia georreferenciada.</td><td>No distingue un defecto activo de uno inactivo sin medición adicional.</td></tr>
+                  <tr><td>Detección de descargas parciales</td><td>Operativa</td><td>Corona y descarga superficial en aislamiento, audible y ultrasónica.</td><td>No localiza con precisión cuando hay varios puntos activos en la misma estructura.</td></tr>
+                  <tr><td>Georreferenciación de hallazgos</td><td>Operativa</td><td>Cada registro queda associado a torre, componente y orientación.</td><td>No reemplaza el criterio del inspector en la clasificación de severidad.</td></tr>
+                  <tr><td>Limpieza de aisladores</td><td>En desarrollo</td><td>Reducir la contaminación sin desconectar el conductor.</td><td>No sustituye la substituição en porcelana defectuosa.</td></tr>
+                  <tr><td>Intervención: apriete y cambio</td><td>En desarrollo</td><td>Cerrar el ciclo sin cortar el servicio de la línea.</td><td>Requiere procedimiento, herramienta y trazabilidad propios.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>La honestidad es un argumento de venta</p>
+              <p>Un proveedor que dice qué <em>no</em> hace genera más confianza que uno que dice que lo hace todo. En esta industria, la primera pregunta de un comité técnico no es qué hace su robot, sino qué le falla cuando se moja.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Cuatro límites que aparecen en toda propuesta</h2>
+
+            <p>Estos cuatro puntos son los que separan un presupuesto de un caso de negocio. Si faltan en la propuesta, el proyecto se.profile problematico antes de empezar.</p>
+
+            <h3>El límite del clima</h3>
+            <p>Ninguna plataforma funciona con viento por encima de su umbral. Eso no es una falla del equipo, es una restricción del activo. La propuesta debe decir qué pasa en una semana de rachas: ¿se cancela la jornada, se cambia a otra tarea, o se pierde el día?</p>
+
+            <h3>El límite del operador</h3>
+            <p>Todo robot de red necesita un operador competente: alguien que sepa interpretar lo que ve y que decida cuándo detener la operación. Si la propuesta asume que el robot es autónomo de extremo a extremo, o bien no entiende el producto, o bien está vendiendo una expectativa que el equipo no puede sostener.</p>
+
+            <h3>El límite de la ventana de trabajo</h3>
+            <p>Una torre se inspecciona en una hora y se desplaza en otra. El tiempo real por punto es mucho mayor que el tiempo de captura. Cualquier caso de negocio que calcule horas de robot sin horas de desplazamiento se va a quedar corto por un factor de dos o tres.</p>
+
+            <h3>El límite del dato</h3>
+            <p>El robot produce hallazgos, no decisiones. Alguien tiene que revisar, clasificar y ordenar el trabajo. Ese costo de recurso humano existe siempre y rara vez aparece en el presupuesto de la propuesta.</p>
+
+            <div class="callout callout-warn">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-shield"/></svg>Advertencia de procurement</p>
+              <p>Cuando una propuesta presenta un "ahorro de 40%" y no desglosa horas de robot, horas de operador, ni costo de revisión de hallazgos, ese 40% incluye un supuesto que no se va a cumplir. Pida el desglose antes de comparar.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Escenarios con retorno comprobado</h2>
+
+            <p>No todos los escenarios son iguales. Estos son los que han demostrado retorno en operación real, ordenados por dificultad de entrada.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Escenario</th><th>Frecuencia</th><th>Valor principal</th><th>Dificultad</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Termografía en subestación</td><td>Ronda programada mensual.</td><td>Detección temprana de puntos calientes en conexiones.</td><td>Baja: recinto cerrado, vehicle access.</td></tr>
+                  <tr><td>Inspección visual de herrajes en línea</td><td>Ronda anual o semestral.</td><td>Priorización objetiva del mantenimiento correctivo.</td><td>Media: requiere plataforma trepadora o dron.</td></tr>
+                  <tr><td>Detección de corona en aisladores</td><td>Ronda específica en temporada seca o contaminada.</td><td>Hallazgo de defecto activo antes de la falla.</td><td>Media: condicionada por clima y hora del día.</td></tr>
+                  <tr><td>Inspección tras evento</td><td>Después de tormenta, quake o trabajo de terceros.</td><td>Evaluación rápida sin exponer personal a la estructura dañada.</td><td>Media-alta: la estructura puede estar inestable.</td></tr>
+                  <tr><td>Intervención de emergencia</td><td>Reactiva.</td><td>Restablecimiento de servicio sin línea de.diablillo temporal.</td><td>Alta: requiere intervención probada y equipo de respaldo.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>Dónde empezar</p>
+              <p>El primer escenario de cualquier programa debe ser de baja dificultad y alta frecuencia. La subestación cumple las dos condiciones. El retorno no será el más alto del catálogo, pero es el que permite aprender la operación, formir al equipo y construir el historial que después justifica el escalamiento a línea.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>El argumento de costo total de propiedad</h2>
+
+            <p>Un robot de red no se compara con el costo de una inspección manual, sino con el costo de mantener el recurso humano que la hace, más el riesgo que se elimina.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Componente</th><th>Inspección manual</th><th>Inspección robótica</th><th>Nota</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Equipo humano en sitio</td><td>Cuadrilla de 2 personas por jornada.</td><td>1 operador (+ cuadrilla de apoyo en despliegue).</td><td>La diferencia es menor de lo que parece: el operador sigue ahí.</td></tr>
+                  <tr><td>Exposición a riesgo</td><td>Alta: altura, arco eléctrico, caída.</td><td>Baja: el operador permanece en tierra.</td><td>Es el argumento más sólido y el menos cuantificado.</td></tr>
+                  <tr><td>Consistencia de datos</td><td>Variable según operario y momento.</td><td>Uniforme y comparable entre años.</td><td>Permite seguir la evolución de un defecto.</td></tr>
+                  <tr><td>Evidencia</td><td>Notas y fotos sin georreferencia.</td><td>Registro estructurado por componente.</td><td>Reduceiapartados de los discussions de prioridad.</td></tr>
+                  <tr><td>Tiempo de ciclo</td><td>Limitado por clima y luz del día.</td><td>Similar o mejor; ampliable con iluminación propia.</td><td>Depende del tipo de plataforma.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>El argumento que sostiene el proyecto</p>
+              <p>El retorno más defendible de un robot de red no es el ahorro de horas de mano de obra: es la <strong>reducción de exposición al riesgo</strong> y la <strong>consistencia del dato</strong>. El primer argumento es difícil de cotizar, y el segundo es el que permite capturar el valor real del activo.</p>
+            </div>
+                
+          </section>
+
+          <section class="taller">
+            <h2>Taller: caso de negocio de un piloto</h2>
+
+            <p>Se construye el caso de negocio completo de un escenario, con los números que un comité pediría. La diferencia entre este taller y una hoja de cálculo es que todo supuesto debe quedar escrito y visible.</p>
+            <ol class="steps">
+              <li><strong>Describa el escenario en una frase</strong> con activo, tarea y frecuencia real.</li>
+              <li><strong>Estime el costo actual</strong> de esa tarea por año: jornadas, personas, viáticos, equipos y tiempo de exposures.</li>
+              <li><strong>Estime el costo del piloto</strong>: equipo, operador, despliegue, software e integración de datos.</li>
+              <li><strong>Calcule el tiempo real por punto</strong> incluyendo desplazamiento, montaje y desmontaje, no solo captura.</li>
+              <li><strong>Estime los hallazgos esperados</strong> a partir del histórico del Módulo 02, y qué fracción evita trabajo correctivo.</li>
+              <li><strong>Escriba el supuesto más frágil</strong> y qué haría que el proyecto se detenga.</li>
+            </ol>
+            <p>El paso 6 es el que más valor tiene para el proyecto. Un caso de negocio sin criterio de detención definido es un documento de promoción, no un plan.</p>
+            
+            <p class="entrega"><strong>Entregable</strong>Caso de negocio de una página con costos actuales, costos del piloto, tiempo por punto, hallazgos esperados y el criterio de detención del proyecto.</p>
+          </section>
+
+          <section class="resumen-eco">
+            <h2>Resumen para la gerencia</h2>
+
+            <p>Para la gerencia, el mensaje de este módulo es que <strong>ROBOTY-RED no reemplaza al equipo de mantenimiento: lo reubica en la tarea que aporta valor</strong>. El operador deja de subir a estructuras y pasa a interpretar evidencia y a decidir prioridades.</p>
+            <p>Ese cambio es cultural antes que técnico. Un programa de robótica de red que no incluya al equipo de operación en el diseño del procedimiento no va a ser adoptado, por bueno que sea el equipo. La tecnología es la parte fácil.</p>
+        
+          </section>
+
+        </div>
+
+        <nav class="leccion-nav" aria-label="Navegación del curso">
+          <a class="btn btn-outline" href="modulo-04.html">← Sensores para inspección</a>
+          <a class="btn btn-primary" href="modulo-06.html">Inteligencia artificial y procesamiento en el borde <svg class="ico ico-sm"><use href="#i-arrow"/></svg></a>
+        </nav>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+          <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" loading="lazy">
+        </a>
+        <p>Robots autónomos para inspeccionar, diagnosticar y mantener redes eléctricas sin interrumpir el servicio.</p>
+        <div class="social">
+          <a href="mailto:info@robotred.co" aria-label="Correo"><svg class="ico ico-sm"><use href="#i-mail"/></svg></a>
+          <a href="https://github.com/alejandro8aperez/Robotred" target="_blank" rel="noopener" aria-label="GitHub"><svg class="ico ico-sm"><use href="#i-network"/></svg></a>
+        </div>
+      </div>
+
+      <nav class="footer-col" aria-label="Curso">
+        <h4>Curso</h4>
+        <a href="modulo-01.html">Módulo 01 — Introducción</a>
+        <a href="modulo-04.html">Módulo 04 — Sensores</a>
+        <a href="modulo-06.html">Módulo 06 — IA en el borde</a>
+        <a href="modulo-08.html">Módulo 08 — Seguridad</a>
+        <a href="modulo-10.html">Módulo 10 — Proyecto final</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Sitio">
+        <h4>Sitio</h4>
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="../index.html#faq">Preguntas frecuentes</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Aprendizaje">
+        <h4>Aprendizaje</h4>
+        <a href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Libro Blanco INSTE-BOT X</a>
+        <a href="../index.html#resultados">Cumplimiento RETIE</a>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> ROBOTY-RED. Todos los derechos reservados.</p>
+      <p class="foot-note">Las referencias normativas IEC/TC 129 se citan con fines formativos. Los valores técnicos se validan por tramo en cada piloto.</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Volver arriba" hidden>
+    <svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M12 19V6M6 12l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="../app.js" defer></script>
+</body>
+</html>

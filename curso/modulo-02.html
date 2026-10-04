@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 02 — Conocimiento de la línea eléctrica | ROBOTY-RED</title>
+  <meta name="description" content="Torres, conductores, herrajes y aisladores: el activo que hay que conocer antes de intentar robotizarlo, y las fallas que la inspección autónoma debe detectar.">
+  <meta name="theme-color" content="#0A1620">
+  <meta name="author" content="ROBOTY-RED">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://robotred.co/curso/modulo-02.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="ROBOTY-RED">
+  <meta property="og:title" content="Módulo 02 — Conocimiento de la línea eléctrica">
+  <meta property="og:description" content="Torres, conductores, herrajes y aisladores: el activo que hay que conocer antes de intentar robotizarlo, y las fallas que la inspección autónoma debe detectar.">
+  <meta property="og:url" content="https://robotred.co/curso/modulo-02.html">
+  <meta property="og:image" content="https://robotred.co/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Módulo 02 — Conocimiento de la línea eléctrica">
+  <meta name="twitter:description" content="Torres, conductores, herrajes y aisladores: el activo que hay que conocer antes de intentar robotizarlo, y las fallas que la inspección autónoma debe detectar.">
+  <meta name="twitter:image" content="https://robotred.co/assets/og-image.png">
+
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="../assets/favicon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="page-curso">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="progress" id="progress" aria-hidden="true"><span></span></div>
+
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 2"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5.5c0 4.3-2.9 8.1-7 9.5-4.1-1.4-7-5.2-7-9.5V6l7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 8.5 4.5L12 12 3.5 7.5 12 3Z"/><path d="m4 12 8 4.3 8-4.3M4 16.5 12 21l8-4.5"/></symbol>
+    <symbol id="i-ai" viewBox="0 0 24 24"><path d="M12 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5.2A3 3 0 0 0 9 18a3 3 0 0 0 3 2 3 3 0 0 0 3-2 3 3 0 0 0 2-5.8A3 3 0 0 0 15 7a3 3 0 0 0-3-3Z"/><path d="M12 8v9M9.5 11.5h5M9.5 14.5h5"/></symbol>
+    <symbol id="i-thermal" viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 1 3 3v7.5a5 5 0 1 1-6 0V6a3 3 0 0 1 3-3Z"/><path d="M12 9v6"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M15.5 3.5a5 5 0 0 0-6.2 6.4L3.7 15.5a2 2 0 1 0 2.8 2.8l5.6-5.6a5 5 0 0 0 6.4-6.2l-3 3-2.6-.7-.7-2.6 3-3Z"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 3v3M14 3v3M10 18v3M14 18v3M3 10h3M3 14h3M18 10h3M18 14h3M10 10h4v4h-4z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M12.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3h3l1.5 4-2 1.5a11 11 0 0 0 5 5L16 11.5 20 13v3a2 2 0 0 1-2.2 2A16 16 0 0 1 5 5.2 2 2 0 0 1 7 3Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-robo" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V5M9 5h6M9 13h.01M15 13h.01M9.5 16.5h5M2 12v3M22 12v3"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.4 6.9 6.6 15.6M13.6 6.9l3.8 8.7M7.5 18h9"/></symbol>
+    <symbol id="i-sensor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M6.5 6.5a7.8 7.8 0 0 0 0 11M17.5 6.5a7.8 7.8 0 0 1 0 11M3.5 3.5a12 12 0 0 0 0 17M20.5 3.5a12 12 0 0 1 0 17"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-drone" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="2"/><path d="M9 10 5 6M15 10l4-4M9 14l-4 4M15 14l4 4M3 4h4M17 4h4M3 20h4M17 20h4"/></symbol>
+  </svg>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+        <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" fetchpriority="high">
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../index.html#robot">Robot X</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="index.html" class="active" aria-current="page">Curso</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="link-tech" href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Área técnica</a>
+        <a class="btn btn-primary btn-sm" href="../index.html#contacto">Solicitar demo</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <article class="leccion">
+      <div class="container leccion-wrap">
+
+        <header class="leccion-head">
+          <p class="leccion-num">Módulo 02 de 10</p>
+          <h1>Conocimiento de la línea eléctrica</h1>
+          <p class="leccion-lead">Torres, conductores, herrajes y aisladores: el activo que hay que conocer antes de intentar robotizarlo, y las fallas que la inspección autónoma debe detectar.</p>
+          <ul class="leccion-meta">
+            <li><svg class="ico ico-sm"><use href="#i-clock"/></svg>90 min de lectura</li>
+            <li><svg class="ico ico-sm"><use href="#i-doc"/></svg>Módulo 2 de 10</li>
+            <li><svg class="ico ico-sm"><use href="#i-network"/></svg>Base técnica del activo</li>
+          </ul>
+        </header>
+
+        <div class="leccion-body">
+
+          <section>
+            <h2>Qué va a aprender</h2>
+            <ul class="ticks">
+              <li>Nombrar las partes de una torre y distinguir elconductor de potencia del conductor de puesta a tierra.</li>
+              <li>Reconocer los cuatro componentes que concentran la mayoría de los defectos de una línea aérea.</li>
+              <li>Asociar cada modo de falla con el sensor que lo detecta, para no medir lo que no se va a Romper.</li>
+              <li>Construir la ficha de activo de un tramo, que es el insumo mínimo de cualquier piloto.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Anatomía de una línea aérea</h2>
+
+            <p>Una línea de transmisión no es "un cable entre dos torres". Es un conjunto de elementos con nombres normalizados, y cada uno falla de una manera distinta. El robot que se diseña para inspeccionar herrajes no sirve para inspeccionar conductores: cambian la distancia de trabajo, el ángulo y el sensor.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Elemento</th><th>Función</th><th>Falla típica</th><th>Visible a simple vista</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Estructura (torre)</td><td>Sostiene y da altura a los conductores.</td><td>Corrosión en la base,_members deformados, pernos flojos, soldaduras fisuradas.</td><td>Sí, de cerca.</td></tr>
+                  <tr><td>Conductor</td><td>Transporta la energía.</td><td>Rotura de strand, pérdida de tensión y punto caliente por mal apriete.</td><td>A veces; el resto necesita instrumentación.</td></tr>
+                  <tr><td>Herraje</td><td>Conecta conductor con aislador y estructura.</td><td>Corrosión, deformación, fisura, perno que cede.</td><td>Sí, pero a corta distancia.</td></tr>
+                  <tr><td>Aislador</td><td>Aíslagallerygallery el conductor de la estructura manteniendo la distancia eléctrica.</td><td>Contaminación, grieta, descarga parcial, pérdida de aislamiento.</td><td>La grieta sí; la descarga parcial no.</td></tr>
+                  <tr><td>Puesta a tierra</td><td>Canaliza a tierra las corrientes de falla.</td><td>Corrosión de la malla, resistencia excesiva delelectrodo.</td><td>No: hay que medirla.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout callout-warn">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-shield"/></svg>El detalle que más se olvida</p>
+              <p>Los <strong>aisladores de cadena</strong> soportan el conductor y son el punto donde la inspección robótica aporta más: son pequeños, están a la altura exacta de trabajo del robot, y son el componente que más se degrada por contaminación y por descargas parciales. Si un robot de red va a tener un solo destino útil, ese es el primero.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Los conductores y por qué se distinguen entre sí</h2>
+
+            <p>El conductor es el elemento más caro y más crítico de la línea, y el que peor se inspecciona con métodos visualess. Su composición determina tanto el comportamiento térmico como la vida útil.</p>
+            <ul class="bullets">
+              <li><strong>ACSR</strong> (aluminio-acero): el más usado en transmisión. Alma de aluminio con núcleo de acero para la resistencia mecánica.</li>
+              <li><strong>AAAC</strong> (aluminio-acero-aluminio): alternativa más ligera, común en zonas costeras o de baja tensión mecánica.</li>
+              <li><strong>ACCC</strong> (conductor de aluminio con núcleo composite): núcleo de fibra de vidrio y carbono. Menos dilatación térmica, más caro, en líneas nuevas de alta exigencia.</li>
+              <li><strong>OPGW</strong>: fibra óptica embebida en el alma del conductor. Sirve de sensor distribuido para temperatura y tensión. Es la vía de datos ideal porque no necesita cable ni radio.</li>
+              <li><strong>ADSS</strong>: fibra óptica auto-soportada, colgada bajo el conductor, más barata de instalar y con su propia problemática de galopamiento.</li>
+            </ul>
+
+            <div class="callout">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-thermal"/></svg>Consecuencia práctica</p>
+              <p>Cuando el conductor lleva fibra embebida (OPGW), buena parte de lo que se le pedía al robot de inspección ya se puede medir desde la sala de control. Eso no vuelve innecesario al robot: vuelve al robot <strong>más útil en lo que solo él puede ver</strong> — el herraje, el aislador, la estructura. Un buen proyecto detecta esta superposición antes de gastar presupuesto en medir lo que ya estaba medido.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Los herrajes: donde se concentra la mayoría de los defectos</h2>
+
+            <p>Los herrajes son piezas metálicas pequeñas que conectan conductor, aislador y estructura. Son la fuente número uno de hallazgos en inspección de líneas aéreas, por tres razones que se combinan:</p>
+            <ol class="steps">
+              <li><strong>Son muchos.</strong> Una torre tiene decenas, y una línea tiene miles.</li>
+              <li><strong>Estánuban Working en compresión y en tensión</strong>, con cargas cíclicas de viento y hielo que Lester el metal.</li>
+              <li><strong>Son barato de inspeccionar.</strong> El elemento barato que se rompe es el que nadie miró.</li>
+            </ol>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Herraje</th><th>Riesgo principal</th><th>Cómo se detecta</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Grapa de compresión</td><td>Pérdida de tensión del conductor si resbala.</td><td>Inspección visual a corta distancia + termografía si hay punto caliente.</td></tr>
+                  <tr><td>Conector de línea</td><td>Corrosión en la cara interior; falla catastrófica si revienta.</td><td>Visual + medición de resistencia de contacto en mantenimiento.</td></tr>
+                  <tr><td>Grapa de suspensión</td><td>Deslizamiento o pérdida de apoyo del conductor.</td><td>Visual; comparar posición respecto al aislador.</td></tr>
+                  <tr><td>Abrazadera de puesta a tierra</td><td>Corrosión que corta el camino a tierra.</td><td>Visual + medición de resistencia de la malla.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>El hallazgo clásico de inspección robótica en herrajes es el <strong>perno flojo o ausente</strong>. Es un defecto que un operario ve en diez segundos con una binocular desde el suelo, y que sin embargo aparece en el reporte de un robot porque nadie lo revisó a tiempo. Por eso el robot se justifica en el <em>triage</em>, no en el reemplazo del operario.</p>
+                
+          </section>
+
+          <section>
+            <h2>Subestaciones: el otro terreno natural</h2>
+
+            <p>Aunque el curso se centra en líneas, el mayor retorno temprano de la robótica de red está en subestaciones, y conviene entender por qué antes de empezar por las torres.</p>
+            <ul class="bullets">
+              <li>Es un recinto <strong>cerrado y con acceso vehicular</strong>: la logística es mucho más simple que en una torre.</li>
+              <li>El equipo es <strong>más denso y más caro</strong>: un transformador o un interruptor resuelve más dinero que un tramo de línea entero.</li>
+              <li>Las fallas son <strong>visuales y térmicas</strong>: exactamente lo que los sensores de inspección.Good detectan bien.</li>
+              <li>La <strong>altura es moderada</strong>: entre uno y seis metros, sin arnés ni escala.</li>
+              <li>El operador puede <strong>acompañar al robot</strong>: es el mejor lugar para un piloto de bajo riesgo.</li>
+            </ul>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>Recomendación</p>
+              <p>Si va a empezar un programa de robótica de red, empiece por una subestación. El costo de entrada es menor, el tiempo de despliegue es menor y el riesgo reputacional de un error es menor. La altura y la línea aérea llegan después, cuando la organización ya sabe operar robots.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Modos de falla y su firma detectable</h2>
+
+            <p>La clave para diseñar una inspección útil es ir al revés: partir del defecto que se quiere encontrar y deducir qué hay que medir.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Defecto</th><th>Firma física</th><th>Sensor que la detecta</th><th>Detectable desde el suelo</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Punto caliente en conexión</td><td>Delta T respecto a vecinos.</td><td>Termografía radiométrica.</td><td>Sí, con elright lente.</td></tr>
+                  <tr><td>Pérdida de aislamiento</td><td>Descarga parcial visible u audible.</td><td>Cámara UV, micrófono, detección ultrasónica.</td><td>No de forma confiable.</td></tr>
+                  <tr><td>Corrosión de estructura</td><td>Pérdida de sección, descascarillado.</td><td>Cámara RGB de alta resolución + perfil de color.</td><td>Parcialmente.</td></tr>
+                  <tr><td>Deformación de member</td><td>Geometría fuera de patrón.</td><td>LiDAR o fotogrametría.</td><td>No.</td></tr>
+                  <tr><td>Rotura de strand</td><td>Pérdida de sección visible en el conductor.</td><td>Cámara + telescopio; a veces solo con tensiondata.</td><td>Con difficulty.</td></tr>
+                  <tr><td>Degradación de aislador</td><td>Contaminación uniforme, grieta, metal flashing.</td><td>Cámara + UV + inspección dieléctrica.</td><td>Sí, la contaminación.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>El filtro de la última columna</p>
+              <p>Esa columna vale más que todo el resto de la tabla. Un defecto que se ve desde el suelo con un teleobjetivo de 400 mm no necesita un robot para <em>detectarse</em>; necesita un robot solo si además se quiere <em>medirlo con precisión y registrar la evidencia</em>. La decisión deonomy robotización debe empezar por esa diferencia, porque determina el presupuesto de todo el proyecto.</p>
+            </div>
+                
+          </section>
+
+          <section class="taller">
+            <h2>Taller: ficha de activo de un tramo</h2>
+
+            <p>Toda especificación de robot arranca con una ficha del activo, no con una lista de requisitos del equipo. El entregable de este taller es esa ficha, y es la que se le va a pedir a cualquier proveedor.</p>
+            <ol class="steps">
+              <li><strong>Delimite el tramo</strong> con número de torres, longitud en km y nivel de tensión.</li>
+              <li><strong>Describa la estructura</strong>: tipo de torre, altura, material, y si tiene escalera o no.</li>
+              <li><strong>Liste los tipos de herraje y aislador</strong> con sus cantidades aproximadas por torre.</li>
+              <li><strong>Identifique el conductor</strong>: tipo y si lleva OPGW o ADSS.</li>
+              <li><strong>Registre los últimos cuatro años de hallazgos</strong> por tipo. Esta es la columna que decide la prioridad.</li>
+              <li><strong>Liste los puntos sin acceso</strong>: pendientes, alojamientos, discrepancias de nivel.</li>
+            </ol>
+            <p>Una ficha bien hecha suele revelar que el 60% de los hallazgos de los últimos años se concentran en menos de tres tipos de componente. Eso es exactamente el dato que justifies el robot.</p>
+            
+            <p class="entrega"><strong>Entregable</strong>Ficha de activo de una página para un tramo real, con el histórico de hallazgos por tipo de componente y la lista de puntos sin acceso.</p>
+          </section>
+
+          <section class="resumen-eco">
+            <h2>Resumen para la gerencia</h2>
+
+            <p>Para la gerencia, la lección de este módulo es que <strong>el robot no se compra, se asigna</strong>. Un robot de red que se despliega sobre un activo cuyos componentes y modos de falla nadie ha analizado está disposant de una cámara móvil cara.</p>
+            <p>La inversión en la ficha de activo es la de mejor retorno de todo el proyecto: cuesta semanas, no millones, y es la que evita comprar la plataforma equivocada o medir dos veces lo mismo.</p>
+        
+          </section>
+
+        </div>
+
+        <nav class="leccion-nav" aria-label="Navegación del curso">
+          <a class="btn btn-outline" href="modulo-01.html">← Introducción a la robótica eléctrica</a>
+          <a class="btn btn-primary" href="modulo-03.html">El robot trepador y las plataformas de movilidad <svg class="ico ico-sm"><use href="#i-arrow"/></svg></a>
+        </nav>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+          <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" loading="lazy">
+        </a>
+        <p>Robots autónomos para inspeccionar, diagnosticar y mantener redes eléctricas sin interrumpir el servicio.</p>
+        <div class="social">
+          <a href="mailto:info@robotred.co" aria-label="Correo"><svg class="ico ico-sm"><use href="#i-mail"/></svg></a>
+          <a href="https://github.com/alejandro8aperez/Robotred" target="_blank" rel="noopener" aria-label="GitHub"><svg class="ico ico-sm"><use href="#i-network"/></svg></a>
+        </div>
+      </div>
+
+      <nav class="footer-col" aria-label="Curso">
+        <h4>Curso</h4>
+        <a href="modulo-01.html">Módulo 01 — Introducción</a>
+        <a href="modulo-04.html">Módulo 04 — Sensores</a>
+        <a href="modulo-06.html">Módulo 06 — IA en el borde</a>
+        <a href="modulo-08.html">Módulo 08 — Seguridad</a>
+        <a href="modulo-10.html">Módulo 10 — Proyecto final</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Sitio">
+        <h4>Sitio</h4>
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="../index.html#faq">Preguntas frecuentes</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Aprendizaje">
+        <h4>Aprendizaje</h4>
+        <a href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Libro Blanco INSTE-BOT X</a>
+        <a href="../index.html#resultados">Cumplimiento RETIE</a>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> ROBOTY-RED. Todos los derechos reservados.</p>
+      <p class="foot-note">Las referencias normativas IEC/TC 129 se citan con fines formativos. Los valores técnicos se validan por tramo en cada piloto.</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Volver arriba" hidden>
+    <svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M12 19V6M6 12l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="../app.js" defer></script>
+</body>
+</html>

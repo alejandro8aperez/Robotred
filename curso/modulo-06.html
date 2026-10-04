@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 06 — Inteligencia artificial y procesamiento en el borde | ROBOTY-RED</title>
+  <meta name="description" content="Por qué el robot decide en campo en lugar de enviar vídeo a la nube, y cómo diseñar un sistema de detección que un inspector pueda auditar.">
+  <meta name="theme-color" content="#0A1620">
+  <meta name="author" content="ROBOTY-RED">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://robotred.co/curso/modulo-06.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="ROBOTY-RED">
+  <meta property="og:title" content="Módulo 06 — Inteligencia artificial y procesamiento en el borde">
+  <meta property="og:description" content="Por qué el robot decide en campo en lugar de enviar vídeo a la nube, y cómo diseñar un sistema de detección que un inspector pueda auditar.">
+  <meta property="og:url" content="https://robotred.co/curso/modulo-06.html">
+  <meta property="og:image" content="https://robotred.co/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Módulo 06 — Inteligencia artificial y procesamiento en el borde">
+  <meta name="twitter:description" content="Por qué el robot decide en campo en lugar de enviar vídeo a la nube, y cómo diseñar un sistema de detección que un inspector pueda auditar.">
+  <meta name="twitter:image" content="https://robotred.co/assets/og-image.png">
+
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="../assets/favicon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="page-curso">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="progress" id="progress" aria-hidden="true"><span></span></div>
+
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 2"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5.5c0 4.3-2.9 8.1-7 9.5-4.1-1.4-7-5.2-7-9.5V6l7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 8.5 4.5L12 12 3.5 7.5 12 3Z"/><path d="m4 12 8 4.3 8-4.3M4 16.5 12 21l8-4.5"/></symbol>
+    <symbol id="i-ai" viewBox="0 0 24 24"><path d="M12 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5.2A3 3 0 0 0 9 18a3 3 0 0 0 3 2 3 3 0 0 0 3-2 3 3 0 0 0 2-5.8A3 3 0 0 0 15 7a3 3 0 0 0-3-3Z"/><path d="M12 8v9M9.5 11.5h5M9.5 14.5h5"/></symbol>
+    <symbol id="i-thermal" viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 1 3 3v7.5a5 5 0 1 1-6 0V6a3 3 0 0 1 3-3Z"/><path d="M12 9v6"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M15.5 3.5a5 5 0 0 0-6.2 6.4L3.7 15.5a2 2 0 1 0 2.8 2.8l5.6-5.6a5 5 0 0 0 6.4-6.2l-3 3-2.6-.7-.7-2.6 3-3Z"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 3v3M14 3v3M10 18v3M14 18v3M3 10h3M3 14h3M18 10h3M18 14h3M10 10h4v4h-4z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M12.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3h3l1.5 4-2 1.5a11 11 0 0 0 5 5L16 11.5 20 13v3a2 2 0 0 1-2.2 2A16 16 0 0 1 5 5.2 2 2 0 0 1 7 3Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-robo" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V5M9 5h6M9 13h.01M15 13h.01M9.5 16.5h5M2 12v3M22 12v3"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.4 6.9 6.6 15.6M13.6 6.9l3.8 8.7M7.5 18h9"/></symbol>
+    <symbol id="i-sensor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M6.5 6.5a7.8 7.8 0 0 0 0 11M17.5 6.5a7.8 7.8 0 0 1 0 11M3.5 3.5a12 12 0 0 0 0 17M20.5 3.5a12 12 0 0 1 0 17"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-drone" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="2"/><path d="M9 10 5 6M15 10l4-4M9 14l-4 4M15 14l4 4M3 4h4M17 4h4M3 20h4M17 20h4"/></symbol>
+  </svg>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+        <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" fetchpriority="high">
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../index.html#robot">Robot X</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="index.html" class="active" aria-current="page">Curso</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="link-tech" href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Área técnica</a>
+        <a class="btn btn-primary btn-sm" href="../index.html#contacto">Solicitar demo</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <article class="leccion">
+      <div class="container leccion-wrap">
+
+        <header class="leccion-head">
+          <p class="leccion-num">Módulo 06 de 10</p>
+          <h1>Inteligencia artificial y procesamiento en el borde</h1>
+          <p class="leccion-lead">Por qué el robot decide en campo en lugar de enviar vídeo a la nube, y cómo diseñar un sistema de detección que un inspector pueda auditar.</p>
+          <ul class="leccion-meta">
+            <li><svg class="ico ico-sm"><use href="#i-clock"/></svg>90 min de lectura</li>
+            <li><svg class="ico ico-sm"><use href="#i-doc"/></svg>Módulo 6 de 10</li>
+            <li><svg class="ico ico-sm"><use href="#i-ai"/></svg>Percepción y decisión en campo</li>
+          </ul>
+        </header>
+
+        <div class="leccion-body">
+
+          <section>
+            <h2>Qué va a aprender</h2>
+            <ul class="ticks">
+              <li>Explicar las cuatro razones por las que el procesamiento va en el robot y no en el centro de datos.</li>
+              <li>Distinguir un sistema de detección clásico de uno basado en aprendizaje profundo, en el contexto de inspección eléctrica.</li>
+              <li>Dimensionar un presupuesto de cómputo en borde realista.</li>
+              <li>Definir el papel del humano en el bucle de decisión, y por qué no puede eliminarse.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Por qué el procesamiento va en el borde</h2>
+
+            <p>La decisión de dónde se procesa el vídeo no es una preferencia técnica: es la que determina si el sistema funciona en el mundo real o solo en la demostración.</p>
+
+            <ol class="steps">
+              <li><strong>Ancho de banda.</strong> Una hora de vídeo de inspección de una torre ocupa cientos de megabytes. Multiplicado por diez torres por jornada y por un corredor completo, la transmisión se vuelve el cuello de botella, y en campo cellular la cobertura no está garantizada.</li>
+              <li><strong>Latencia.</strong> Un hallazgo que se detecta a distancia y que la IA confirma en dos segundos sirve. El mismo hallazgo con ida y vuelta a un centro de datos a 300 km ya llegó tarde para que el operador actúe sobre esa torre en esa jornada.</li>
+              <li><strong>Disponibilidad.</strong> El campo no tiene señal. Un sistema que depende de la nube no puede usarse en el lugar donde el problema está.</li>
+              <li><strong>Privacidad y custodia.</strong> La infraestructura crítica es un objetivo. Procesar localmente significa que el dato sensible nunca sale del perímetro controlado.</li>
+            </ol>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>El patrón correcto</p>
+              <p><strong>En el borde</strong>, el robot filtra, detecta y prioriza. <strong>En el centro de datos</strong>, se archivan los hallazgos, se entrenan modelos con el histórico y se construyen reportes. No es "todo local" ni "todo en la nube": es cada tarea donde le conviene.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Qué debe decidir el robot, en concreto</h2>
+
+            <p>La palabra "IA" en una propuesta de inspección evoke demasiado. Las decisiones concretas que un robot debe tomar en campo son mucho más acotadas, y por eso son implementables.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Decisión</th><th>Qué resuelve</th><th>Complejidad</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>¿La imagen estátomada?</td><td>Descarta fotos borrosas o mal iluminadas y vuelve a capturar.</td><td>Baja: reglas deumbrales.</td></tr>
+                  <tr><td>¿Hay algo ahí?</td><td>Detecta presencia de un componente en la escena esperada.</td><td>Media: detección de objetos.</td></tr>
+                  <tr><td>¿Qué es?</td><td>Clasifica: aislador, grapa, conector, conductor, estructura.</td><td>Media-alta: clasificación entrenada.</td></tr>
+                  <tr><td>¿Es grave?</td><td>Prioriza: separa lo que requiere intervención de lo que no.</td><td>Alta y delicada: es donde entra el criterio del inspector.</td></tr>
+                  <tr><td>¿Seguimos?</td><td>Modifica la ruta de inspección según lo encontrado: más tomas si hay defecto, menos si no.</td><td>Media: lógica de decisión sobre los anteriores.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>Obsérvese que ninguna de estas decisiones requiere que el robot "entienda" la red eléctrica. Requiere que clasifique correctamente lo que ve. Esta distinción es la que separa un proyecto de inspección viable de una promesa de autonomía total.</p>
+
+            <div class="callout">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-doc"/></svg>Advertencia</p>
+              <p>Cualquier propuesta que describa el sistema como "IA que entiende la línea eléctrica" está describiendo algo que no existe en producción. Lo que existe es clasificación de componentes y priorización con supervisión humana.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Cómputo en borde: qué se puede y qué no se puede</h2>
+
+            <p>El robot tiene un presupuesto de cómputo de quelques..
+
+            watts, y eso define lo que es realista ejecutar localmente.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Tarea</th><th>Cómputo típico</th><th>¿En borde?</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Control de movimiento y servo</td><td>Determinista, ciclos de milisegundos.</td><td>Obligatoriamente en borde.</td></tr>
+                  <tr><td>Detección de objetos (YOLO-clase)</td><td>Unos pocos gigaflops, viable con GPU de bajo consumo o NPU.</td><td>Sí, con hardware adecuado.</td></tr>
+                  <tr><td>Segmentación de defectos</td><td>Más costosa que la detección; requiere modelo optimizado.</td><td>Posible, con cuantización.</td></tr>
+                  <tr><td>Clasificación de imágenes (ResNet / ViT pequeño)</td><td>Moderada.</td><td>Sí.</td></tr>
+                  <tr><td>Entrenamiento y reentrenamiento de modelos</td><td>Horas de GPU.</td><td>Nunca en el robot.</td></tr>
+              <tr><td>Modelo de lenguaje para reportes</td><td>Decenas de miles de millones de parámetros.</td><td>No. En el centro de datos.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>La técnica que hace viable el borde</p>
+              <p><strong>Cuantización</strong>: reducir la precisión de los pesos del modelo —de 32 bits a 8— multiplica la velocidad de inferencia y reduce el consumo de memoria, con una pérdida deExactitud mínima. Es lo que permite correr un detector de defectos decente en un_processor de un brazo robótico, sin tarjeta gráfica dedicada.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Falsos positivos y el costo invisible</h2>
+
+            <p>Un sistema de inspección se juzga por dos números: cuántos defectos reales encuentra y cuántos falsos positivos produce. La industria haAGON se ha enfocado en el primero y ha subestimado el segundo, que es el que determina si el sistema se usa.</p>
+
+            <ul class="bullets">
+              <li><strong>Un falso positivo</strong> no es gratis: alguien tiene que revisar el hallazgo, decidir que no es nada y descartarlo. Con cientos de hallazgos por jornada, esto consume días de trabajo de inspección.</li>
+              <li><strong>Un falso negativo</strong> es un defecto real que pasa. Es el error grave, pero es el menos frecuente si el modelo se ajusta a ser conservador.</li>
+              <li><strong>La consecuencia del error bajo</strong> es la rechazo del sistema: si el inspector ve que el 30% de las alertas son ruido, deja de mirar las alertas.</li>
+            </ul>
+
+            <div class="callout callout-warn">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-shield"/></svg>La decisión de umbral que hay que hacer explícita</p>
+              <p>Todo detector tiene un umbral de confianza que decide qué se reporta. Subirlo reduce falsos positivos y aumenta falsos negativos. <strong>Ese umbral es una decisión de política de mantenimiento, no una decisión técnica:</strong> lo debe tomar la empresa, no el proveedor, y debe quedar escrito.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>El humano en el bucle</h2>
+
+            <p>La supervisión humana no es un freno a la autonomía: es lo que hace que el sistema sea responsable. El robot prioriza; el inspector valida y decide.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Nivel de automatización</th><th>Qué hace el robot</th><th>Qué hace el inspector</th><th>Riesgo</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Asistido</td><td>Captura y ordena.</td><td>Revisa todo y clasifica.</td><td>Bajo: el sistema nunca prioriza solo.</td></tr>
+                  <tr><td>Supervisado</td><td>Prioriza y propone la acción.</td><td>Valida, corrige o descarta.</td><td>Medio: requiere auditoría de las decisiones del modelo.</td></tr>
+                  <tr><td>Autónomo</td><td>Decide y ejecuta la intervención.</td><td>Supervisa excepciones.</td><td>Alto: solo con marco normativo y casos de prueba extensos.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>El sector eléctrico rara vez necesita el tercer nivel, y casi siempre empieza en el primero. Ese es un rasgo de la industria, no una limitación del robot: cuando el error se mide en un blackout, la confianza se gana nivel por nivel.</p>
+                
+          </section>
+
+          <section class="taller">
+            <h2>Taller: definir el conjunto de datos de un tramo</h2>
+
+            <p>Si el proyecto va a usar aprendizaje automático, el conjunto de datos es el activo más valioso y el más difícil de conseguir. Este taller produce el plan para construirlo.</p>
+            <ol class="steps">
+              <li><strong>Recopile el histórico</strong> de hallazgos de los últimos años: fotos, reportes, órdenes de trabajo.</li>
+              <li><strong>Clasifique</strong> cada imagen según el tipo de componente y si contiene defecto, con etiquetas consistentes.</li>
+              <li><strong>Cuantifique el desbalance</strong>: lo más común es que el 95% de las imágenes no tenga defecto y el 5% sí. Anote el número real.</li>
+              <li><strong>Separe los conjuntos</strong> de entrenamiento y de prueba <em>por estructura, no al azar</em>, para que el rendimiento mida capacidad de generalizar y no de memorizar.</li>
+              <li><strong>Defina el umbral de confianza inicial</strong> y escríbalo, con el criterio de negocio que lo justifica.</li>
+              <li><strong>Defina el protocolo de revisión</strong> humana: quién revisa, en cuánto tiempo y cómo se registra.</li>
+            </ol>
+            <p>El error más común en proyectos de IA es evaluar el modelo con imágenes del mismo tipo de estructura que se usó para entrenar, y obtener un número excelente que después se degrada en campo. El paso 4 es el que evita esa trampa.</p>
+            
+            <p class="entrega"><strong>Entregable</strong>Plan de construcción del conjunto de datos: fuentes, esquema de etiquetas, cuantificación de desbalance, criterio de separación por estructura y protocolo de revisión humana.</p>
+          </section>
+
+          <section class="resumen-eco">
+            <h2>Resumen para la gerencia</h2>
+
+            <p>Para la gerencia, el mensaje es que <strong>la inteligencia artificial en un robot de red no es una promesa de autonomía total</strong>: es un filtro que reduce el volumen de datos que llega a un inspector y le entrega lo importante primero.</p>
+            <p>Eso tiene un beneficio directo y medible: si hoy un inspector revisa 400 imágenes por jornada y solo 30 tienen algo interesante, el valor de la IA es que revise esas 400 en segundos y le muestre las 30. El resto de la propuesta —nube, entrenamiento continuo, gemelo digital— es infraestructura para que eso escale, no el producto en sí.</p>
+        
+          </section>
+
+        </div>
+
+        <nav class="leccion-nav" aria-label="Navegación del curso">
+          <a class="btn btn-outline" href="modulo-05.html">← Qué puede hacer ROBOTY-RED</a>
+          <a class="btn btn-primary" href="modulo-07.html">Robot para mantenimiento <svg class="ico ico-sm"><use href="#i-arrow"/></svg></a>
+        </nav>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+          <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" loading="lazy">
+        </a>
+        <p>Robots autónomos para inspeccionar, diagnosticar y mantener redes eléctricas sin interrumpir el servicio.</p>
+        <div class="social">
+          <a href="mailto:info@robotred.co" aria-label="Correo"><svg class="ico ico-sm"><use href="#i-mail"/></svg></a>
+          <a href="https://github.com/alejandro8aperez/Robotred" target="_blank" rel="noopener" aria-label="GitHub"><svg class="ico ico-sm"><use href="#i-network"/></svg></a>
+        </div>
+      </div>
+
+      <nav class="footer-col" aria-label="Curso">
+        <h4>Curso</h4>
+        <a href="modulo-01.html">Módulo 01 — Introducción</a>
+        <a href="modulo-04.html">Módulo 04 — Sensores</a>
+        <a href="modulo-06.html">Módulo 06 — IA en el borde</a>
+        <a href="modulo-08.html">Módulo 08 — Seguridad</a>
+        <a href="modulo-10.html">Módulo 10 — Proyecto final</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Sitio">
+        <h4>Sitio</h4>
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="../index.html#faq">Preguntas frecuentes</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Aprendizaje">
+        <h4>Aprendizaje</h4>
+        <a href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Libro Blanco INSTE-BOT X</a>
+        <a href="../index.html#resultados">Cumplimiento RETIE</a>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> ROBOTY-RED. Todos los derechos reservados.</p>
+      <p class="foot-note">Las referencias normativas IEC/TC 129 se citan con fines formativos. Los valores técnicos se validan por tramo en cada piloto.</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Volver arriba" hidden>
+    <svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M12 19V6M6 12l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="../app.js" defer></script>
+</body>
+</html>

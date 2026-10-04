@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 04 — Sensores para inspección | ROBOTY-RED</title>
+  <meta name="description" content="Termografía, visión, acústica y LiDAR: qué detecta cada sensor, con qué límites, y cómo capturar bien la evidencia.">
+  <meta name="theme-color" content="#0A1620">
+  <meta name="author" content="ROBOTY-RED">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://robotred.co/curso/modulo-04.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="ROBOTY-RED">
+  <meta property="og:title" content="Módulo 04 — Sensores para inspección">
+  <meta property="og:description" content="Termografía, visión, acústica y LiDAR: qué detecta cada sensor, con qué límites, y cómo capturar bien la evidencia.">
+  <meta property="og:url" content="https://robotred.co/curso/modulo-04.html">
+  <meta property="og:image" content="https://robotred.co/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Módulo 04 — Sensores para inspección">
+  <meta name="twitter:description" content="Termografía, visión, acústica y LiDAR: qué detecta cada sensor, con qué límites, y cómo capturar bien la evidencia.">
+  <meta name="twitter:image" content="https://robotred.co/assets/og-image.png">
+
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="../assets/favicon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="page-curso">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="progress" id="progress" aria-hidden="true"><span></span></div>
+
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 2"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5.5c0 4.3-2.9 8.1-7 9.5-4.1-1.4-7-5.2-7-9.5V6l7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 8.5 4.5L12 12 3.5 7.5 12 3Z"/><path d="m4 12 8 4.3 8-4.3M4 16.5 12 21l8-4.5"/></symbol>
+    <symbol id="i-ai" viewBox="0 0 24 24"><path d="M12 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5.2A3 3 0 0 0 9 18a3 3 0 0 0 3 2 3 3 0 0 0 3-2 3 3 0 0 0 2-5.8A3 3 0 0 0 15 7a3 3 0 0 0-3-3Z"/><path d="M12 8v9M9.5 11.5h5M9.5 14.5h5"/></symbol>
+    <symbol id="i-thermal" viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 1 3 3v7.5a5 5 0 1 1-6 0V6a3 3 0 0 1 3-3Z"/><path d="M12 9v6"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M15.5 3.5a5 5 0 0 0-6.2 6.4L3.7 15.5a2 2 0 1 0 2.8 2.8l5.6-5.6a5 5 0 0 0 6.4-6.2l-3 3-2.6-.7-.7-2.6 3-3Z"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 3v3M14 3v3M10 18v3M14 18v3M3 10h3M3 14h3M18 10h3M18 14h3M10 10h4v4h-4z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M12.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3h3l1.5 4-2 1.5a11 11 0 0 0 5 5L16 11.5 20 13v3a2 2 0 0 1-2.2 2A16 16 0 0 1 5 5.2 2 2 0 0 1 7 3Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-robo" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V5M9 5h6M9 13h.01M15 13h.01M9.5 16.5h5M2 12v3M22 12v3"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.4 6.9 6.6 15.6M13.6 6.9l3.8 8.7M7.5 18h9"/></symbol>
+    <symbol id="i-sensor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M6.5 6.5a7.8 7.8 0 0 0 0 11M17.5 6.5a7.8 7.8 0 0 1 0 11M3.5 3.5a12 12 0 0 0 0 17M20.5 3.5a12 12 0 0 1 0 17"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-drone" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="2"/><path d="M9 10 5 6M15 10l4-4M9 14l-4 4M15 14l4 4M3 4h4M17 4h4M3 20h4M17 20h4"/></symbol>
+  </svg>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+        <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" fetchpriority="high">
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../index.html#robot">Robot X</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="index.html" class="active" aria-current="page">Curso</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="link-tech" href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Área técnica</a>
+        <a class="btn btn-primary btn-sm" href="../index.html#contacto">Solicitar demo</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <article class="leccion">
+      <div class="container leccion-wrap">
+
+        <header class="leccion-head">
+          <p class="leccion-num">Módulo 04 de 10</p>
+          <h1>Sensores para inspección</h1>
+          <p class="leccion-lead">Termografía, visión, acústica y LiDAR: qué detecta cada sensor, con qué límites, y cómo capturar bien la evidencia.</p>
+          <ul class="leccion-meta">
+            <li><svg class="ico ico-sm"><use href="#i-clock"/></svg>90 min de lectura</li>
+            <li><svg class="ico ico-sm"><use href="#i-doc"/></svg>Módulo 4 de 10</li>
+            <li><svg class="ico ico-sm"><use href="#i-thermal"/></svg>Termografía, visión, LiDAR</li>
+          </ul>
+        </header>
+
+        <div class="leccion-body">
+
+          <section>
+            <h2>Qué va a aprender</h2>
+            <ul class="ticks">
+              <li>Emparejar cada modo de falla del Módulo 02 con el sensor que realmente lo detecta.</li>
+              <li>Explicar por qué la termografía malTomada produce hallazgos falsos.</li>
+              <li>Distinguir las medidas que exigen una geometría conocida de las que se pueden hacer en movimiento.</li>
+              <li>Diseñar un plan de captura para un tramo, con distancia, ángulo y referencias.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Termografía: la más útil y la más traicionera</h2>
+
+            <p>La cámara termográfica es el sensor con mejor relación entre valor y costo en toda la inspección de redes: detecta elcalor, y el calor es la huella de casi todos los defectos resistivos. El problema es que mide mal con facilidad.</p>
+
+            <h3>El principio</h3>
+            <p>La cámara mide radiación infrarroja y calcula una temperatura de superficie. La temperatura que se calcula es correcta solo si la cámara sabe <em>cuánto</em> de lo que ve es emisión propia de la superficie, y eso se controla con la emisividad. Un herraje galvanizado nuevo tiene emisividad baja; uno con corrosión y óxido la tiene alta. Si no se corrige, la misma lectura da dos temperaturas distintas según el operario que la tomó.</p>
+
+            <h3>Los tres errores que generan hallazgos falsos</h3>
+            <ol class="steps">
+              <li><strong>Emisividad no ajustada.</strong> Causa número uno. Galvanizado, aluminio y óxido dar lecturas incompatibles entre sí en la misma imagen.</li>
+              <li><strong>Reflexión de fondo.</strong> El metal pulido refleja el sol, el operador o las torres vecinas: la imagen brilla donde no hay defecto.</li>
+              <li><strong>Distancia y ángulo incorrectos.</strong> La cámara enfoca a un rango fijo; a distancia y con ángulo oblicuo, el píxel medido no es el punto que el operario cree.</li>
+            </ol>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>La regla operativa</p>
+              <p>La termografía no se lee en pantalla durante la inspección. Se <strong>extrae</strong>: se aísla cada punto de conexión del resto de la escena y se compara con puntos equivalentes. Un termograma sin punto de referencia conocido no es evidencia.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Visión: el sensor que más información produce y peor se aprovecha</h2>
+
+            <p>La cámara produce la mayor cantidad de datos por segundo y es la que más veces se desperdicia, porque se guarda mucho y se analiza poco.</p>
+            <ul class="bullets">
+              <li><strong>RGB de alta resolución.</strong> El caballo de batalla: grietas, corrosión, deformaciones, condición general. Necesita luz y distancia corta para resolver una fisura.</li>
+              <li><strong>Visión multiespectral.</strong> Distingueixels materiales por firma espectral. Es lo que permite separar óxido, Alonso y lichen sobre el mismo aislador.</li>
+              <li><strong>Cámara UV.</strong> Hace visibles las descargas parciales de corona como puntos luminosos. Es de las pocas técnicas que detecta en vivo un defecto que aún no ha causado falla.</li>
+              <li><strong>Cámara infrarroja de onda larga.</strong> Complementa a la RGB en niebla, humo o penumbra: ve lo que la visible no ve.</li>
+            </ul>
+
+            <div class="callout">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-doc"/></svg>Evidencia</p>
+              <p>Para que una imagen sea prueba, necesita tres cosas que un robot puede y un operario con celular no: <strong>marcador de escala en la escena</strong>, <strong>georreferencia y orientación</strong>, y <strong>identificación del componente</strong> al que corresponde. Sin las tres, la foto sirve para estética y no para el expediente técnico.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>LiDAR y navegación: medir la geometría del activo</h2>
+
+            <p>El LiDAR emite pulsos y mide el tiempo de retorno para construir una nube de puntos. En inspección de red aporta dos cosas distintas que a menudo se confunden.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Uso</th><th>Qué entrega</th><th>Costo</th><th>Cuando se justifica</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Navegación y localization</td><td>Posición precisa del robot para georreferenciar la inspección.</td><td>Bajo si el robot ya lo trae.</td><td>Siempre, si se van a registrar hallazgos.</td></tr>
+                  <tr><td>Inspección geométrica</td><td>Deformación de una torre, flecha del conductor, distancia aMagnets de seguridad.</td><td>Alto.</td><td>Cuando hay una deformación sospechada que hay que medir.</td></tr>
+                  <tr><td>Mapeo de corredor</td><td>Nube de puntos del servidumbre para detectarvegetación invasora.</td><td>Alto, y mucho dato.</td><td>En corredores de gran extensión, con dron de ala fija.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>Regla práctica: el LiDAR de navegación se paga solo. El LiDAR de inspección es una inversión de proyecto y hay que justificarla con un defecto concreto que se quiere medir.</p>
+                
+          </section>
+
+          <section>
+            <h2>Sensores acústicos: escuchar la descarga parcial</h2>
+
+            <p>La descarga parcial genera un pulso acústico y una emisión ultrasónica. Un micrófono convencional la detecta cuando es audible —el coronamiento audible de un aislador sucio— y un transductor de presión ultrasónica la detecta siempre, incluso con lluvia, porque el aire atenúa menos el ultrasonido que el sonido.</p>
+            <ul class="bullets">
+              <li><strong>Limitación principal:</strong> el sonido se propaga mal en el viento y se atenúa con la lluvia. Un registro acústico tiene que ir acompañado del estado del tiempo en ese momento.</li>
+              <li><strong>Limitación de alcance:</strong> la fuente se localiza mal si hay más de un punto activo en la misma estructura.</li>
+              <li><strong>Ventaja:</strong> es de los pocos sensores que detectan un defecto <em>antes</em> de que exista un daño visible, lo que lo convierte en la herramienta clave de mantenimiento predictivo.</li>
+            </ul>
+                
+          </section>
+
+          <section>
+            <h2>Sensores que casi se olvidan en el presupuesto</h2>
+
+            <p>Entre el 80% y el 90% del presupuesto de sensores suele ir en cámaras. Los quegenesis la diferencia entre una inspección y una prueba son más baratos:</p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Sensor</th><th>Costo relativo</th><th>Qué habilita</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>IMU de precisión</td><td>Muy bajo</td><td>Saber exactamente hacia dónde miraba la cámara en cada disparo. Sin esto no hay georreferencia posible.</td></tr>
+                  <tr><td>RTK GNSS</td><td>Medio</td><td>Posición centimétrica en exterior, sin estación total.</td></tr>
+                  <tr><td>Iluminación propia</td><td>Bajo</td><td>Convierte una inspección de día en una de turno noche. Multiplica los puntos por torre.</td></tr>
+                  <tr><td>Cámara de contexto</td><td>Bajo</td><td>Una vista amplia de la torre por cada punto de detalle. Sin ella, el inspector tiene que adivinar dónde está.</td></tr>
+                  <tr><td>Sensor de distancia de seguridad</td><td>Medio</td><td>La medición que demuestra que el robot mantuvo la distancia mínima. Es evidencia, no safety extra.</td></tr>
+                  <tr><td>Sincronizador de tiempo</td><td>Muy bajo</td><td>Correlacionar imagen, temperatura y posición en un mismo instante.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="callout callout-warn">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-shield"/></svg>Criterio de inversión</p>
+              <p>Presupueste un <strong>35% del costo total en sensores</strong> y un <strong>10% en iluminación y contexto</strong>. Ese segundo número es el que casi todos recortan primero y el que más rápido se nota en el informe de hallazgos.</p>
+            </div>
+                
+          </section>
+
+          <section class="taller">
+            <h2>Taller: plan de captura de un tramo</h2>
+
+            <p>Se cierra el círculo con los tres módulos anteriores: ficha de activo, plataforma y ahora sensores. El entregable es la especificación de la captura.</p>
+            <ol class="steps">
+              <li><strong>Liste los tres defectos prioritarios</strong> según el histórico del módulo 02, no según el catálogo del proveedor.</li>
+              <li><strong>Asigne un sensor a cada uno</strong> y descarte los que no aportan a esos tres.</li>
+              <li><strong>Fije la geometría de captura:</strong> distancia, ángulo y número de tomas por componente. Nada de "cuantas fotos haya".</li>
+              <li><strong>Defina la evidencia:</strong> marcador de escala, georreferencia, identificador de componente y condición del ambiente.</li>
+              <li><strong>Escriba el criterio de calidad de la toma</strong> —qué hace que una imagen sea rechazada en campo— y css.coloque el umbral de reintento.</li>
+              <li><strong>Calcule el volumen</strong> de la jornada y compruebe que cabe en el ancho de banda de transmisión.</li>
+            </ol>
+            <p>El paso 6 es donde aparecen las sorpresas. Una hora de vídeo de una torre puede pesar más que todo el equipo, y ese dato hay que llevarlo a la discussion de infraestructura antes de la primera salida.</p>
+            
+            <p class="entrega"><strong>Entregable</strong>Plan de captura de dos páginas: defectos prioritarios, sensor asignado, geometría, requisitos de evidencia y volumen de datos por jornada.</p>
+          </section>
+
+          <section class="resumen-eco">
+            <h2>Resumen para la gerencia</h2>
+
+            <p>El mensaje para la gerencia es que <strong>el sensor no genera información, la calidad de la captura la genera</strong>. Con la misma cámara, dos equipos pueden entregar el doble de defectos reales o el doble de falsos positivos, y la diferencia no está en el modelo de IA sino en la disciplina de captura: distancia, ángulo, iluminación, escala y referencia.</p>
+            <p>Por eso la inversión en especificación de captura rinde más que la inversión en un sensor más caro. Es también el argumento que justifica exigir evidencia estructurada a un proveedor: no es burocracia, es lo que hace que los hallazgos valgan.</p>
+        
+          </section>
+
+        </div>
+
+        <nav class="leccion-nav" aria-label="Navegación del curso">
+          <a class="btn btn-outline" href="modulo-03.html">← El robot trepador</a>
+          <a class="btn btn-primary" href="modulo-05.html">Qué puede hacer ROBOTY-RED <svg class="ico ico-sm"><use href="#i-arrow"/></svg></a>
+        </nav>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+          <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" loading="lazy">
+        </a>
+        <p>Robots autónomos para inspeccionar, diagnosticar y mantener redes eléctricas sin interrumpir el servicio.</p>
+        <div class="social">
+          <a href="mailto:info@robotred.co" aria-label="Correo"><svg class="ico ico-sm"><use href="#i-mail"/></svg></a>
+          <a href="https://github.com/alejandro8aperez/Robotred" target="_blank" rel="noopener" aria-label="GitHub"><svg class="ico ico-sm"><use href="#i-network"/></svg></a>
+        </div>
+      </div>
+
+      <nav class="footer-col" aria-label="Curso">
+        <h4>Curso</h4>
+        <a href="modulo-01.html">Módulo 01 — Introducción</a>
+        <a href="modulo-04.html">Módulo 04 — Sensores</a>
+        <a href="modulo-06.html">Módulo 06 — IA en el borde</a>
+        <a href="modulo-08.html">Módulo 08 — Seguridad</a>
+        <a href="modulo-10.html">Módulo 10 — Proyecto final</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Sitio">
+        <h4>Sitio</h4>
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="../index.html#faq">Preguntas frecuentes</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Aprendizaje">
+        <h4>Aprendizaje</h4>
+        <a href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Libro Blanco INSTE-BOT X</a>
+        <a href="../index.html#resultados">Cumplimiento RETIE</a>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> ROBOTY-RED. Todos los derechos reservados.</p>
+      <p class="foot-note">Las referencias normativas IEC/TC 129 se citan con fines formativos. Los valores técnicos se validan por tramo en cada piloto.</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Volver arriba" hidden>
+    <svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M12 19V6M6 12l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="../app.js" defer></script>
+</body>
+</html>

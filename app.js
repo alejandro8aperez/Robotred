@@ -1,5 +1,5 @@
 /* =========================================================
-   ROBOTRED — app.js
+   ROBOTY-RED — app.js
    Navegación, scroll, animaciones, pestañas, FAQ y formulario
    ========================================================= */
 (function () {
@@ -249,7 +249,7 @@
   }
 
   function mailtoFallback(data) {
-    var subject = '[ROBOT-RED] ' + (data.get('tipo') || 'Solicitud') +
+    var subject = '[ROBOTY-RED] ' + (data.get('tipo') || 'Solicitud') +
       ' — ' + (data.get('empresa') || '');
     var body = [
       'Nombre: ' + (data.get('nombre') || ''),

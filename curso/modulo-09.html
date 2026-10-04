@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 09 — Diseño del primer prototipo | ROBOTY-RED</title>
+  <meta name="description" content="Componentes, controladores y telemetría para construir la primera versión, y las decisiones de ingeniería que más conviene acertar.">
+  <meta name="theme-color" content="#0A1620">
+  <meta name="author" content="ROBOTY-RED">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://robotred.co/curso/modulo-09.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="ROBOTY-RED">
+  <meta property="og:title" content="Módulo 09 — Diseño del primer prototipo">
+  <meta property="og:description" content="Componentes, controladores y telemetría para construir la primera versión, y las decisiones de ingeniería que más conviene acertar.">
+  <meta property="og:url" content="https://robotred.co/curso/modulo-09.html">
+  <meta property="og:image" content="https://robotred.co/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Módulo 09 — Diseño del primer prototipo">
+  <meta name="twitter:description" content="Componentes, controladores y telemetría para construir la primera versión, y las decisiones de ingeniería que más conviene acertar.">
+  <meta name="twitter:image" content="https://robotred.co/assets/og-image.png">
+
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="../assets/favicon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="page-curso">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="progress" id="progress" aria-hidden="true"><span></span></div>
+
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 2"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5.5c0 4.3-2.9 8.1-7 9.5-4.1-1.4-7-5.2-7-9.5V6l7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 8.5 4.5L12 12 3.5 7.5 12 3Z"/><path d="m4 12 8 4.3 8-4.3M4 16.5 12 21l8-4.5"/></symbol>
+    <symbol id="i-ai" viewBox="0 0 24 24"><path d="M12 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5.2A3 3 0 0 0 9 18a3 3 0 0 0 3 2 3 3 0 0 0 3-2 3 3 0 0 0 2-5.8A3 3 0 0 0 15 7a3 3 0 0 0-3-3Z"/><path d="M12 8v9M9.5 11.5h5M9.5 14.5h5"/></symbol>
+    <symbol id="i-thermal" viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 1 3 3v7.5a5 5 0 1 1-6 0V6a3 3 0 0 1 3-3Z"/><path d="M12 9v6"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M15.5 3.5a5 5 0 0 0-6.2 6.4L3.7 15.5a2 2 0 1 0 2.8 2.8l5.6-5.6a5 5 0 0 0 6.4-6.2l-3 3-2.6-.7-.7-2.6 3-3Z"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 3v3M14 3v3M10 18v3M14 18v3M3 10h3M3 14h3M18 10h3M18 14h3M10 10h4v4h-4z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M12.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3h3l1.5 4-2 1.5a11 11 0 0 0 5 5L16 11.5 20 13v3a2 2 0 0 1-2.2 2A16 16 0 0 1 5 5.2 2 2 0 0 1 7 3Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-robo" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V5M9 5h6M9 13h.01M15 13h.01M9.5 16.5h5M2 12v3M22 12v3"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.4 6.9 6.6 15.6M13.6 6.9l3.8 8.7M7.5 18h9"/></symbol>
+    <symbol id="i-sensor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M6.5 6.5a7.8 7.8 0 0 0 0 11M17.5 6.5a7.8 7.8 0 0 1 0 11M3.5 3.5a12 12 0 0 0 0 17M20.5 3.5a12 12 0 0 1 0 17"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-drone" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="2"/><path d="M9 10 5 6M15 10l4-4M9 14l-4 4M15 14l4 4M3 4h4M17 4h4M3 20h4M17 20h4"/></symbol>
+  </svg>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+        <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" fetchpriority="high">
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../index.html#robot">Robot X</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="index.html" class="active" aria-current="page">Curso</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="link-tech" href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Área técnica</a>
+        <a class="btn btn-primary btn-sm" href="../index.html#contacto">Solicitar demo</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <article class="leccion">
+      <div class="container leccion-wrap">
+
+        <header class="leccion-head">
+          <p class="leccion-num">Módulo 09 de 10</p>
+          <h1>Diseño del primer prototipo</h1>
+          <p class="leccion-lead">Componentes, controladores y telemetría para construir la primera versión, y las decisiones de ingeniería que más conviene acertar.</p>
+          <ul class="leccion-meta">
+            <li><svg class="ico ico-sm"><use href="#i-clock"/></svg>90 min de lectura</li>
+            <li><svg class="ico ico-sm"><use href="#i-doc"/></svg>Módulo 9 de 10</li>
+            <li><svg class="ico ico-sm"><use href="#i-cpu"/></svg>Arquitectura del sistema</li>
+          </ul>
+        </header>
+
+        <div class="leccion-body">
+
+          <section>
+            <h2>Qué va a aprender</h2>
+            <ul class="ticks">
+              <li>Describir la arquitectura completa de un robot de red, desde la mecánica hasta la nube.</li>
+              <li>Elegir entre controlador de consumo, embebido y controlador industrial, con criterios claros.</li>
+              <li>Dimensionar la telemetría según el volumen de datos y la cobertura del tramo.</li>
+              <li>Identificar las tres decisiones de diseño que, una vez tomadas, son caras de revertir.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>La arquitectura completa</h2>
+
+            <p>Un robot de red es un sistema de seis bloques. Lo que suele fallar en los prototipos no es ningún bloque aislado, sino las interfaces entre ellos.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Bloque</th><th>Responsabilidad</th><th>Decisión crítica</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Mecánica y estructura</td><td>Transmitir fuerzas, resistir el ambiente,_mountar los sensores en posición conocida.</td><td>Materiales y grado de protección IP.</td></tr>
+                  <tr><td>Actuadores</td><td>Locomoción y manipulación; control de par y posición.</td><td>Redundancia y límites de torque.</td></tr>
+                  <tr><td>Percepción</td><td>Cámaras, sensores, LiDAR, IMU; sincronización temporal.</td><td>Qué se procesa a bordo y qué no.</td></tr>
+                  <tr><td>Cómputo de a bordo</td><td>Inferencia, control, registro local, control de energía.</td><td>Arquitectura de computadora y del sistema operativo.</td></tr>
+                  <tr><td>Telemetría</td><td>Enlace de datos con el operador y con el centro.</td><td>Protocolo, cobertura y comportamiento ante pérdida.</td></tr>
+                  <tr><td>Software e interfaz</td><td>Configuración, flujo de inspección, gestión de hallazgos, reportes.</td><td>Modelo de datos: qué se registra y cómo se integra.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>Dónde se pierden los proyectos</p>
+              <p>En la interfaz entre el bloque de percepción y el de software. El sensor produce una imagen con metadatos de posición y orientación; el software de inspección necesita saber qué componente es, dónde está y en qué condiciones se tomó. Si ese modelo de datos no se define antes de integrar, la información llega al centro y se pierde.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Cómputo: tres caminos</h2>
+
+            <p>La elección del computador de a bordo define qué se puede hacer en campo durante toda la vida del producto, y por eso conviene tomarla con criterio de largo plazo.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Opción</th><th>Ventajas</th><th>Desventajas</th><th>Cuándo</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Placa de consumo (Raspberry Pi y similares)</td><td>Barata,ONSIDERproto rápido, ecosistema amplio.</td><td>Sin rango industrial de temperatura; sin protección; vida útil corta.</td><td>Prototipo de banco y desarrollo de software.</td></tr>
+                  <tr><td>Módulo embebido industrial</td><td>Rango térmico amplio, sin disco, Watchdog, ciclo de vida largo.</td><td>Menos potencia de cómputo; ecosistema más limitado.</td><td>Prototipo que va a campo.</td></tr>
+                  <tr><td>Controlador industrial (PLC con CPU)</td><td>Determinismo, E/S robustas, ciclo de vida industrial, redundancia.</td><td>Costo, complejidad, y no es un computador de propósito general.</td><td>Producción, cuando el control manda.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-cpu"/></svg>El error de partida</p>
+              <p>Arrancar con una placa de consumo y migrar después a hardware industrial. La migración no es solo cambiar la placa: es rehacer el acceso a disco, la gestión térmica, la alimentación y el arranque. Es más barato decidir el hardware de campo desde el primer día, aunque se prototipe sobre una placa de desarrollo.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Telemetría: dimensionarla con números</h2>
+
+            <p>El enlace de datos se subestima siempre y se sobredimensiona a veces. La decisión se toma con el volumen del módulo 04, no con intuición.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Tecnología</th><th>Alcance típico</th><th>Ventaja</th><th>Limitación</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Wi-Fi</td><td>Cientos de metros.</td><td>Alto ancho de banda, barato.</td><td>No sirve para línea aérea; punto de acceso por torre.</td></tr>
+                  <tr><td>Celular 4G/5G</td><td>Depende de cobertura del operador.</td><td>Cubre el territorio sin infraestructura propia.</td><td>Cobertura irregular en zonas de montaña; costo de datos.</td></tr>
+                  <tr><td>IoT celular (LTE-M, NB-IoT)</td><td>Nacional.</td><td>Costo por dato muy bajo, cobertura amplia.</td><td>No sirve para vídeo; solo telemetría.</td></tr>
+                  <tr><td>Radio de malla / trunking</td><td>Depende de la topología.</td><td>Cobertura propia, resilient.</td><td>Requiere diseño de red y mantenimiento de torres.</td></tr>
+                  <tr><td>Satélite</td><td>Global.</td><td>Cobertura donde no hay nada.</td><td>Costo y latencia; sensible a obstrucciones.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <dl class="glossary">
+              <div><dt>Enlace de control</dt><dd>El que lleva órdenes del operador al robot. Necesita baja latencia y debe ser robusto, pero puede ser de bajo ancho de banda.</dd></div>
+              <div><dt>Enlace de datos</dt><dd>El que sube capturas y resultados. Necesita ancho de banda, pero tolera más latencia. <strong>Separarlos es la decisión clave</strong> cuando el volumen es alto.</dd></div>
+              <div><dt>Almacenamiento local</dt><dd>Registro en tarjeta o disco a bordo para lo que no se puede transmitir. Es la red de seguridad del dato: nada se pierde aunque no haya señal.</dd></div>
+            </dl>
+
+            <p>El patrón que funciona: enlace de control robusto y de bajo ancho de banda para operar, enlace de datos separado para subir volumen, y almacenamiento local que se descarga cuando se recupera la señal. Un diseño con un solo enlace suele funcionar en el taller y fallar en la montaña.</p>
+                
+          </section>
+
+          <section>
+            <h2>Las tres decisiones caras de revertir</h2>
+
+            <p>En un prototipo hay muchas decisiones, pero solo tres son realmente irreversibles o muy caras de cambiar. Las demás se ajustan en el camino.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Decisión</th><th>Por qué es cara de revertir</th><th>Cómo acertarla</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Modelo de datos de los hallazgos</td><td>Si el esquema de registro no contempla lo que la empresa necesita, hay que reprocesar histórico entero.</td><td>Escribir el esquema de datos <em>con el equipo de mantenimiento</em>, no con el de TI, antes de integrar sensores.</td></tr>
+                  <tr><td>Interfaz mecánica de los sensores</td><td>El punto de montaje define la geometría de la captura y la repetibilidad de los hallazgos.</td><td>Definirla con la carga útil real de campo, no con la de laboratorio.</td></tr>
+                  <tr><td>Estrategia de comunicación</td><td>Determina la cobertura, el costo de datos y el comportamiento en falla.</td><td>Levantar la información de cobertura del tramo antes de elegir, no después.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>La regla del prototipo</p>
+              <p>Un primer prototipo no busca ser perfecto, busca <strong>descartar ideas rápido</strong>. Salga a campo pronto, con una sola tarea y un solo tipo de componente, y revise el modelo de datos y la geometría de captura antes de multiplicar sensores. Multiplicar después de validar es barato; cambiar después de multiplicar, no.</p>
+            </div>
+                
+          </section>
+
+          <section class="taller">
+            <h2>Taller: hoja de ruta del prototipo</h2>
+
+            <p>Se construye la hoja de ruta que gobierna el primer prototipo: qué se prueba en cada etapa y cuál es el criterio para pasar a la siguiente. La estructura por etapas evita el error más común, que es intentar construir el producto completo antes de validarlo en campo.</p>
+            <ol class="steps">
+              <li><strong>Etapa 0 — Mesa.</strong> Modelo de datos y arquitectura de bloques. Salida: el esquema de registro y el diagrama de la interfaz entre bloques.</li>
+              <li><strong>Etapa 1 — Banco.</strong> Percepción y computo funcionando con datos reales de la empresa, no con imágenes de internet. Salida: un modelo que clasifica componentes del tramo.</li>
+              <li><strong>Etapa 2 — Tienda.</strong> Integración mecánica y eléctrica completa, en el taller, con el prototipo armado. Salida: el sistema encendido y conectado.</li>
+              <li><strong>Etapa 3 — Subestación.</strong> Primera salida a un entorno controlado y con operador humano al lado. Salida: una jornada completa con hallazgos registrados.</li>
+              <li><strong>Etapa 4 — Línea.</strong> Extensión al activo objetivo, con un solo componente como objetivo. Salida: comparación contra la inspección manual en el mismo tramo.</li>
+              <li><strong>Etapa 5 — Repetible.</strong> Segunda y tercera salida sin personal de desarrollo en sitio. Salida: evidencia de que el sistema lo opera alguien del equipo de mantenimiento.</li>
+            </ol>
+            <p>El criterio de avance entre etapas debe ser un dato, no una opinión: si el prototipo no clasifica bien los componentes del tramo en la etapa 1, ningún ajuste mecánico de la etapa 3 lo va a arreglar.</p>
+            
+            <p class="entrega"><strong>Entregable</strong>Hoja de ruta de una página: las seis etapas, el entregable de cada una, el criterio de avance y el recurso estimado por etapa.</p>
+          </section>
+
+          <section class="resumen-eco">
+            <h2>Resumen para la gerencia</h2>
+
+            <p>Para la gerencia, el mensaje es que <strong>construir el robot es la parte conocida del problema</strong>. Las piezas existen, la ingeniería es estándar y el riesgo técnico está acotado. Lo que no está resuelto son las tres decisiones que no se pueden revertir: el modelo de datos, la interfaz mecánica de captura y la estrategia de comunicaciones.</p>
+            <p>Un equipo de desarrollo competente va a acertar la mecánica casi siempre, porque es donde hay menos unknowns. Las tres decisiones que hay que proteger son las de la derecha: son las que cuestan rehacer.</p>
+        
+          </section>
+
+        </div>
+
+        <nav class="leccion-nav" aria-label="Navegación del curso">
+          <a class="btn btn-outline" href="modulo-08.html">← Seguridad eléctrica</a>
+          <a class="btn btn-primary" href="modulo-10.html">Proyecto final <svg class="ico ico-sm"><use href="#i-arrow"/></svg></a>
+        </nav>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+          <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" loading="lazy">
+        </a>
+        <p>Robots autónomos para inspeccionar, diagnosticar y mantener redes eléctricas sin interrumpir el servicio.</p>
+        <div class="social">
+          <a href="mailto:info@robotred.co" aria-label="Correo"><svg class="ico ico-sm"><use href="#i-mail"/></svg></a>
+          <a href="https://github.com/alejandro8aperez/Robotred" target="_blank" rel="noopener" aria-label="GitHub"><svg class="ico ico-sm"><use href="#i-network"/></svg></a>
+        </div>
+      </div>
+
+      <nav class="footer-col" aria-label="Curso">
+        <h4>Curso</h4>
+        <a href="modulo-01.html">Módulo 01 — Introducción</a>
+        <a href="modulo-04.html">Módulo 04 — Sensores</a>
+        <a href="modulo-06.html">Módulo 06 — IA en el borde</a>
+        <a href="modulo-08.html">Módulo 08 — Seguridad</a>
+        <a href="modulo-10.html">Módulo 10 — Proyecto final</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Sitio">
+        <h4>Sitio</h4>
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="../index.html#faq">Preguntas frecuentes</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Aprendizaje">
+        <h4>Aprendizaje</h4>
+        <a href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Libro Blanco INSTE-BOT X</a>
+        <a href="../index.html#resultados">Cumplimiento RETIE</a>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> ROBOTY-RED. Todos los derechos reservados.</p>
+      <p class="foot-note">Las referencias normativas IEC/TC 129 se citan con fines formativos. Los valores técnicos se validan por tramo en cada piloto.</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Volver arriba" hidden>
+    <svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M12 19V6M6 12l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="../app.js" defer></script>
+</body>
+</html>

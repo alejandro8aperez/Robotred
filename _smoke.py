@@ -273,6 +273,100 @@ def main():
 
             page.close()
 
+        # --- CURSO: indice y las 10 lecciones deben cargar limpias ---
+        print("\n--- curso/ ---")
+        lecciones = ["curso/index.html"] + [
+            f"curso/modulo-{n:02d}.html" for n in range(1, 11)]
+
+        for label, width, height in (("escritorio", 1440, 900), ("movil", 390, 844)):
+            for ruta in lecciones:
+                page = browser.new_page(viewport={"width": width, "height": height})
+                console, failed = [], []
+                page.on("console", lambda m: console.append(f"{m.type}: {m.text}")
+                        if m.type == "error" else None)
+                page.on("pageerror", lambda e: console.append(f"pageerror: {e}"))
+                page.on("response", lambda r: failed.append(f"{r.status} {r.url}")
+                        if r.status >= 400 else None)
+
+                page.goto(f"{base}/{ruta}", wait_until="networkidle")
+                page.wait_for_timeout(400)
+
+                titulo = page.title()
+                corto = titulo[:60]
+
+                # Iconos: ningun <use> puede quedar sin <symbol>.
+                huerfanos = page.evaluate(
+                    """() => [...document.querySelectorAll('use')]
+                         .map(u => u.getAttribute('href').slice(1))
+                         .filter(id => !document.getElementById(id))"""
+                )
+                # Tablas: no deben desbordar su contenedor.
+                desbordan = page.evaluate(
+                    """() => [...document.querySelectorAll('.table-wrap')]
+                         .filter(d => d.scrollWidth > d.clientWidth + 2)
+                         .length"""
+                )
+
+                nav_ok = page.evaluate(
+                    """() => { const a = document.querySelector('#nav a.active');
+                              return a ? a.getAttribute('href') : null; }"""
+                )
+                if nav_ok != "index.html":
+                    failures.append(
+                        f"[curso/{label}] {ruta}: el menu no resalta Curso: {nav_ok}")
+
+                if huerfanos:
+                    failures.append(f"[curso/{label}] {ruta}: iconos sin symbol: {huerfanos}")
+                if console:
+                    failures.extend(f"[curso/{label}] {ruta} consola: {c}" for c in console)
+                http_fail = [u for u in failed if "127.0.0.1" in u or u.startswith(("4", "5"))]
+                if http_fail:
+                    failures.append(f"[curso/{label}] {ruta} recursos rotos: {http_fail}")
+                # Cada pagina debe traer su propio titulo, no el de otra.
+                if not titulo or titulo.startswith("{") or titulo.endswith("}"):
+                    failures.append(f"[curso/{label}] {ruta}: titulo sin rellenar")
+                elif ruta.endswith("index.html"):
+                    if "Curso de robótica" not in titulo:
+                        failures.append(f"[curso/{label}] {ruta}: titulo '{corto}'")
+                else:
+                    num = ruta[-7:-5]
+                    if not titulo.startswith(f"Módulo {num} —"):
+                        failures.append(f"[curso/{label}] {ruta}: titulo '{corto}'")
+                    if not titulo.endswith("ROBOTY-RED"):
+                        failures.append(f"[curso/{label}] {ruta}: titulo sin la marca")
+
+                if ruta.endswith("index.html") or label == "escritorio":
+                    print(f"[{label}] {ruta:26} | {corto}")
+                    print(f"           tablas que desbordan: {desbordan} | huerfanos: {huerfanos or 'ninguno'}")
+
+                page.close()
+
+        # Navegacion real: indice -> leccion 1 -> leccion 2.
+        print("\n--- navegacion del curso ---")
+        page = browser.new_page(viewport={"width": 1440, "height": 900})
+        page.goto(f"{base}/curso/index.html", wait_until="networkidle")
+        page.click('a[href="modulo-01.html"]')
+        page.wait_for_load_state("networkidle")
+        print("indice -> modulo 1:", page.url)
+        if not page.url.endswith("modulo-01.html"):
+            failures.append("[curso] el indice no lleva al modulo 1")
+
+        # La navegacion interna del modulo 1 avanza al 2.
+        page.click('.leccion-nav a[href="modulo-02.html"]')
+        page.wait_for_load_state("networkidle")
+        print("modulo 1 -> siguiente:", page.url)
+        if not page.url.endswith("modulo-02.html"):
+            failures.append("[curso] el boton 'siguiente' del modulo 1 no lleva al 2")
+
+        # Y la leccion 10 vuelve al tutorial.
+        page.goto(f"{base}/curso/modulo-10.html", wait_until="networkidle")
+        page.click('.leccion-nav a[href="../tutorial.html"]')
+        page.wait_for_load_state("networkidle")
+        print("modulo 10 -> tutorial:", page.url)
+        if "tutorial" not in page.url:
+            failures.append("[curso] el final del curso no lleva al tutorial")
+        page.close()
+
         browser.close()
 
     httpd.shutdown()

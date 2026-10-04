@@ -52,23 +52,23 @@
     <path d="M155 275 L136 305 H151 L142 330 L174 292 H158 Z" fill="#FFD21C"/>
   </g>
 
-  <!-- Wordmark -->
-  <text x="350" y="255" font-family="Arial, Helvetica, sans-serif" font-size="132" font-weight="800"
-        letter-spacing="-5" fill="#073B73">ROBOT</text>
-  <text x="875" y="255" font-family="Arial, Helvetica, sans-serif" font-size="132" font-weight="800"
-        letter-spacing="-5" fill="#F4B400">RED</text>
+  <!-- Wordmark: ROBOTY-RED. Centrado en x=740, con el separador alineado al
+       ancho real del texto (~766 px). Deja ~54 px de respiro respecto al
+       icono, que termina en x=303, y alinea descriptor y eslogan. -->
+  <text x="740" y="250" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="112" font-weight="800" letter-spacing="-4"><tspan fill="#073B73">ROBOTY</tspan><tspan fill="#F4B400">-RED</tspan></text>
 
   <!-- separator -->
-  <rect x="355" y="285" width="675" height="8" rx="4" fill="#F4B400"/>
+  <rect x="357" y="280" width="766" height="8" rx="4" fill="#F4B400"/>
 
   <!-- descriptor -->
-  <text x="690" y="345" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+  <text x="740" y="345" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
         font-size="30" font-weight="600" letter-spacing="3" fill="#073B73">
     ROBÓTICA • INGENIERÍA • REDES ELÉCTRICAS
   </text>
 
   <!-- tagline -->
-  <text x="690" y="395" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+  <text x="740" y="395" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
         font-size="27" font-weight="400" fill="#4A5568">
     Tecnología que mantiene tus redes
   </text>

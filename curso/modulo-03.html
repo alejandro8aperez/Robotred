@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 03 — El robot trepador y las plataformas de movilidad | ROBOTY-RED</title>
+  <meta name="description" content="Cinemática del trepador, adherencia sobre acero galvanizado y el panorama completo de plataformas: cuadrúpedos, drones, vehículos terrestres y submarinos.">
+  <meta name="theme-color" content="#0A1620">
+  <meta name="author" content="ROBOTY-RED">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://robotred.co/curso/modulo-03.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="ROBOTY-RED">
+  <meta property="og:title" content="Módulo 03 — El robot trepador y las plataformas de movilidad">
+  <meta property="og:description" content="Cinemática del trepador, adherencia sobre acero galvanizado y el panorama completo de plataformas: cuadrúpedos, drones, vehículos terrestres y submarinos.">
+  <meta property="og:url" content="https://robotred.co/curso/modulo-03.html">
+  <meta property="og:image" content="https://robotred.co/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Módulo 03 — El robot trepador y las plataformas de movilidad">
+  <meta name="twitter:description" content="Cinemática del trepador, adherencia sobre acero galvanizado y el panorama completo de plataformas: cuadrúpedos, drones, vehículos terrestres y submarinos.">
+  <meta name="twitter:image" content="https://robotred.co/assets/og-image.png">
+
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="../assets/favicon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="page-curso">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="progress" id="progress" aria-hidden="true"><span></span></div>
+
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 2"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5.5c0 4.3-2.9 8.1-7 9.5-4.1-1.4-7-5.2-7-9.5V6l7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 8.5 4.5L12 12 3.5 7.5 12 3Z"/><path d="m4 12 8 4.3 8-4.3M4 16.5 12 21l8-4.5"/></symbol>
+    <symbol id="i-ai" viewBox="0 0 24 24"><path d="M12 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5.2A3 3 0 0 0 9 18a3 3 0 0 0 3 2 3 3 0 0 0 3-2 3 3 0 0 0 2-5.8A3 3 0 0 0 15 7a3 3 0 0 0-3-3Z"/><path d="M12 8v9M9.5 11.5h5M9.5 14.5h5"/></symbol>
+    <symbol id="i-thermal" viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 1 3 3v7.5a5 5 0 1 1-6 0V6a3 3 0 0 1 3-3Z"/><path d="M12 9v6"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M15.5 3.5a5 5 0 0 0-6.2 6.4L3.7 15.5a2 2 0 1 0 2.8 2.8l5.6-5.6a5 5 0 0 0 6.4-6.2l-3 3-2.6-.7-.7-2.6 3-3Z"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 3v3M14 3v3M10 18v3M14 18v3M3 10h3M3 14h3M18 10h3M18 14h3M10 10h4v4h-4z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M12.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3h3l1.5 4-2 1.5a11 11 0 0 0 5 5L16 11.5 20 13v3a2 2 0 0 1-2.2 2A16 16 0 0 1 5 5.2 2 2 0 0 1 7 3Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-robo" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V5M9 5h6M9 13h.01M15 13h.01M9.5 16.5h5M2 12v3M22 12v3"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.4 6.9 6.6 15.6M13.6 6.9l3.8 8.7M7.5 18h9"/></symbol>
+    <symbol id="i-sensor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M6.5 6.5a7.8 7.8 0 0 0 0 11M17.5 6.5a7.8 7.8 0 0 1 0 11M3.5 3.5a12 12 0 0 0 0 17M20.5 3.5a12 12 0 0 1 0 17"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-drone" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="2"/><path d="M9 10 5 6M15 10l4-4M9 14l-4 4M15 14l4 4M3 4h4M17 4h4M3 20h4M17 20h4"/></symbol>
+  </svg>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+        <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" fetchpriority="high">
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../index.html#robot">Robot X</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="index.html" class="active" aria-current="page">Curso</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="link-tech" href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Área técnica</a>
+        <a class="btn btn-primary btn-sm" href="../index.html#contacto">Solicitar demo</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <article class="leccion">
+      <div class="container leccion-wrap">
+
+        <header class="leccion-head">
+          <p class="leccion-num">Módulo 03 de 10</p>
+          <h1>El robot trepador y las plataformas de movilidad</h1>
+          <p class="leccion-lead">Cinemática del trepador, adherencia sobre acero galvanizado y el panorama completo de plataformas: cuadrúpedos, drones, vehículos terrestres y submarinos.</p>
+          <ul class="leccion-meta">
+            <li><svg class="ico ico-sm"><use href="#i-clock"/></svg>90 min de lectura</li>
+            <li><svg class="ico ico-sm"><use href="#i-doc"/></svg>Módulo 3 de 10</li>
+            <li><svg class="ico ico-sm"><use href="#i-robo"/></svg>Plataformas y cinemática</li>
+          </ul>
+        </header>
+
+        <div class="leccion-body">
+
+          <section>
+            <h2>Qué va a aprender</h2>
+            <ul class="ticks">
+              <li>Explicar el compromiso entre velocidad y adherencia en un robot trepador.</li>
+              <li>Comparar las cinco familias de plataforma en costo, capacidad de carga útil y capacidad de intervención.</li>
+              <li>Calcular de forma aproximada la carga útil disponible una vez descontado el peso de la estructura y la batería.</li>
+              <li>Identificar la plataforma correcta para un tramo dado, justificando la elección con el activo del Módulo 02.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Anatomía de un robot trepador de torre</h2>
+
+            <p>Un trepador es, en su forma más simple, un mecanismo de sujeción que se desplaza por un elemento estructural vertical —un angular, un tubo o un alma de perfil— y que transporta una carga útil. Todo lo demás es consecuencia de cómo resuelve dos problemas.</p>
+
+            <h3>El primer problema: cómo se sujeta</h3>
+            <p>Existen tres familias, y la elección define el activo sobre el que el robot puede trabajar:</p>
+            <ul class="bullets">
+              <li><strong>Ventosa o agarre suave:</strong> se adhiere por presión negativa o por contacto elástico. Es el método más rápido y el más inofensivo para la estructura, y exige superficie lisa y limpia.</li>
+              <li><strong>Pinza o mordaza positiva:</strong> abraza el elemento y se ancla mecánicamente. Aguanta más y no depende de la superficie, pero deja marca y hay que verificar el par de apriete.</li>
+              <li><strong>Ganchos o rodillos:</strong> envolvente por un lado en estructuras de celosía. Es la opción para torres de celosía de acero, donde no hay un elemento continuo por el que trepar.</li>
+            </ul>
+
+            <h3>El segundo problema: dónde está la línea</h3>
+            <p>En una torre de celosía el robot sube por un alma, pero el conductor está a varios metros de distancia horizontal y por encima. Ahí es donde entra la cinemática de la plataforma articulada y el brazo de inspección, y por eso casi ningún trepador sube "y ya está": sube, se posiciona y <em>alcanza</em>.</p>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>La cifra que decide proyectos</p>
+              <p>En cualquier plataforma trepadora, el número que hay que pedir y verificar es el <strong>alcance de inspección con carga útil instalada</strong>: cuán lejos del eje de la torre llega el sensor, y cuánto pesa lo que lleva. Un robot con excelente adherencia y brazo corto es útil en estructura, pero no ve aisladores.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>El compromisofundamental: velocidad contra adherencia</h2>
+
+            <p>En un trepador hay un compromiso físico que no se puede negociar. Cuanto más rápido se mueve, más fuerza se necesita en los actuadores y más peso deben soportar los acoplamientos; y cuanto más seguros y discretos son los actuadores, más lento se mueve.</p>
+            <p>Esto se traduce en tres números que hay que comparar entre proveedores y que rara vez aparecen juntos en una ficha técnica:</p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Parámetro</th><th>Qué mide</th><th>Por qué importa</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Velocidad de ascenso</td><td>Metros por hora en el perfil declarado.</td><td>Define cuántos minutos se tarda en una torre y, con eso, cuántos operarios y cuántas horas de ventana.</td></tr>
+                  <tr><td>Fuerza de sujeción</td><td>Newtons de retención, y factor de seguridad sobre peso total.</td><td>Determina si el robot sobrevive a ráfaga de viento con la carga desplazada.</td></tr>
+                  <tr><td>Par máximo</td><td>Par de torsión en el acoplamiento principal.</td><td>Es el límite frente a torsión por viento, la causa clásica de caída en torres de celosía.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout callout-warn">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-shield"/></svg>Advertencia</p>
+              <p>La velocidad máxima publicada casi siempre es la velocidad <em>en vacío</em>, sin carga útil y sin viento. Pregunte siempre por la velocidad con carga nominal y en el perfil de viento de su tramo. Un número de especificación en esta industria rara vez es el número de campo.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>El panorama de plataformas</h2>
+
+            <p>Cinco familias cubren hoy la práctica totalidad de los casos de uso de interés:</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Familia</th><th>FORTALEZAS</th><th>Debilidades</th><th>Mejor terreno</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Cuadrúpedo (UGV de patas)</td><td>Se adapta a terreno irregular; redundancia natural; trepa escalones y rejillas.</td><td>Consumo alto; lento; caro.</td><td>Subestaciones, patios, chantier.</td></tr>
+                  <tr><td>Trepador de torre</td><td>Llega a la altura exacta del aislador y del herraje; carga útil estable.</td><td>Solo en estructura compatible; requiere acceso a la base.</td><td>Torres de transmisión y distribución.</td></tr>
+                  <tr><td>Drone (multirrotor)</td><td>Rápido de desplegar; cubre kilómetros de línea por día; no necesita base fija.</td><td>Depende del clima y del viento; poca carga útil; autonomía limitada por batería.</td><td>Líneas largas, corredor abierto.</td></tr>
+                  <tr><td>Drone (ala fija / VTOL)</td><td>Autonomía de horas y gran alcance de corredor.</td><td>No puede_STOP en el punto ni tomar un contacto; útil para mapeo y detección de corredor.</td><td>Inspección de corredor extenso, detección de intrusión en servidumbre.</td></tr>
+                  <tr><td>Submarino (UUV)</td><td>El único que inspecciona cables submarinos sin cortar servicio.</td><td>Tecnología y costo muy altos; navegación relativa.</td><td>Cables submarinos de interconexión.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>Dónde está la frontera real</p>
+              <p>Hay una frontera clara entre <strong>ver</strong> y <strong>tocar</strong>. El dron llega al conductor y lo examina; difícilmente lo toca. La plataforma trepadora llega al herraje y puede agarrarlo. Mientras el proyecto sea de inspección, el dron gana en costo por punto inspeccionado; en cuanto aparezca un requisito de manipulación, la plataforma con brazo gana, aunque sea más lenta y más cara.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Carga útil: la cuenta que casi nadie hace</h2>
+
+            <p>La ficha técnica dice "carga útil máxima". La pregunta correcta es qué queda después de pagar el resto del robot.</p>
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-sensor"/></svg>Fórmula de trabajo</p>
+              <p>Carga útil disponible = carga útil nominal − peso del sensor − peso del brazo de inspección − peso del cableado y de las protecciones − peso de la batería de reserva.</p>
+              <p>En plataformas pequeñas este cálculo suele dejar un margen muy pequeño. Si el proyecto necesita un manipulator abrasivo y una cámara de alto rango dinámico a la vez, la plataforma escolhida probablemente no admita ambos.</p>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Elemento de la carga útil</th><th>Peso aproximado</th><th>¿Se puede omitir?</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Cámara RGB de inspección con zoom</td><td>0,8 – 2 kg</td><td>Nunca: es la razón de ser del viaje.</td></tr>
+                  <tr><td>Cámara termográfica radiométrica</td><td>0,3 – 1 kg</td><td>Solo si el defecto buscado es visible.</td></tr>
+                  <tr><td>Brazo articulado de 4 grados de libertad</td><td>4 – 12 kg</td><td>No, si se quiere alcanzar herraje desde el alma.</td></tr>
+                  <tr><td>Herramienta de torque</td><td>3 – 8 kg</td><td>Solo en proyectos de intervención.</td></tr>
+                  <tr><td>Reflector e iluminación</td><td>1 – 3 kg</td><td>De noche, nunca.</td></tr>
+                  <tr><td>Batería de reserva para operación en frío</td><td>5 – 20 kg</td><td>Depende del clima del tramo.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>Los valores de la tabla son órdenes de magnitud de mercado, no especificaciones de un fabricante concreto. Sirven para hacer la cuenta de arriba en la etapa de pre-facturación y decidir si hace falta pedir una plataforma de la siguiente categoría.</p>
+                
+          </section>
+
+          <section>
+            <h2>Variables de entorno que deciden el proyecto</h2>
+
+            <p>Antes de comparar plataformas hay que leer el clima del tramo, porque es lo que invalida más especificaciones.</p>
+            <ul class="bullets">
+              <li><strong>Racha de viento máxima.</strong> En muchas zonas del interior de Colombia y del Perú, más de la mitad del año hay ráfagas por encima de lo que cualquier drone soporta con carga útil. Un proyecto de dron mal planificado se cancela solo, sin código de error.</li>
+              <li><strong>Altitud.</strong> Por encima de 3 000 m la densidad del aire cae y la capacidad de sustentación y la autonomía bajan. El número del fabricante es a nivel del mar.</li>
+              <li><strong>Temperatura mínima.</strong> El frío reduce capacidad de batería de litio y vuelve frágil a los sellos y a las juntas.</li>
+              <li><strong>Lluvia y humedad.</strong> Restringe la cámara y la termografía; exige un grado de protección real, no nominal.</li>
+              <li><strong>Espacio aéreo.</strong> Con ionizing, con líneas de alta tensión o en corredor de aeropuerto, la operación de dron se vuelve un trámite, y a veces un trámite imposible.</li>
+            </ul>
+                
+          </section>
+
+          <section class="taller">
+            <h2>Taller: selección de plataforma por tramo</h2>
+
+            <p>Se toma la ficha de activo del Módulo 02 y se aplica el método. El entregable es una recomendación argumentada de una línea, no un equipo concreto.</p>
+            <ol class="steps">
+              <li><strong>Delimite la tarea.</strong> Una sola tarea, un solo componente objetivo: por ejemplo "detectar descargas parciales en aisladores de cadena".</li>
+              <li><strong>Fije la altura de trabajo</strong> necesaria y la distancia horizontal al objetivo desde el elemento estructural.</li>
+              <li><strong>Descarte plataformas</strong> que no alcancen esa geometría, anotando el motivo.</li>
+              <li><strong>Sobreviva</strong> las dos que queden con el clima del módulo 01 y 02: viento, altitud, temperatura.</li>
+              <li><strong>Haga la cuenta de carga útil</strong> con los sensores del módulo 04. Si no cierra, suba de categoría o recorte alcance.</li>
+              <li><strong>Escriba la justificación en un párrafo</strong> que un committee pueda leer sin asking clarifying questions.</li>
+            </ol>
+            <p>Si el párrafo termina siendo largo o llena de "y también puede…", probablemente la tarea elegida fue demasiado ambiciosa para un solo piloto.</p>
+            
+            <p class="entrega"><strong>Entregable</strong>Nota de selección de plataforma de una página: tarea, geometría, candidatos descartados y su motivo, candidatos sobrevivientes y justificación final.</p>
+          </section>
+
+          <section class="resumen-eco">
+            <h2>Resumen para la gerencia</h2>
+
+            <p>La idea que debe quedar para la gerencia: <strong>el dron y el trepador no compiten, se complementan</strong>. El dron da cobertura y velocidad sobre kilómetros de corredor; el trepador da precisión y capacidad de intervención sobre un punto. Un programa maduro usa los dos, y usa el dron para decidir a dónde va el trepador.</p>
+            <p>Esa lógica es además la que ordena el presupuesto: primero se paga por <em>saber</em> dónde está el problema, después por <em>arreglar</em> el problema. Es un orden de inversión que casi nunca es el que propone el proveedor, y siempre es el que protege el presupuesto.</p>
+        
+          </section>
+
+        </div>
+
+        <nav class="leccion-nav" aria-label="Navegación del curso">
+          <a class="btn btn-outline" href="modulo-02.html">← Conocimiento de la línea eléctrica</a>
+          <a class="btn btn-primary" href="modulo-04.html">Sensores para inspección <svg class="ico ico-sm"><use href="#i-arrow"/></svg></a>
+        </nav>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+          <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" loading="lazy">
+        </a>
+        <p>Robots autónomos para inspeccionar, diagnosticar y mantener redes eléctricas sin interrumpir el servicio.</p>
+        <div class="social">
+          <a href="mailto:info@robotred.co" aria-label="Correo"><svg class="ico ico-sm"><use href="#i-mail"/></svg></a>
+          <a href="https://github.com/alejandro8aperez/Robotred" target="_blank" rel="noopener" aria-label="GitHub"><svg class="ico ico-sm"><use href="#i-network"/></svg></a>
+        </div>
+      </div>
+
+      <nav class="footer-col" aria-label="Curso">
+        <h4>Curso</h4>
+        <a href="modulo-01.html">Módulo 01 — Introducción</a>
+        <a href="modulo-04.html">Módulo 04 — Sensores</a>
+        <a href="modulo-06.html">Módulo 06 — IA en el borde</a>
+        <a href="modulo-08.html">Módulo 08 — Seguridad</a>
+        <a href="modulo-10.html">Módulo 10 — Proyecto final</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Sitio">
+        <h4>Sitio</h4>
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="../index.html#faq">Preguntas frecuentes</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Aprendizaje">
+        <h4>Aprendizaje</h4>
+        <a href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Libro Blanco INSTE-BOT X</a>
+        <a href="../index.html#resultados">Cumplimiento RETIE</a>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> ROBOTY-RED. Todos los derechos reservados.</p>
+      <p class="foot-note">Las referencias normativas IEC/TC 129 se citan con fines formativos. Los valores técnicos se validan por tramo en cada piloto.</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Volver arriba" hidden>
+    <svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M12 19V6M6 12l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="../app.js" defer></script>
+</body>
+</html>

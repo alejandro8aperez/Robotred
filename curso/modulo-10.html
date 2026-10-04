@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 10 — Proyecto final | ROBOTY-RED</title>
+  <meta name="description" content="Un proyecto completo, de principio a fin: alcance, plan de validación, costos, entregables y los criterios para decidir si se escala.">
+  <meta name="theme-color" content="#0A1620">
+  <meta name="author" content="ROBOTY-RED">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://robotred.co/curso/modulo-10.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="ROBOTY-RED">
+  <meta property="og:title" content="Módulo 10 — Proyecto final">
+  <meta property="og:description" content="Un proyecto completo, de principio a fin: alcance, plan de validación, costos, entregables y los criterios para decidir si se escala.">
+  <meta property="og:url" content="https://robotred.co/curso/modulo-10.html">
+  <meta property="og:image" content="https://robotred.co/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Módulo 10 — Proyecto final">
+  <meta name="twitter:description" content="Un proyecto completo, de principio a fin: alcance, plan de validación, costos, entregables y los criterios para decidir si se escala.">
+  <meta name="twitter:image" content="https://robotred.co/assets/og-image.png">
+
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="../assets/favicon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="page-curso">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="progress" id="progress" aria-hidden="true"><span></span></div>
+
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 2"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5.5c0 4.3-2.9 8.1-7 9.5-4.1-1.4-7-5.2-7-9.5V6l7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 8.5 4.5L12 12 3.5 7.5 12 3Z"/><path d="m4 12 8 4.3 8-4.3M4 16.5 12 21l8-4.5"/></symbol>
+    <symbol id="i-ai" viewBox="0 0 24 24"><path d="M12 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5.2A3 3 0 0 0 9 18a3 3 0 0 0 3 2 3 3 0 0 0 3-2 3 3 0 0 0 2-5.8A3 3 0 0 0 15 7a3 3 0 0 0-3-3Z"/><path d="M12 8v9M9.5 11.5h5M9.5 14.5h5"/></symbol>
+    <symbol id="i-thermal" viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 1 3 3v7.5a5 5 0 1 1-6 0V6a3 3 0 0 1 3-3Z"/><path d="M12 9v6"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M15.5 3.5a5 5 0 0 0-6.2 6.4L3.7 15.5a2 2 0 1 0 2.8 2.8l5.6-5.6a5 5 0 0 0 6.4-6.2l-3 3-2.6-.7-.7-2.6 3-3Z"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 3v3M14 3v3M10 18v3M14 18v3M3 10h3M3 14h3M18 10h3M18 14h3M10 10h4v4h-4z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M12.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3h3l1.5 4-2 1.5a11 11 0 0 0 5 5L16 11.5 20 13v3a2 2 0 0 1-2.2 2A16 16 0 0 1 5 5.2 2 2 0 0 1 7 3Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-robo" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V5M9 5h6M9 13h.01M15 13h.01M9.5 16.5h5M2 12v3M22 12v3"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.4 6.9 6.6 15.6M13.6 6.9l3.8 8.7M7.5 18h9"/></symbol>
+    <symbol id="i-sensor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M6.5 6.5a7.8 7.8 0 0 0 0 11M17.5 6.5a7.8 7.8 0 0 1 0 11M3.5 3.5a12 12 0 0 0 0 17M20.5 3.5a12 12 0 0 1 0 17"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-drone" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="2"/><path d="M9 10 5 6M15 10l4-4M9 14l-4 4M15 14l4 4M3 4h4M17 4h4M3 20h4M17 20h4"/></symbol>
+  </svg>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+        <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" fetchpriority="high">
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../index.html#robot">Robot X</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="index.html" class="active" aria-current="page">Curso</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="link-tech" href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Área técnica</a>
+        <a class="btn btn-primary btn-sm" href="../index.html#contacto">Solicitar demo</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <article class="leccion">
+      <div class="container leccion-wrap">
+
+        <header class="leccion-head">
+          <p class="leccion-num">Módulo 10 de 10</p>
+          <h1>Proyecto final</h1>
+          <p class="leccion-lead">Un proyecto completo, de principio a fin: alcance, plan de validación, costos, entregables y los criterios para decidir si se escala.</p>
+          <ul class="leccion-meta">
+            <li><svg class="ico ico-sm"><use href="#i-clock"/></svg>120 min de lectura</li>
+            <li><svg class="ico ico-sm"><use href="#i-doc"/></svg>Módulo 10 de 10</li>
+            <li><svg class="ico ico-sm"><use href="#i-target"/></svg>Síntesis y plan de proyecto</li>
+          </ul>
+        </header>
+
+        <div class="leccion-body">
+
+          <section>
+            <h2>Qué va a aprender</h2>
+            <ul class="ticks">
+              <li>Integrar los nueve módulos anteriores en un plan de proyecto ejecutable.</li>
+              <li>Definir el alcance de un piloto de forma que tenga un criterio de éxito verificable.</li>
+              <li>Construir el plan de validación de conformidad con los criterios de la guía aplicable.</li>
+              <li>Definir los criterios de escalamiento y de detención, antes de empezar.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>El punto de partida</h2>
+
+            <p>Este módulo no introduce conceptos nuevos. Reordena todo lo anterior en una sola pregunta: <strong>dado un activo concreto y un presupuesto concreto, ¿qué proyecto de robótica tiene sentido y cómo se sabe si funcionó?</strong></p>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>El error de la mayoría de los proyectos</p>
+              <p>Empezar por la tecnología. "Compremos el robot y veamos qué encontramos." Ese camino produce una demostración impecable y un proyecto sin criterio de éxito, que se evalúa con opiniones y no con datos.</p>
+            </div>
+
+            <p>El camino correcto tiene tres líneas de entrada, y las tres tienen que estar resueltas antes de elegir el equipo:</p>
+            <ol class="steps">
+              <li><strong>El activo y sus modos de falla.</strong> Del módulo 02: qué componentes tienen el historial de hallazgos que justifica la intervención.</li>
+              <li><strong>La tarea concreta.</strong> Del módulo 05: un solo escenario, con frecuencia real y criterio de éxito medible.</li>
+              <li><strong>El presupuesto y la ventana.</strong> Cuánto se puede invertir y cuántas jornadas al año se pueden gastar en campo.</li>
+            </ol>
+                
+          </section>
+
+          <section>
+            <h2>Alcance del piloto y criterio de éxito</h2>
+
+            <p>El alcance de un piloto se define por lo que se <em>excluye</em>, no por lo que incluye. Un piloto bien acotado cabe en una frase y tiene un criterio que se puede verificar con un número.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>El piloto incluye</th><th>El piloto NO incluye</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Un activo concreto: una subestación o un tramo definido.</td><td>Toda la red. Un piloto no es un programa.</td></tr>
+                  <tr><td>Un tipo de componente objetivo, del módulo 02.</td><td>Todos los defectos del activo. Eso es una inspección, no un piloto.</td></tr>
+                  <tr><td>Una plataforma, del módulo 03.</td><td>Comparación de plataformas. Eso es una evaluación, no un piloto.</td></tr>
+                  <tr><td>Un conjunto de sensores mínimo, del módulo 04.</td><td>Todos los sensores posibles. Añaden costo y ruido.</td></tr>
+                  <tr><td>Detección con revisión humana, del módulo 06.</td><td>Intervención física, salvo que el nivel 1 esté ya probado.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>Un criterio de éxito bien escrito</p>
+              <p>"En seis jornadas sobre el tramo X, con el robot Y, el sistema detectará al menos el 80% de los defectos que el inspector de referencia identificó, con no más de un falso positivo por torre y con el 100% de los hallazgos georreferenciados."</p>
+              <p>Ese criterio tiene activo, número, umbral, comparación contra una referencia y un requisito de evidencia. Es lo que hace que un piloto termine y no se extienda indefinidamente.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Plan de validación</h2>
+
+            <p>La validación responde a una pregunta: ¿cómo vamos a saber que esto funciona? Se organiza en tres capas, con criterios de aceptación explícitos.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Capa</th><th>Qué valida</th><th>Método</th><th>Criterio de aceptación</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Funcional</td><td>Que el sistema hace lo que dice hacer.</td><td>Pruebas de laboratorio con piezas de prueba y casos conocidos.</td><td>Detecta los casos conocidos en la proportion definida.</td></tr>
+                  <tr><td>Rendimiento</td><td>Que el rendimiento se sostiene en campo.</td><td>Jornadas de campo comparadas contra la inspección de referencia.</td><td>Umbral del criterio de éxito, alcanzado y sostenido.</td></tr>
+                  <tr><td>Seguridad y conformidad</td><td>Que se cumplen los requisitos.</td><td>Análisis de riesgo y pruebas de falla, del módulo 08.</td><td>Los riesgos residuales están aceptados y documentados.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-doc"/></svg>Sobre la referencia IEC TR 63439-1-2</p>
+              <p>El informe técnico IEC TR 63439-1-2 (2026) es la guía de aplicación que acompaña a la norma de requisitos. Aporta el marco para <strong>cómo demostrar la conformidad</strong> en una evaluación: qué evidencia hay que producir, cómo se documenta y cómo se revisa. Es la referencia que convierte "funciona bien" en "está conforme".</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Presupuesto y estructura de costos</h2>
+
+            <p>El presupuesto de un piloto tiene cuatro componentes, y los proveedores suelen cotizar solo el primero. Un presupuesto que solo mira el equipo subestima el proyecto entre un 40% y un 100%.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Componente</th><th>Qué incluye</th><th>Habitualmente omitido</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Equipo</td><td>Robot, sensores, plataforma de carga,fta.</td><td>Casi nunca omitido.</td></tr>
+                  <tr><td>Software</td><td>Licencias, configuración, integración con los sistemas existentes.</td><td>Frecuentemente, y suele ser la partida más grande en el primer año.</td></tr>
+                  <tr><td>Operación</td><td>Tren del operador, despliegue, viáticos, jornadas de campo.</td><td>Se cotiza como si el robot operara solo.</td></tr>
+                  <tr><td>Organización</td><td>Capacitación del equipo, procedimientos, revisión de hallazgos.</td><td>Casi nunca está en el presupuesto, y es lo que decide si el sistema se usa.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout callout-key">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-target"/></svg>La pregunta que revela los presupuestos mal hechos</p>
+              <p>"¿Cuántas horas de operador al año, a qué costo, y cuántas horas de revisión de hallazgos?" Si la respuesta viene con dos números y no con un porcentaje, el presupuesto está bien pensado. Si viene con un porcentaje, hay que pedir el desglose.</p>
+            </div>
+                
+          </section>
+
+          <section>
+            <h2>Escalamiento y criterios de detención</h2>
+
+            <p>Un piloto debería tener definidos, desde el principio, tanto el camino para escalar como las condiciones para detenerse. Lo segundo es lo que casi nunca se escribe, y es lo que protege el proyecto.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Decisión</th><th>Condición</th><th>Qué significa en la práctica</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Escalar</td><td>El criterio de éxito se alcanzó en las jornadas de campo y el equipo de operación lo ejecuta sin apoyo externo.</td><td>El sistema es sostenible operativamente.</td></tr>
+                  <tr><td>Extender</td><td>El criterio se alcanzó, pero el equipo todavía necesita apoyo de desarrollo.</td><td>Hace falta más capacitación antes de crecer; no es un fracaso.</td></tr>
+                  <tr><td>Ajustar</td><td>El criterio se alcanzó solo parcialmente y la causa es conocida y corregible.</td><td>Se itera con un cambio acotado, no con un proyecto nuevo.</td></tr>
+                  <tr><td>Detener</td><td>El criterio no se alcanza por una causa que no depende del ajuste, o el riesgo residual no es aceptable.</td><td>Se documenta lo aprendido y se cierra. Esto también es un resultado.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout callout-warn">
+              <p class="callout-title"><svg class="ico ico-sm"><use href="#i-shield"/></svg>Sobre la presión de escalar</p>
+              <p>Un piloto que "funcionó bien" pero que el equipo de operación no puede operar sin el proveedor no escaló: se convirtió en una consultoría permanente. La prueba real de que un proyecto de robótica funciona es si sobrevive al fin del contrato de desarrollo.</p>
+            </div>
+                
+          </section>
+
+          <section class="taller">
+            <h2>Taller: propuesta final de proyecto</h2>
+
+            <p>La demostración final del curso: una propuesta de proyecto completa, en un documento de tres páginas, que un comité pueda aprobar o rechazar con los elementos que tiene a la vista.</p>
+            <ol class="steps">
+              <li><strong>Página 1 — El problema.</strong> Activo, componentes con historial, tarea prioritaria y por qué es un problema y no una mejora.</li>
+              <li><strong>Página 2 — La solución y el alcance.</strong> Plataforma y sensores elegidos, con la justificación de los módulos 03 y 04; qué incluye el piloto y qué NO, según la tabla del módulo.</li>
+              <li><strong>Página 3 — Validación, presupuesto y decisión.</strong> Criterio de éxito medible, plan de validación de tres capas, presupuesto en las cuatro partidas, y la tabla de escalamiento y detención.</li>
+            </ol>
+            <p>Antes de entregarla, revise tres cosas: ¿el criterio de éxito tiene un número?; ¿el presupuesto tiene las cuatro partidas?; ¿existe una condición de detención? Si las tres respuestas son sí, la propuesta está lista para un comité.</p>
+            
+            <p class="entrega"><strong>Entregable</strong>Propuesta de proyecto de tres páginas: problema, solución y alcance, validación, presupuesto y criterios de escalamiento y detención.</p>
+          </section>
+
+          <section class="resumen-eco">
+            <h2>Resumen para la gerencia</h2>
+
+            <p>Para cerrar el curso, la idea que resume los diez módulos es esta: <strong>la robótica de red es una disciplina de ingeniería de decisión antes que de ingeniería de hardware</strong>. Las máquinas se Comparan, se eligen y se compran. El proyecto lo define una organización que sabe qué falla en su activo, qué puede pagar y qué evidencia necesita para decidir.</p>
+            <p>Quien entienda eso puede evaluar cualquier propuesta de provider que se le presente: no por lo que promete hacer el robot, sino por cómo propone medir su propio desempeño y qué pasa si no lo alcanza. Ese es el criterio, y es el único que escala.</p>
+            <p><strong>Buen curso, y buen uso de los robots.</strong></p>
+        
+          </section>
+
+        </div>
+
+        <nav class="leccion-nav" aria-label="Navegación del curso">
+          <a class="btn btn-outline" href="modulo-09.html">← Diseño del primer prototipo</a>
+          <a class="btn btn-primary" href="../tutorial.html">Ver el tutorial completo <svg class="ico ico-sm"><use href="#i-arrow"/></svg></a>
+        </nav>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html" aria-label="ROBOTY-RED — inicio">
+          <img class="brand-logo" src="../assets/logo-blanco.webp" width="100" height="96" alt="" loading="lazy">
+        </a>
+        <p>Robots autónomos para inspeccionar, diagnosticar y mantener redes eléctricas sin interrumpir el servicio.</p>
+        <div class="social">
+          <a href="mailto:info@robotred.co" aria-label="Correo"><svg class="ico ico-sm"><use href="#i-mail"/></svg></a>
+          <a href="https://github.com/alejandro8aperez/Robotred" target="_blank" rel="noopener" aria-label="GitHub"><svg class="ico ico-sm"><use href="#i-network"/></svg></a>
+        </div>
+      </div>
+
+      <nav class="footer-col" aria-label="Curso">
+        <h4>Curso</h4>
+        <a href="modulo-01.html">Módulo 01 — Introducción</a>
+        <a href="modulo-04.html">Módulo 04 — Sensores</a>
+        <a href="modulo-06.html">Módulo 06 — IA en el borde</a>
+        <a href="modulo-08.html">Módulo 08 — Seguridad</a>
+        <a href="modulo-10.html">Módulo 10 — Proyecto final</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Sitio">
+        <h4>Sitio</h4>
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#soluciones">Soluciones</a>
+        <a href="../tutorial.html">Tutorial</a>
+        <a href="../index.html#faq">Preguntas frecuentes</a>
+        <a href="../index.html#contacto">Contacto</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Aprendizaje">
+        <h4>Aprendizaje</h4>
+        <a href="https://alejandro8aperez.github.io/INSTE-BOT/" target="_blank" rel="noopener">Libro Blanco INSTE-BOT X</a>
+        <a href="../index.html#resultados">Cumplimiento RETIE</a>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> ROBOTY-RED. Todos los derechos reservados.</p>
+      <p class="foot-note">Las referencias normativas IEC/TC 129 se citan con fines formativos. Los valores técnicos se validan por tramo en cada piloto.</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Volver arriba" hidden>
+    <svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M12 19V6M6 12l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="../app.js" defer></script>
+</body>
+</html>

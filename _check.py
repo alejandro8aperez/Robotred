@@ -22,12 +22,15 @@ def ids_of(path):
     return set(re.findall(r'\bid="([^"]+)"', path.read_text(encoding="utf-8")))
 
 
-def broken_refs(refs, own_ids):
+def broken_refs(refs, own_ids, base=None):
     """Refs que no apuntan a ningun id.
 
     Admite anclas locales (#id), paginas (otra.html) y paginas con ancla
     (otra.html#id), comprobando el ancla contra los ids de la pagina destino.
+    Los destinos se resuelven relativos a `base` (el directorio de la pagina
+    que contiene el enlace), no a la raiz del sitio.
     """
+    base = base or root
     broken = set()
     for r in refs:
         if not r or r in own_ids:
@@ -36,10 +39,13 @@ def broken_refs(refs, own_ids):
         if not target:
             # Ancla local: ya cubierta por la comprobacion de own_ids.
             continue
-        if "/" in target:
-            continue
         if target.endswith(".html"):
-            dest = root / target
+            dest = (base / target).resolve()
+            try:
+                rel = dest.relative_to(root.resolve())
+            except ValueError:
+                broken.add(r)
+                continue
             if not dest.exists():
                 broken.add(r)
             elif frag and frag not in ids_of(dest):
@@ -169,8 +175,32 @@ if not og_url:
     problems.append("Falta og:url")
 elif domain not in og_url.group(1):
     problems.append(f"og:url no apunta a {domain}: {og_url.group(1)}")
+# El nombre de marca debe ser coherente en todo el sitio. El dominio sigue
+# aparte: hasta que roboty-red.co este registrado, el sitio publica en
+# .netlify.app pero sus etiquetas SEO apuntan a robotred.co.
+MARCA = "ROBOTY-RED"
+marca_vieja = re.findall(r"ROBOT-RED|ROBOTRED\b", html + css + js)
+if marca_vieja:
+    problems.append(f"queda la marca antigua {sorted(set(marca_vieja))}")
+if MARCA not in html:
+    problems.append(f"la marca {MARCA} no aparece en index.html")
+
+# Dominio propio unico: el de las etiquetas SEO y el del correo deben
+#Coincidir. Se ignoran los de terceros (fuentes, JSON-LD, GitHub).
+sitio = html + css + js
+dominios = {d.replace("info@", "") for d in
+            re.findall(r"\b(?:info@)?(robot[a-z-]*\.(?:co|com))\b", sitio)}
+if len(dominios) > 1:
+    problems.append(f"se mezclan dominios propios: {sorted(dominios)}")
+
+# La cabecera de seguridad debe aplicar tambien al curso.
+config = (root / "netlify.toml").read_text(encoding="utf-8")
+if "/curso/*" not in config:
+    problems.append("netlify.toml no define cabeceras para /curso/*")
+
 for f in ("netlify.toml", "robots.txt", "sitemap.xml", "gracias.html",
-          "tutorial.html", "assets/og-image.png", "assets/apple-touch-icon.png",
+          "tutorial.html", "curso/index.html", "assets/og-image.png",
+          "assets/apple-touch-icon.png",
           "assets/logo-color.webp", "assets/logo-blanco.webp",
           "assets/esquema.jpg", "assets/favicon-32.png"):
     ok = (root / f).exists()
@@ -182,11 +212,16 @@ print("\n== PAGINAS SECUNDARIAS ==")
 
 
 def check_page(name, want_robots=None, need_seo=True, need_js=True):
-    """Valida una pagina distinta de index.html con las mismas reglas."""
+    """Valida una pagina distinta de index.html con las mismas reglas.
+
+    `name` puede llevar subdirectorio ("curso/modulo-01.html"); las rutas
+    de la pagina se resuelven desde ahi.
+    """
     path = root / name
     if not path.exists():
         problems.append(f"Falta la pagina {name}")
         return
+    base = path.parent
 
     page = path.read_text(encoding="utf-8")
     pc = Checker()
@@ -208,7 +243,7 @@ def check_page(name, want_robots=None, need_seo=True, need_js=True):
 
     refs = {r for r in pc.refs
             if r and not r.startswith(("http://", "https://", "mailto:", "tel:"))}
-    broken = broken_refs(refs, set(pc.ids))
+    broken = broken_refs(refs, set(pc.ids), base=base)
     if broken:
         issues.append(f"anclas rotas: {broken}")
 
@@ -218,7 +253,7 @@ def check_page(name, want_robots=None, need_seo=True, need_js=True):
         issues.append(f"iconos <use> sin <symbol>: {orphans}")
 
     for src in sorted(set(re.findall(r'(?:src|href)="([^"#]+\.(?:png|jpg|jpeg|webp|svg|css|js))"', page))):
-        if not (root / src).exists():
+        if not (base / src).resolve().exists():
             issues.append(f"archivo inexistente: {src}")
 
     head = page[:page.find("</head>")]
@@ -232,10 +267,13 @@ def check_page(name, want_robots=None, need_seo=True, need_js=True):
             issues.append(f"el canonical no apunta a robotred.co: {canonical.group(1)}")
         if not re.search(r'property="og:url"', head):
             issues.append("falta og:url")
-    if 'href="styles.css"' not in page:
-        issues.append("no carga styles.css")
-    if need_js and 'src="app.js"' not in page:
-        issues.append("no carga app.js")
+    rel_css = "../styles.css" if base != root else "styles.css"
+    if f'href="{rel_css}"' not in page:
+        issues.append(f"no carga {rel_css}")
+    if need_js:
+        rel_js = "../app.js" if base != root else "app.js"
+        if f'src="{rel_js}"' not in page:
+            issues.append(f"no carga {rel_js}")
 
     print(f"  {name:18} {'OK' if not issues else 'FALLA'}")
     for i in issues:
@@ -247,13 +285,26 @@ check_page("tutorial.html")
 # La pagina de gracias es noindex y estatica: no lleva canonical, og:url ni app.js.
 check_page("gracias.html", want_robots="noindex", need_seo=False, need_js=False)
 
+# El curso: indice + una leccion por modulo.
+curso_dir = root / "curso"
+lecciones = sorted(curso_dir.glob("modulo-*.html")) if curso_dir.exists() else []
+if len(lecciones) != 10:
+    problems.append(f"Se esperaban 10 lecciones y hay {len(lecciones)}")
+check_page("curso/index.html")
+for leccion in lecciones:
+    check_page(f"curso/{leccion.name}")
+
 print("\n== ENCUBIERTO ==")
 moji = html.count("â€") + css.count("â€") + js.count("â€")
 repl = html.count("\ufffd") + css.count("\ufffd") + js.count("\ufffd")
-for page in ("tutorial.html", "gracias.html"):
+enc_extra = ["tutorial.html", "gracias.html", "curso/index.html"]
+enc_extra += [f"curso/{p.name}" for p in lecciones]
+for page in enc_extra:
     extra = (root / page).read_text(encoding="utf-8")
     moji += extra.count("â€")
     repl += extra.count("\ufffd")
+    if any(0x2E80 <= ord(c) <= 0x9FFF or 0xAC00 <= ord(c) <= 0xD7AF for c in extra):
+        problems.append(f"{page}: contiene caracteres CJK corruptos")
 print("mojibake 'â€':", moji, "| U+FFFD:", repl)
 if moji or repl:
     problems.append("Encoding roto: hay caracteres mojibake o U+FFFD")
