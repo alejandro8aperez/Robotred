@@ -17,6 +17,39 @@ problems = []
 EXT = (".png", ".jpg", ".jpeg", ".webp", ".svg", ".css", ".js", ".xml", ".ico")
 
 
+def ids_of(path):
+    """Ids declarados en un archivo HTML."""
+    return set(re.findall(r'\bid="([^"]+)"', path.read_text(encoding="utf-8")))
+
+
+def broken_refs(refs, own_ids):
+    """Refs que no apuntan a ningun id.
+
+    Admite anclas locales (#id), paginas (otra.html) y paginas con ancla
+    (otra.html#id), comprobando el ancla contra los ids de la pagina destino.
+    """
+    broken = set()
+    for r in refs:
+        if not r or r in own_ids:
+            continue
+        target, _, frag = r.partition("#")
+        if not target:
+            # Ancla local: ya cubierta por la comprobacion de own_ids.
+            continue
+        if "/" in target:
+            continue
+        if target.endswith(".html"):
+            dest = root / target
+            if not dest.exists():
+                broken.add(r)
+            elif frag and frag not in ids_of(dest):
+                broken.add(r)
+            continue
+        if not target.endswith(tuple(EXT)):
+            broken.add(r)
+    return sorted(broken)
+
+
 class Checker(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -61,14 +94,10 @@ print("ids duplicados:", dupes)
 
 local_refs = {r for r in c.refs
               if r and not r.startswith(("http://", "https://", "mailto:", "tel:"))}
-broken_refs = sorted(
-    r for r in local_refs
-    if r not in c.ids and "/" not in r
-    and not r.endswith(tuple(EXT)) and not r.endswith(".html")
-)
-print("refs rotas:", broken_refs)
+broken_index_refs = broken_refs(local_refs, set(c.ids))
+print("refs rotas:", broken_index_refs)
 
-if c.stack or c.errors or dupes or broken_refs:
+if c.stack or c.errors or dupes or broken_index_refs:
     problems.append("HTML mal formado o referencias internas rotas")
 
 symbols = set(re.findall(r'<symbol id="([^"]+)"', html))
@@ -77,6 +106,12 @@ orphan_uses = sorted(uses - symbols)
 print("use sin symbol:", orphan_uses)
 if orphan_uses:
     problems.append("Iconos <use> sin <symbol> correspondiente")
+
+index_absolutes = sorted(set(re.findall(r'href="/([^"]*)"', html)))
+print("enlaces con ruta absoluta:", index_absolutes or "ninguno")
+if index_absolutes:
+    problems.append(
+        f"index.html usa rutas absolutas (rompen en file://): {index_absolutes}")
 
 print("\n== CSS ==")
 print("llaves:", css.count("{"), css.count("}"))
@@ -158,6 +193,11 @@ def check_page(name, want_robots=None, need_seo=True, need_js=True):
     pc.feed(page)
 
     issues = []
+    # Enlaces con ruta absoluta: rompen al abrir el archivo con doble clic
+    # (file://), donde "/" apunta a la raiz del disco. Se prefieren relativos.
+    absolutes = sorted(set(re.findall(r'href="/([^"]*)"', page)))
+    if absolutes:
+        issues.append(f"enlaces con ruta absoluta (rompen en file://): {absolutes}")
     if pc.stack:
         issues.append(f"tags sin cerrar: {pc.stack}")
     if pc.errors:
@@ -168,9 +208,7 @@ def check_page(name, want_robots=None, need_seo=True, need_js=True):
 
     refs = {r for r in pc.refs
             if r and not r.startswith(("http://", "https://", "mailto:", "tel:"))}
-    broken = sorted(r for r in refs
-                    if r not in pc.ids and "/" not in r
-                    and not r.endswith(tuple(EXT)) and not r.endswith(".html"))
+    broken = broken_refs(refs, set(pc.ids))
     if broken:
         issues.append(f"anclas rotas: {broken}")
 
